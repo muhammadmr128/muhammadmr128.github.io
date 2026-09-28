@@ -100,7 +100,7 @@
 
   /* ---------- Hero ---------- */
   .hero{padding-top:clamp(48px,8vw,96px);position:relative;overflow:hidden}
-  .hero-grid{display:grid;gap:32px}
+  .hero-grid{display:grid;gap:32px;grid-template-columns:minmax(0,1fr)}
   .status-chip{display:inline-flex;align-items:center;gap:.55em;font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--ink-soft);background:var(--surface);border:1px solid var(--line);padding:.4em .8em;border-radius:999px;width:max-content}
   .status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px color-mix(in srgb,#22c55e 25%,transparent)}
   .hero h1{font-weight:800;font-size:clamp(3.1rem,12vw,8.5rem);letter-spacing:-.03em;margin-top:.15em}
@@ -244,6 +244,46 @@
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
 
+
+  /* ---------- Research & publications ---------- */
+  .rstats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:clamp(20px,3vw,28px)}
+  @media (max-width:720px){.rstats{grid-template-columns:repeat(2,1fr)}}
+  .rstats div{background:var(--surface);padding:18px 20px}
+  .rstats b{display:block;font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.02em;color:var(--accent);line-height:1.05}
+  .rstats span{font-size:.86rem;color:var(--ink-soft)}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .chip{font:600 .82rem "Instrument Sans",sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:.5em 1em;border-radius:999px;cursor:pointer;transition:all .2s}
+  .chip:hover{border-color:var(--accent);color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .pubs{display:grid;gap:14px}
+  .pub{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,2.4vw,26px);display:grid;grid-template-columns:1fr auto;gap:10px 24px;transition:border-color .2s,transform .2s,opacity .3s}
+  .pub:hover{border-color:var(--accent)}
+  .pub.hide{display:none}
+  .pub .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+  .pub .yr{font:600 .78rem "JetBrains Mono",monospace;color:var(--accent)}
+  .badge{font:500 .68rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;padding:.3em .6em;border-radius:6px;border:1px solid var(--line);color:var(--ink-soft)}
+  .badge.j{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+  .badge.fa{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .pub h3{font-weight:700;font-size:clamp(1.05rem,1.9vw,1.3rem);letter-spacing:-.01em;line-height:1.25;margin:0}
+  .pub .auth{color:var(--ink-faint);font-size:.88rem;margin:.45em 0 0}
+  .pub .auth b{color:var(--ink);font-weight:600}
+  .pub .venue{color:var(--ink-soft);font-size:.9rem;font-style:italic;margin:.2em 0 0}
+  .pub .hl{text-align:right;min-width:9ch}
+  .pub .hl b{display:block;font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--accent);letter-spacing:-.02em;line-height:1}
+  .pub .hl span{font-size:.75rem;color:var(--ink-faint);display:block;max-width:14ch;margin-left:auto}
+  .pub details{grid-column:1/-1;border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+  .pub summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--ink);list-style:none;display:flex;align-items:center;gap:.5em;width:max-content}
+  .pub summary::-webkit-details-marker{display:none}
+  .pub summary::before{content:"+";display:grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid var(--line);color:var(--accent);font-weight:700;transition:transform .25s}
+  .pub details[open] summary::before{transform:rotate(45deg)}
+  .pub details p{color:var(--ink-soft);margin:.7em 0 0;max-width:72ch}
+  .pub .links{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+  .pub .links a{font-weight:600;font-size:.9rem;color:var(--accent);text-decoration:none}
+  .pub .links a:hover{text-decoration:underline}
+  @media (max-width:640px){.pub{grid-template-columns:1fr}.pub .hl{text-align:left;display:flex;align-items:baseline;gap:10px}.pub .hl span{margin:0;max-width:none}}
+  .rg-btn{display:inline-flex;align-items:center;gap:.55em}
+  .rg-btn .rg{display:inline-grid;place-items:center;width:1.9em;height:1.5em;border-radius:4px;background:#00ccbb;color:#fff;font:700 .7em "Instrument Sans",sans-serif}
+
   /* ================= Interactive layer ================= */
   .progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),#ffb199);z-index:100;pointer-events:none}
   .nav-links a.active{color:var(--ink)}
@@ -254,8 +294,9 @@
   #river{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
   .hero .wrap{position:relative;z-index:1}
   .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:140px;background:linear-gradient(to bottom,transparent,var(--paper));z-index:0;pointer-events:none}
-  .hero h1 .line2{display:block;font-size:.6em;margin-top:.2em;white-space:nowrap;min-height:1.05em}
-  @media (max-width:640px){.hero h1 .line2{white-space:normal;min-height:2.1em;font-size:.66em}}
+  .hero h1 .line2{display:block;font-size:.52em;margin-top:.25em;white-space:nowrap;min-height:1.05em}
+  @media (max-width:1100px){.hero h1 .line2{white-space:normal;min-height:2.1em}}
+  @media (max-width:640px){.hero h1 .line2{font-size:.66em}}
   .rot{color:var(--accent)}
   .caret{display:inline-block;width:.08em;height:.85em;background:var(--accent);margin-left:.06em;vertical-align:-.06em;animation:blink 1s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
@@ -337,10 +378,11 @@
 <div class="progress" id="progress" aria-hidden="true"></div>
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#top">Muhammad<span>.</span></a>
+    <a class="brand" href="#top">Mushfique<span>.</span></a>
     <nav class="nav-links">
       <a href="#work" class="hide-sm">Work</a>
       <a href="#now" class="now-link">Now</a>
+      <a href="#research" class="hide-sm">Research</a>
       <a href="#journey" class="hide-sm">Journey</a>
       <a href="#about" class="hide-sm">About</a>
       <a href="#contact">Contact</a>
@@ -356,7 +398,7 @@
     <canvas id="river" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <span class="status-chip"><span class="status-dot"></span> Seeking Winter 2027 co-op &middot; St. John's, NL</span>
-      <h1 aria-label="Hi, I'm Muhammad. I engineer for the environment.">Hi, I'm <span class="accent">Muhammad</span>.<span class="line2" aria-hidden="true">I engineer for <span class="rot" id="rot">the environment.</span><span class="caret"></span></span></h1>
+      <h1 aria-label="Hi, I'm Mushfique. I engineer for the environment.">Hi, I'm <span class="accent">Mushfique</span>.<span class="line2" aria-hidden="true">I engineer for <span class="rot" id="rot">the environment.</span><span class="caret"></span></span></h1>
       <p class="hero-lead">Environmental systems engineering student at Memorial University, with a background in building engineering &amp; construction management. This is where I keep my work and what I'm up to right now.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#work">See my work <span aria-hidden="true">→</span></a>
@@ -547,12 +589,118 @@
         </div>
         <div class="card reveal glow">
           <span class="num">02</span>
-          <h3>Undergraduate Work — KUET</h3>
-          <p>Projects from my B.Sc. in Building Engineering &amp; Construction Management at Khulna University of Engineering &amp; Technology.</p>
-          <div class="tags"><span class="tag">Building Engineering</span><span class="tag">Construction Mgmt</span></div>
-          <span class="go">Details coming soon</span>
+          <h3>BIM Design &amp; Energy Modelling, 4-Storey Building</h3>
+          <p>Designed a 4-storey building in BIM and ran energy simulations to test envelope and efficiency choices, with the schedule planned in MS Project. KUET design project.</p>
+          <div class="tags"><span class="tag">Revit</span><span class="tag">Green Building Studio</span><span class="tag">Robot Structural</span><span class="tag">MS Project</span></div>
+          <span class="go">Undergraduate · KUET</span>
+        </div>
+        <div class="card reveal glow">
+          <span class="num">03</span>
+          <h3>Structural Analysis, 12-Storey Tower</h3>
+          <p>Modelled and analysed a 12-storey tower under wind and seismic loading to check structural performance against code requirements. KUET design project.</p>
+          <div class="tags"><span class="tag">ETABS</span><span class="tag">Wind &amp; Seismic</span><span class="tag">Structural Design</span></div>
+          <span class="go">Undergraduate · KUET</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESEARCH ===================== -->
+  <section id="research">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">/ research portfolio</span>
+          <h2 style="margin-top:.35em">Publications</h2>
+        </div>
+        <p>Turning industrial and demolition waste into low-carbon construction materials, and designing buildings that use less energy. <a class="rg-btn" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none;white-space:nowrap"><span class="rg">RG</span>ResearchGate profile ↗</a></p>
+      </div>
+      <div class="rstats reveal">
+        <div><b data-count="5">5</b><span>publications</span></div>
+        <div><b data-count="2">2</b><span>peer-reviewed journal articles</span></div>
+        <div><b data-count="77">77</b><span>citations</span></div>
+        <div><b data-count="337">337</b><span>reads on ResearchGate</span></div>
+      </div>
+      <div class="filters" role="group" aria-label="Filter publications">
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="journal" aria-pressed="false">Journal articles</button>
+        <button class="chip" type="button" data-f="first" aria-pressed="false">First author</button>
+        <button class="chip" type="button" data-f="materials" aria-pressed="false">Sustainable materials</button>
+        <button class="chip" type="button" data-f="energy" aria-pressed="false">Building energy</button>
+      </div>
+      <div class="pubs" id="pubs">
+          <article class="pub reveal" data-type="journal" data-topic="materials" data-first="false">
+            <div>
+              <div class="meta"><span class="yr">2025</span><span class="badge j">Journal article</span></div>
+              <h3>Combined influence of modified recycled concrete aggregate and metakaolin on high-strength concrete production: Experimental assessment and machine learning quantifications with advanced SHAP and PDP analyses</h3>
+              <p class="auth">Sobuz, M. H. R., <b>Rahman, M. M.</b>, Aayaz, R., Al-Rashed, W. S., Datta, S. D., Safayet, M. A., Kabbo, M. K. I., &amp; Abdullah, M.</p>
+              <p class="venue">Construction and Building Materials, 461, 139897</p>
+            </div>
+            <div class="hl"><b>60.36</b><span>MPa strength from recycled aggregate</span></div>
+            <details>
+              <summary>Key findings</summary>
+              <p>Treated recycled concrete aggregate combined with metakaolin produced high-strength concrete reaching 60.36 MPa, matching conventional high-strength mixes while replacing a large share of natural aggregate with demolition waste. Machine-learning models (XGBoost, R² = 0.924) predicted strength, and SHAP and PDP analyses showed which mix factors drive it.</p>
+              <div class="links"><a href="https://doi.org/10.1016/j.conbuildmat.2025.139897" target="_blank" rel="noopener">Read the paper (DOI) ↗</a></div>
+            </details>
+          </article>
+          <article class="pub reveal" data-type="journal" data-topic="energy" data-first="false">
+            <div>
+              <div class="meta"><span class="yr">2025</span><span class="badge j">Journal article</span></div>
+              <h3>Investigating the energy-efficiency of Glauber's salt as PCM-enhanced mortar in building envelope</h3>
+              <p class="auth">Rahman, S., Rana, M. J., <b>Rahman, M. M.</b>, Dang, H., Talukder, S., &amp; Anzum, A.</p>
+              <p class="venue">Advances in Building Energy Research, 19(6), 798–825</p>
+            </div>
+            <div class="hl"><b>−22%</b><span>simulated building energy use</span></div>
+            <details>
+              <summary>Key findings</summary>
+              <p>Adding Glauber's salt as a phase-change material to mortar cut thermal conductivity by about 65% (1.173 → 0.416 W/m·K). At the optimal 10% PCM content, simulated annual building energy use fell by about 22%.</p>
+              <div class="links"><a href="https://doi.org/10.1080/17512549.2025.2547399" target="_blank" rel="noopener">Read the paper (DOI) ↗</a></div>
+            </details>
+          </article>
+          <article class="pub reveal" data-type="conference" data-topic="materials" data-first="true">
+            <div>
+              <div class="meta"><span class="yr">2024</span><span class="badge">Conference paper</span><span class="badge fa">First author</span></div>
+              <h3>Fresh and hardened properties of high-strength concrete using coal bottom ash and silica fume</h3>
+              <p class="auth"><b>Rahman, M. M.</b>, &amp; Hossain, M. S.</p>
+              <p class="venue">Conference paper</p>
+            </div>
+            <div class="hl"><b>10%</b><span>coal bottom ash replacement</span></div>
+            <details>
+              <summary>Key findings</summary>
+              <p>Replacing up to 10% of the mix with coal bottom ash, a combustion by-product, alongside silica fume kept concrete at high strength. This turns industrial waste into structural material and cuts cement-related CO₂.</p>
+              <div class="links"><a href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate ↗</a></div>
+            </details>
+          </article>
+          <article class="pub reveal" data-type="conference" data-topic="materials" data-first="true">
+            <div>
+              <div class="meta"><span class="yr">2024</span><span class="badge">Conference paper</span><span class="badge fa">First author</span></div>
+              <h3>Enhancing concrete mechanical performance through metakaolin and improved recycled concrete aggregates</h3>
+              <p class="auth"><b>Rahman, M. M.</b>, &amp; Hossain, M. S.</p>
+              <p class="venue">Conference paper</p>
+            </div>
+            <div class="hl"><b>10%</b><span>metakaolin offsets strength loss</span></div>
+            <details>
+              <summary>Key findings</summary>
+              <p>Treating recycled concrete aggregate and adding 10% metakaolin offset the usual strength loss from recycled aggregate, making high-strength concrete from demolition waste feasible.</p>
+              <div class="links"><a href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate ↗</a></div>
+            </details>
+          </article>
+          <article class="pub reveal" data-type="conference" data-topic="energy" data-first="false">
+            <div>
+              <div class="meta"><span class="yr">2023</span><span class="badge">Conference paper</span></div>
+              <h3>Impact of exterior facade materials on energy performance of residential structures in Bangladesh</h3>
+              <p class="auth">Ashraf, J., <b>Rahman, M. M.</b>, &amp; Rana, M. J.</p>
+              <p class="venue">Proceedings of ICPACER 2023</p>
+            </div>
+            <div class="hl"><b>3</b><span>design levers for lower cooling demand</span></div>
+            <details>
+              <summary>Key findings</summary>
+              <p>Identified the window-to-wall ratio, shading height and building orientation that minimise residential cooling-energy demand in Bangladesh’s climate.</p>
+              <div class="links"><a href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate ↗</a></div>
+            </details>
+          </article>
+      </div>
+      <p class="chart-note">Citation and read counts from ResearchGate, September 2026.</p>
     </div>
   </section>
 
@@ -623,7 +771,7 @@
       </div>
       <div class="about-grid">
         <div class="about-body reveal">
-          <p>I'm <strong>Md. Mushfiqur Rahman</strong> (Muhammad), a Master of Applied Science (Co-op) student in <strong>Environmental Systems Engineering &amp; Management</strong> at Memorial University of Newfoundland in St. John's.</p>
+          <p>I'm <strong>Md. Mushfiqur Rahman</strong> (Mushfique), a Master of Applied Science (Co-op) student in <strong>Environmental Systems Engineering &amp; Management</strong> at Memorial University of Newfoundland in St. John's.</p>
           <p>Before coming to Canada, I earned my B.Sc. in <strong>Building Engineering &amp; Construction Management</strong> from Khulna University of Engineering &amp; Technology (KUET), Bangladesh. That background in how buildings and infrastructure get designed and delivered now meets my graduate focus on how we manage their environmental impact.</p>
           <p>Right now I'm building my GIS and ArcGIS skills and looking for a <strong>Winter 2027 co-op or internship</strong> in environmental management, construction, or infrastructure. If that sounds like your team, I'd love to hear from you.</p>
         </div>
@@ -648,6 +796,7 @@
       <div class="socials">
         <a href="mailto:muhammadmr@mun.ca">✉ Email</a>
         <button type="button" id="copyEmail">⧉ Copy email</button>
+        <a href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">ResearchGate ↗</a>
       </div>
     </div>
   </section>
@@ -733,7 +882,7 @@
     var links={};document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
     if('IntersectionObserver' in window){
       var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){for(var k in links)links[k].classList.remove('active');if(links[e.target.id])links[e.target.id].classList.add('active')}})},{rootMargin:'-45% 0px -50% 0px'});
-      ['now','work','journey','about','contact'].forEach(function(id){var el=document.getElementById(id);if(el)so.observe(el)});
+      ['now','work','research','journey','about','contact'].forEach(function(id){var el=document.getElementById(id);if(el)so.observe(el)});
     }
 
     // --- hero "river" particle field (water flowing, reacts to cursor)
@@ -844,6 +993,14 @@
       addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
     })();
 
+
+    // --- publication filters
+    (function(){
+      var chips=document.querySelectorAll('.filters .chip'),pubs=document.querySelectorAll('.pub');
+      chips.forEach(function(c){c.addEventListener('click',function(){var f=c.dataset.f;
+        chips.forEach(function(x){x.setAttribute('aria-pressed',x===c)});
+        pubs.forEach(function(p){var ok=f==='all'||p.dataset.type===f||p.dataset.topic===f||(f==='first'&&p.dataset.first==='true');p.classList.toggle('hide',!ok);if(ok)p.classList.add('in')})})});
+    })();
     // --- copy email
     (function(){
       var b=document.getElementById('copyEmail'),t=document.getElementById('toast');if(!b)return;
