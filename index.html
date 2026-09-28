@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Muhammad — Portfolio</title>
-<meta name="description" content="Personal portfolio and what I'm working on right now." />
+<title>Md. Mushfiqur Rahman — Environmental Systems Engineering</title>
+<meta name="description" content="Md. Mushfiqur Rahman — MASc (Co-op) student in Environmental Systems Engineering &amp; Management at Memorial University. Projects, GIS work and what I'm doing now." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
@@ -155,6 +155,37 @@
   .card:hover .go .arw{transform:translateX(4px)}
   .arw{transition:transform .2s}
 
+
+  /* ---------- Featured case study ---------- */
+  .feature{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(24px,4vw,48px);box-shadow:var(--shadow);margin-bottom:clamp(20px,3vw,32px)}
+  .feature-top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:14px}
+  .pill{font-family:"JetBrains Mono",monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;padding:.35em .75em;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft)}
+  .pill.hot{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+  .feature h3{font-weight:800;font-size:clamp(1.6rem,3.6vw,2.6rem);letter-spacing:-.02em;max-width:24ch}
+  .feature .sub{color:var(--ink-faint);font-size:.92rem;margin:.6em 0 0}
+  .feature .lede{color:var(--ink-soft);font-size:clamp(1rem,1.6vw,1.15rem);max-width:68ch;margin:1.1em 0 0}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin:clamp(22px,3vw,34px) 0}
+  @media (max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--surface);padding:18px 20px}
+  .stat b{display:block;font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(1.6rem,3.2vw,2.3rem);letter-spacing:-.02em;color:var(--accent);line-height:1.1}
+  .stat span{font-size:.85rem;color:var(--ink-soft)}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px)}
+  @media (max-width:860px){.cols{grid-template-columns:1fr}}
+  .cols h4{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:0 0 .7em;font-weight:500}
+  .cols ol,.cols ul{margin:0;padding-left:1.1em;color:var(--ink-soft);font-size:.96rem}
+  .cols li{margin-bottom:.45em}
+  .cols li::marker{color:var(--accent)}
+  .feature .tags{margin-top:clamp(20px,3vw,30px)}
+  /* coursework */
+  .courses{margin-top:clamp(20px,3vw,32px);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,3vw,30px);background:var(--surface)}
+  .courses h4{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:0 0 14px;font-weight:500}
+  .course-list{display:flex;flex-wrap:wrap;gap:10px}
+  .course{border:1px solid var(--line);border-radius:10px;padding:.5em .8em;font-size:.9rem;color:var(--ink)}
+  .course code{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--ink-faint);margin-right:.5em}
+  .course.ip{border-style:dashed}
+  .course.ip::after{content:"in progress";font-family:"JetBrains Mono",monospace;font-size:.66rem;color:var(--accent);margin-left:.6em;text-transform:uppercase;letter-spacing:.06em}
+  .grid-label{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:clamp(36px,5vw,56px) 0 16px}
+
   /* ---------- About ---------- */
   .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
   @media (max-width:760px){.about-grid{grid-template-columns:1fr}}
@@ -205,9 +236,9 @@
   <!-- ===================== HERO ===================== -->
   <section class="hero">
     <div class="wrap hero-grid">
-      <span class="status-chip"><span class="status-dot"></span> Open to opportunities &middot; St. John's, NL</span>
-      <h1>Hi, I'm <span class="accent">Muhammad</span>.<br>I build things.</h1>
-      <p class="hero-lead">Student, developer, and lifelong tinkerer. This is where I keep my work and what I'm up to right now.</p>
+      <span class="status-chip"><span class="status-dot"></span> Seeking Winter 2027 co-op &middot; St. John's, NL</span>
+      <h1>Hi, I'm <span class="accent">Muhammad</span>.<br>I engineer for the environment.</h1>
+      <p class="hero-lead">Environmental systems engineering student at Memorial University, with a background in building engineering &amp; construction management. This is where I keep my work and what I'm up to right now.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#work">See my work <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="#now">What I'm doing now</a>
@@ -217,14 +248,14 @@
     <div class="wrap">
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-          <span>Web Development</span><span class="star">✦</span>
-          <span>Problem Solving</span><span class="star">✦</span>
-          <span>Design</span><span class="star">✦</span>
-          <span>Always Learning</span><span class="star">✦</span>
-          <span>Web Development</span><span class="star">✦</span>
-          <span>Problem Solving</span><span class="star">✦</span>
-          <span>Design</span><span class="star">✦</span>
-          <span>Always Learning</span><span class="star">✦</span>
+          <span>Environmental Systems</span><span class="star">✦</span>
+          <span>GIS &amp; ArcGIS</span><span class="star">✦</span>
+          <span>Construction Management</span><span class="star">✦</span>
+          <span>Sustainability</span><span class="star">✦</span>
+          <span>Environmental Systems</span><span class="star">✦</span>
+          <span>GIS &amp; ArcGIS</span><span class="star">✦</span>
+          <span>Construction Management</span><span class="star">✦</span>
+          <span>Sustainability</span><span class="star">✦</span>
         </div>
       </div>
     </div>
@@ -236,27 +267,32 @@
       <div class="now reveal">
         <span class="eyebrow">/ now</span>
         <h2>What I'm working on right now</h2>
-        <p class="updated">Last updated: August 2026</p>
+        <p class="updated">Last updated: September 2026</p>
         <ul class="now-list">
           <li>
-            <span class="now-tag">Building</span>
-            <div><strong>This portfolio website</strong>
-            <span>Setting up my personal site and learning to host it for free — you're looking at it.</span></div>
+            <span class="now-tag">Studying</span>
+            <div><strong>MASc (Co-op), Environmental Systems Engineering &amp; Management</strong>
+            <span>Memorial University of Newfoundland, expected 2027. This term: offshore oil &amp; gas impacts, and environmental chemistry &amp; toxicology.</span></div>
           </li>
           <li>
-            <span class="now-tag">Studying</span>
-            <div><strong>Coursework at Memorial University</strong>
-            <span>Focusing on the fundamentals and sharpening my programming skills this term.</span></div>
+            <span class="now-tag">Researching</span>
+            <div><strong>Wildfire impacts on source-water quality</strong>
+            <span>Machine-learning models that predict and explain post-wildfire changes in river water quality.</span></div>
           </li>
           <li>
             <span class="now-tag">Learning</span>
-            <div><strong>A new stack / tool</strong>
-            <span>Add whatever you're currently picking up — a framework, a language, a certification.</span></div>
+            <div><strong>ArcGIS &amp; spatial analysis</strong>
+            <span>Building my GIS skills and working toward an ArcGIS certification.</span></div>
           </li>
           <li>
-            <span class="now-tag">Exploring</span>
-            <div><strong>Side project ideas</strong>
-            <span>Tinkering with small builds. Swap in what you're actually exploring.</span></div>
+            <span class="now-tag">Building</span>
+            <div><strong>A GIS portfolio project</strong>
+            <span>A hands-on mapping and analysis project to put those skills into practice — write-up coming soon.</span></div>
+          </li>
+          <li>
+            <span class="now-tag">Seeking</span>
+            <div><strong>Winter 2027 co-op / internship</strong>
+            <span>Looking for engineering roles in environmental management, construction, or infrastructure.</span></div>
           </li>
         </ul>
       </div>
@@ -271,38 +307,88 @@
           <span class="eyebrow">/ selected work</span>
           <h2 style="margin-top:.35em">Projects</h2>
         </div>
-        <p>A few things I've built. Replace these with your real projects — each card links wherever you want (GitHub, a live demo, a write-up).</p>
+        <p>Graduate research and technical work across environmental systems, water quality and building engineering.</p>
       </div>
 
+      <article class="feature reveal">
+        <div class="feature-top">
+          <span class="pill hot">Graduate project</span>
+          <span class="pill">MUN · ENGI 960A/B</span>
+          <span class="pill">Jan 2026 – present</span>
+        </div>
+        <h3>Quantifying Wildfire Impacts on Source-Water Quality: A Machine-Learning Framework</h3>
+        <p class="sub">Memorial University of Newfoundland · Supervisor: Dr. Arpana Rani Datta · Team of four</p>
+        <p class="lede">Wildfires are getting larger and more severe across Canada's boreal forests, and the ash and sediment they release can reach the rivers communities drink from. This project builds a data-driven tool that predicts how wildfires degrade source-water quality and explains which factors drive the change, to give water utilities evidence for monitoring and post-fire planning.</p>
+
+        <div class="stats">
+          <div class="stat"><b>800+</b><span>multi-year environmental records</span></div>
+          <div class="stat"><b>22</b><span>hydrologic, seasonal &amp; wildfire variables</span></div>
+          <div class="stat"><b>4</b><span>ensemble ML models compared</span></div>
+          <div class="stat"><b>R² 0.774</b><span>best model (Extra Trees)</span></div>
+        </div>
+
+        <div class="cols">
+          <div>
+            <h4>The problem</h4>
+            <ul>
+              <li>2024 wildfires near Churchill Falls, Labrador, forced evacuations and raised concerns about water-supply reliability.</li>
+              <li>Post-fire runoff can raise turbidity, nutrients and metals, increasing treatment costs and risk.</li>
+              <li>Utilities need to know <em>when</em> and <em>why</em> water quality shifts after a fire.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>What I did</h4>
+            <ol>
+              <li>Compiled hydrometric data (ECCC), provincial water-quality records and wildfire perimeters for the Churchill River and the Peace–Athabasca basin.</li>
+              <li>Linked water quality to flow, comparing pre-fire and post-fire turbidity–discharge behaviour.</li>
+              <li>Trained and compared Random Forest, Extra Trees, Gradient Boosting and XGBoost regressors.</li>
+              <li>Used SHAP and partial-dependence plots to explain the dominant drivers.</li>
+            </ol>
+          </div>
+          <div>
+            <h4>Results</h4>
+            <ul>
+              <li>Extra Trees performed best, with R² = 0.774.</li>
+              <li>SHAP analysis ranked the key drivers of post-fire water-quality change.</li>
+              <li>A cross-watershed transfer test checked whether the model generalizes to a different basin.</li>
+              <li>Findings shaped into recommendations for monitoring and water-supply protection.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">XGBoost</span><span class="tag">SHAP</span><span class="tag">Ensemble ML</span><span class="tag">Hydrology</span><span class="tag">Water Quality</span><span class="tag">Environmental Risk</span></div>
+      </article>
+
+      <div class="courses reveal">
+        <h4>Graduate coursework · MASc, Memorial University · CGPA 3.87</h4>
+        <div class="course-list">
+          <span class="course"><code>ENGI 9609</code>Environmental Risk Assessment</span>
+          <span class="course"><code>ENGI 9627</code>Environmental Systems Engineering</span>
+          <span class="course"><code>ENGI 9626</code>Environmental Management Systems</span>
+          <span class="course"><code>ENGI 9622</code>Environmental Statistics</span>
+          <span class="course"><code>ENGI 9628</code>Environmental Laboratory</span>
+          <span class="course"><code>ENGI 9601</code>Environmental Pollution &amp; Mitigation</span>
+          <span class="course ip"><code>ENGI 9625</code>Environmental Impacts of Offshore Oil &amp; Gas</span>
+          <span class="course ip"><code>ENVS 6002</code>Environmental Chemistry &amp; Toxicology</span>
+        </div>
+      </div>
+
+      <p class="grid-label">More work</p>
       <div class="grid">
-        <a class="card reveal" href="#" target="_blank" rel="noopener">
+        <div class="card reveal">
           <span class="num">01</span>
-          <h3>Project One</h3>
-          <p>A short description of what it does and why you built it. One or two sentences is plenty — keep it punchy.</p>
-          <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-          <span class="go">View project <span class="arw" aria-hidden="true">→</span></span>
-        </a>
-        <a class="card reveal" href="#" target="_blank" rel="noopener">
+          <h3>GIS Portfolio Project</h3>
+          <p>A spatial analysis project built in ArcGIS, applying mapping and geoprocessing to a real environmental question. In progress.</p>
+          <div class="tags"><span class="tag">ArcGIS</span><span class="tag">GIS</span><span class="tag">Spatial Analysis</span></div>
+          <span class="go">In progress</span>
+        </div>
+        <div class="card reveal">
           <span class="num">02</span>
-          <h3>Project Two</h3>
-          <p>What problem it solves. Mention the interesting technical bit or what you learned building it.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">API</span></div>
-          <span class="go">View project <span class="arw" aria-hidden="true">→</span></span>
-        </a>
-        <a class="card reveal" href="#" target="_blank" rel="noopener">
-          <span class="num">03</span>
-          <h3>Project Three</h3>
-          <p>A class project, a hackathon build, or a personal experiment — anything you're proud of counts.</p>
-          <div class="tags"><span class="tag">React</span><span class="tag">Node</span></div>
-          <span class="go">View project <span class="arw" aria-hidden="true">→</span></span>
-        </a>
-        <a class="card reveal" href="#" target="_blank" rel="noopener">
-          <span class="num">04</span>
-          <h3>Project Four</h3>
-          <p>Delete this card if you only have three, or add more by copying the block. Grid handles the rest.</p>
-          <div class="tags"><span class="tag">Design</span><span class="tag">Figma</span></div>
-          <span class="go">View project <span class="arw" aria-hidden="true">→</span></span>
-        </a>
+          <h3>Undergraduate Work — KUET</h3>
+          <p>Projects from my B.Sc. in Building Engineering &amp; Construction Management at Khulna University of Engineering &amp; Technology.</p>
+          <div class="tags"><span class="tag">Building Engineering</span><span class="tag">Construction Mgmt</span></div>
+          <span class="go">Details coming soon</span>
+        </div>
       </div>
     </div>
   </section>
@@ -318,16 +404,17 @@
       </div>
       <div class="about-grid">
         <div class="about-body reveal">
-          <p>I'm <strong>Muhammad</strong>, a student based in St. John's, Newfoundland. I like turning ideas into things people can actually use, and I'm happiest when I'm learning something new.</p>
-          <p>Rewrite this in your own voice. Talk about what you study, what got you into building things, and what you care about. Two or three short paragraphs is the sweet spot — enough to feel human, short enough that people actually read it.</p>
-          <p>End with what you're looking for: an internship, freelance work, collaborators, or just people to connect with.</p>
+          <p>I'm <strong>Md. Mushfiqur Rahman</strong> (Muhammad), a Master of Applied Science (Co-op) student in <strong>Environmental Systems Engineering &amp; Management</strong> at Memorial University of Newfoundland in St. John's.</p>
+          <p>Before coming to Canada, I earned my B.Sc. in <strong>Building Engineering &amp; Construction Management</strong> from Khulna University of Engineering &amp; Technology (KUET), Bangladesh. That background in how buildings and infrastructure get designed and delivered now meets my graduate focus on how we manage their environmental impact.</p>
+          <p>Right now I'm building my GIS and ArcGIS skills and looking for a <strong>Winter 2027 co-op or internship</strong> in environmental management, construction, or infrastructure. If that sounds like your team, I'd love to hear from you.</p>
         </div>
         <div class="facts reveal">
           <div class="fact"><span class="k">Based in</span><span class="v">St. John's, NL 🇨🇦</span></div>
-          <div class="fact"><span class="k">Studying</span><span class="v">Memorial University</span></div>
-          <div class="fact"><span class="k">Focus</span><span class="v">Web &amp; Software</span></div>
-          <div class="fact"><span class="k">Currently</span><span class="v">Open to work</span></div>
-          <div class="fact"><span class="k">Tools</span><span class="v">JS · Python · Git</span></div>
+          <div class="fact"><span class="k">Studying</span><span class="v">MASc, Memorial University</span></div>
+          <div class="fact"><span class="k">Focus</span><span class="v">Environmental Systems</span></div>
+          <div class="fact"><span class="k">Background</span><span class="v">B.Sc., Building Eng. (KUET)</span></div>
+          <div class="fact"><span class="k">Currently</span><span class="v">Seeking Winter 2027 co-op</span></div>
+          <div class="fact"><span class="k">Learning</span><span class="v">ArcGIS · GIS</span></div>
         </div>
       </div>
     </div>
@@ -338,19 +425,16 @@
     <div class="wrap reveal">
       <span class="eyebrow" style="justify-content:center">/ get in touch</span>
       <h2>Let's <a href="mailto:muhammadmr@mun.ca">talk</a>.</h2>
-      <p>Have a project, an opportunity, or just want to say hi? My inbox is open.</p>
+      <p>Hiring for a co-op or internship, or want to talk environmental engineering? My inbox is open.</p>
       <div class="socials">
         <a href="mailto:muhammadmr@mun.ca">✉ Email</a>
-        <a href="#" target="_blank" rel="noopener">GitHub</a>
-        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="#" target="_blank" rel="noopener">Résumé (PDF)</a>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="wrap">
-  <span>© <span id="year">2026</span> Muhammad. Built from scratch.</span>
+  <span>© <span id="year">2026</span> Md. Mushfiqur Rahman.</span>
   <span class="mono">Made with care ✦ Hosted free</span>
 </footer>
 
