@@ -186,6 +186,35 @@
   .course.ip::after{content:"in progress";font-family:"JetBrains Mono",monospace;font-size:.66rem;color:var(--accent);margin-left:.6em;text-transform:uppercase;letter-spacing:.06em}
   .grid-label{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:clamp(36px,5vw,56px) 0 16px}
 
+
+  /* ---------- Research charts ---------- */
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);margin-top:clamp(20px,3vw,32px)}
+  @media (max-width:860px){.charts{grid-template-columns:1fr}}
+  .chart{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,2.4vw,26px);position:relative;min-width:0}
+  .chart .ck{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint)}
+  .chart h4{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.15rem;letter-spacing:-.01em;margin:.35em 0 .2em;line-height:1.2}
+  .chart .cap{color:var(--ink-soft);font-size:.9rem;margin:0 0 12px}
+  .chart.wide{grid-column:1/-1}
+  .shot{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:8px;cursor:zoom-in}
+  .shot img{display:block;width:100%;height:auto}
+  .chart svg{display:block;width:100%;height:auto;overflow:visible}
+  .chart svg text{font-family:"Instrument Sans",system-ui,sans-serif;fill:var(--ink-soft)}
+  .chart svg .axis{stroke:var(--line)}
+  .chart svg .lbl{fill:var(--ink);font-weight:600}
+  .chart svg .bar{fill:color-mix(in srgb,var(--ink-faint) 55%,var(--surface))}
+  .chart svg .bar.hi{fill:var(--accent)}
+  .chart svg .hit{fill:transparent;cursor:default}
+  .chart svg .dot{fill:var(--accent);fill-opacity:.55;stroke:var(--surface);stroke-width:1.5}
+  .chart svg .ref{stroke:var(--ink-faint);stroke-dasharray:5 5;stroke-width:1.5}
+  .chart svg .grid{stroke:var(--line);stroke-width:1}
+  .mtable{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:12px}
+  .mtable th,.mtable td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line);color:var(--ink-soft);font-variant-numeric:tabular-nums}
+  .mtable th:first-child,.mtable td:first-child{text-align:left}
+  .mtable th{font-family:"JetBrains Mono",monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:500}
+  .mtable tr.hi td{color:var(--ink);font-weight:600}
+  .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-size:.8rem;padding:6px 9px;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity .12s;z-index:5;font-variant-numeric:tabular-nums}
+  .chart-note{color:var(--ink-faint);font-size:.8rem;margin:14px 0 0;max-width:80ch}
+
   /* ---------- About ---------- */
   .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
   @media (max-width:760px){.about-grid{grid-template-columns:1fr}}
@@ -277,7 +306,7 @@
           <li>
             <span class="now-tag">Researching</span>
             <div><strong>Wildfire impacts on source-water quality</strong>
-            <span>Machine-learning models that predict and explain post-wildfire changes in river water quality.</span></div>
+            <span>Machine-learning models that predict river turbidity and explain what drives it in wildfire-affected watersheds.</span></div>
           </li>
           <li>
             <span class="now-tag">Learning</span>
@@ -317,14 +346,14 @@
           <span class="pill">Jan 2026 – present</span>
         </div>
         <h3>Quantifying Wildfire Impacts on Source-Water Quality: A Machine-Learning Framework</h3>
-        <p class="sub">Memorial University of Newfoundland · Supervisor: Dr. Arpana Rani Datta · Team of four</p>
+        <p class="sub">Memorial University of Newfoundland · Supervisor: Dr. Arpana Rani Datta · Team of four · Trained in Alberta's Peace–Athabasca Basin, tested in Labrador's Churchill River</p>
         <p class="lede">Wildfires are getting larger and more severe across Canada's boreal forests, and the ash and sediment they release can reach the rivers communities drink from. This project builds a data-driven tool that predicts how wildfires degrade source-water quality and explains which factors drive the change, to give water utilities evidence for monitoring and post-fire planning.</p>
 
         <div class="stats">
-          <div class="stat"><b>800+</b><span>multi-year environmental records</span></div>
-          <div class="stat"><b>22</b><span>hydrologic, seasonal &amp; wildfire variables</span></div>
+          <div class="stat"><b>823</b><span>turbidity samples, 4 stations, 2000–2026</span></div>
+          <div class="stat"><b>22</b><span>chemistry, time &amp; station predictors</span></div>
           <div class="stat"><b>4</b><span>ensemble ML models compared</span></div>
-          <div class="stat"><b>R² 0.774</b><span>best model (Extra Trees)</span></div>
+          <div class="stat"><b>R² 0.775</b><span>best model (Extra Trees)</span></div>
         </div>
 
         <div class="cols">
@@ -339,24 +368,59 @@
           <div>
             <h4>What I did</h4>
             <ol>
-              <li>Compiled hydrometric data (ECCC), provincial water-quality records and wildfire perimeters for the Churchill River and the Peace–Athabasca basin.</li>
-              <li>Linked water quality to flow, comparing pre-fire and post-fire turbidity–discharge behaviour.</li>
+              <li>Built a 26-year, 4-station water-quality dataset for the Peace–Athabasca Basin (Alberta), a boreal watershed hit by the 2016 Fort McMurray and 2023 fires.</li>
+              <li>Chose turbidity as the target: it integrates sediment, colour and metals, and it is what treatment plants struggle with.</li>
               <li>Trained and compared Random Forest, Extra Trees, Gradient Boosting and XGBoost regressors.</li>
-              <li>Used SHAP and partial-dependence plots to explain the dominant drivers.</li>
+              <li>Ranked the drivers with feature importance, then tested whether the model transfers to Newfoundland's Churchill River.</li>
             </ol>
           </div>
           <div>
             <h4>Results</h4>
             <ul>
-              <li>Extra Trees performed best, with R² = 0.774.</li>
-              <li>SHAP analysis ranked the key drivers of post-fire water-quality change.</li>
-              <li>A cross-watershed transfer test checked whether the model generalizes to a different basin.</li>
+              <li>Extra Trees performed best on every metric (R² = 0.775).</li>
+              <li>Total nitrogen, colour, manganese, iron and aluminium drive turbidity, a wildfire disturbance signature.</li>
+              <li>Transfer test: the framework carries over, but the fitted model over-predicts ~17× in Newfoundland until the local hydrology link is established.</li>
               <li>Findings shaped into recommendations for monitoring and water-supply protection.</li>
             </ul>
           </div>
         </div>
 
-        <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">XGBoost</span><span class="tag">SHAP</span><span class="tag">Ensemble ML</span><span class="tag">Hydrology</span><span class="tag">Water Quality</span><span class="tag">Environmental Risk</span></div>
+
+        <div class="charts">
+          <figure class="chart wide" style="margin:0">
+            <span class="ck">Figure 1 · Model comparison</span>
+            <h4>Extra Trees was the best model on every metric</h4>
+            <p class="cap">Four ensemble models scored on held-out test data. R² (left, higher is better) is the share of turbidity variation explained; RMSE and MAE (middle, right, lower is better) are prediction errors in NTU.</p>
+            <a class="shot" href="img/ml-model-comparison.png" target="_blank" rel="noopener"><img src="img/ml-model-comparison.png" width="1784" height="484" loading="lazy" alt="Three bar charts comparing Extra Trees, Gradient Boosting, Random Forest and XGBoost on R², RMSE and MAE. Extra Trees has the highest R² (about 0.77) and the lowest RMSE and MAE."></a>
+          </figure>
+          <figure class="chart" style="margin:0">
+            <span class="ck">Figure 2 · Observed vs predicted</span>
+            <h4>Predictions track real measurements</h4>
+            <p class="cap">Each dot is a held-out water sample; dots on the red 1:1 line are perfect predictions. Extra Trees (top right) reaches R² = 0.775.</p>
+            <a class="shot" href="img/ml-observed-vs-predicted.png" target="_blank" rel="noopener"><img src="img/ml-observed-vs-predicted.png" width="1384" height="1184" loading="lazy" alt="Four scatter plots of observed versus predicted turbidity: Random Forest R² 0.719, Extra Trees R² 0.775, Gradient Boosting R² 0.720, XGBoost R² 0.685."></a>
+          </figure>
+          <figure class="chart" style="margin:0">
+            <span class="ck">Figure 3 · What drives turbidity</span>
+            <h4>Nitrogen, colour &amp; metals dominate</h4>
+            <p class="cap">Top 15 inputs by importance in the Extra Trees model. Total nitrogen leads by about 5×, followed by colour, manganese, aluminium and iron, which is exactly what wildfire runoff carries into rivers.</p>
+            <a class="shot" href="img/ml-feature-importance.png" target="_blank" rel="noopener"><img src="img/ml-feature-importance.png" width="784" height="584" loading="lazy" alt="Horizontal bar chart of the top 15 feature importances in the Extra Trees model. Total nitrogen is about 0.52, followed by true colour, total manganese, total aluminium and total iron."></a>
+          </figure>
+          <figure class="chart" style="margin:0">
+            <span class="ck">Figure 4 · Prediction errors</span>
+            <h4>Errors are small and unbiased</h4>
+            <p class="cap">Residuals (observed − predicted) for Extra Trees are sharply peaked at zero; only a few extreme turbidity events sit in the tail.</p>
+            <a class="shot" href="img/ml-residuals.png" target="_blank" rel="noopener"><img src="img/ml-residuals.png" width="682" height="384" loading="lazy" alt="Histogram of Extra Trees residuals, sharply peaked and centred on zero with a long thin tail toward large positive errors."></a>
+          </figure>
+          <figure class="chart" id="c-transfer" style="margin:0">
+            <span class="ck">Figure 5 · Transfer test, Churchill River NL</span>
+            <h4>The Alberta model doesn't transfer as-is</h4>
+            <p class="cap">Applied directly to Newfoundland, the model over-predicts turbidity about 17×. The method transfers, but it must be retrained on local hydrology.</p>
+            <div class="plot"></div>
+          </figure>
+        </div>
+        <p class="chart-note">Figures 1–4: project results on the Peace–Athabasca dataset (823 samples, 80/20 train/test split). Figure 5: pilot transfer test on one Churchill River comparison, illustrative rather than statistical. Click any figure to open it full size.</p>
+
+        <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">XGBoost</span><span class="tag">Feature Importance</span><span class="tag">pandas</span><span class="tag">seaborn</span><span class="tag">Ensemble ML</span><span class="tag">Hydrology</span><span class="tag">Water Quality</span><span class="tag">Environmental Risk</span></div>
       </article>
 
       <div class="courses reveal">
@@ -465,6 +529,31 @@
     } else {
       els.forEach(function(el){ el.classList.add('in'); });
     }
+  })();
+
+  // ---------- Research charts ----------
+  (function(){
+    
+    var NS='http://www.w3.org/2000/svg';
+    function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+    function txt(p,x,y,s,a){var t=el('text',Object.assign({x:x,y:y},a||{}),p);t.textContent=s;return t}
+    function tipFor(fig){var t=document.createElement('div');t.className='tip';fig.appendChild(t);return function(evt,html){if(!html){t.style.opacity=0;return}t.innerHTML=html;var r=fig.getBoundingClientRect();var x=evt.clientX-r.left+12,y=evt.clientY-r.top-34;x=Math.min(x,r.width-t.offsetWidth-8);t.style.left=Math.max(8,x)+'px';t.style.top=y+'px';t.style.opacity=1}}
+    function hbars(id,rows,opt){
+      var fig=document.getElementById(id),box=fig.querySelector('.plot'),tip=tipFor(fig);
+      var W=520,lw=opt.lw,rh=34,H=rows.length*rh+8,max=opt.max;
+      var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':opt.aria},box);
+      rows.forEach(function(r,i){
+        var y=i*rh+4,bw=Math.max(2,(W-lw-70)*r[1]/max);
+        txt(svg,lw-10,y+rh/2+1,r[0],{'text-anchor':'end','dominant-baseline':'middle','font-size':13,class:r[2]?'lbl':''});
+        el('rect',{x:lw,y:y+7,width:bw,height:rh-14,rx:4,class:'bar'+(r[2]?' hi':'')},svg);
+        txt(svg,lw+bw+8,y+rh/2+1,opt.fmt(r[1]),{'dominant-baseline':'middle','font-size':13,class:'lbl'});
+        var h=el('rect',{x:0,y:y,width:W,height:rh,class:'hit'},svg);
+        h.addEventListener('mousemove',function(e){tip(e,'<b>'+r[0]+'</b> · '+opt.tip(r))});h.addEventListener('mouseleave',function(e){tip(e,null)});
+      });
+    }
+    // Fig 4
+    hbars('c-transfer',[['Observed (NL)',14,false],['Alberta model, gaps imputed',234,true],['Alberta model, NL inputs only',243,true]],{lw:215,max:260,aria:'Bar chart of observed versus predicted turbidity in Newfoundland',fmt:function(v){return v+' NTU'},tip:function(r){return r[1]+' NTU'+(r[2]?' · ~'+Math.round(r[1]/14)+'× observed':'')}});
+    var tb4=document.querySelector('#c-transfer .bar');if(tb4)tb4.style.fill='var(--ink)';
   })();
 </script>
 </body>
