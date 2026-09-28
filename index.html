@@ -243,16 +243,105 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease}
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* ================= Interactive layer ================= */
+  .progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),#ffb199);z-index:100;pointer-events:none}
+  .nav-links a.active{color:var(--ink)}
+  .nav-links a{position:relative}
+  .nav-links a:not(.now-link)::before{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transition:transform .25s}
+  .nav-links a.active::before,.nav-links a:not(.now-link):hover::before{transform:scaleX(1)}
+
+  #river{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+  .hero .wrap{position:relative;z-index:1}
+  .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:140px;background:linear-gradient(to bottom,transparent,var(--paper));z-index:0;pointer-events:none}
+  .hero h1 .line2{display:block;font-size:.6em;margin-top:.2em;white-space:nowrap;min-height:1.05em}
+  @media (max-width:640px){.hero h1 .line2{white-space:normal;min-height:2.1em;font-size:.66em}}
+  .rot{color:var(--accent)}
+  .caret{display:inline-block;width:.08em;height:.85em;background:var(--accent);margin-left:.06em;vertical-align:-.06em;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .scroll-cue{display:inline-flex;align-items:center;gap:.6em;margin-top:clamp(24px,4vw,40px);font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);text-decoration:none}
+  .scroll-cue .mouse{width:18px;height:28px;border:1.5px solid var(--ink-faint);border-radius:10px;position:relative}
+  .scroll-cue .mouse::after{content:"";position:absolute;left:50%;top:5px;width:3px;height:6px;margin-left:-1.5px;border-radius:2px;background:var(--accent);animation:wheel 1.6s ease-in-out infinite}
+  @keyframes wheel{0%{transform:translateY(0);opacity:1}80%{transform:translateY(9px);opacity:0}100%{opacity:0}}
+
+  /* spotlight glow that follows the cursor */
+  .glow{position:relative;isolation:isolate}
+  .glow::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 60%)}
+  .glow:hover::before{opacity:1}
+  .card.glow,.chart.glow{transform-style:preserve-3d;transition:transform .25s ease,border-color .2s,box-shadow .2s}
+  .btn{will-change:transform}
+
+  /* ML pipeline stepper */
+  .pipe{margin:clamp(22px,3vw,34px) 0;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .pipe-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .pipe-head h4{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:0;font-weight:500}
+  .pipe-play{font:600 .8rem "Instrument Sans",sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:.4em .9em;cursor:pointer}
+  .pipe-play:hover{border-color:var(--accent)}
+  .pipe-steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+  .pipe-steps::before{content:"";position:absolute;left:10%;right:10%;top:34px;height:2px;background:var(--line)}
+  .pipe-fill{position:absolute;left:10%;top:34px;height:2px;background:var(--accent);transition:width .45s ease;width:0}
+  .pstep{background:none;border:0;cursor:pointer;padding:16px 6px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink-soft);font:500 .85rem "Instrument Sans",sans-serif;position:relative;z-index:1}
+  .pstep .dot{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--line);font:600 .8rem "JetBrains Mono",monospace;transition:all .3s}
+  .pstep.done .dot{border-color:var(--accent);color:var(--accent)}
+  .pstep.on .dot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:scale(1.12);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
+  .pstep.on{color:var(--ink);font-weight:600}
+  .pstep:focus-visible .dot{outline:2px solid var(--ring);outline-offset:3px}
+  .pipe-panel{padding:clamp(18px,2.6vw,28px);background:color-mix(in srgb,var(--accent) 5%,var(--surface));min-height:150px;display:grid;grid-template-columns:auto 1fr;gap:18px 22px;align-items:start}
+  .pipe-panel .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1;color:var(--accent);letter-spacing:-.02em;min-width:3.2ch}
+  .pipe-panel .big small{display:block;font:500 .7rem "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
+  .pipe-panel h5{font-family:"Bricolage Grotesque";font-size:1.25rem;margin:0 0 .35em;letter-spacing:-.01em}
+  .pipe-panel p{margin:0;color:var(--ink-soft);max-width:62ch}
+  .pipe-panel .in{animation:pin .45s ease both}
+  @keyframes pin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (max-width:640px){.pstep span.t{font-size:.72rem}.pstep .dot{width:32px;height:32px}.pipe-steps::before,.pipe-fill{top:31px}.pipe-panel{grid-template-columns:1fr}}
+
+  /* Lightbox */
+  .lb{position:fixed;inset:0;z-index:200;background:rgba(10,10,14,.88);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:clamp(12px,4vw,48px)}
+  .lb.open{display:flex;animation:fade .2s ease}
+  @keyframes fade{from{opacity:0}}
+  .lb figure{margin:0;max-width:min(1200px,100%);max-height:100%;display:flex;flex-direction:column;gap:12px}
+  .lb img{max-width:100%;max-height:78vh;object-fit:contain;background:#fff;border-radius:12px;padding:10px;animation:zin .25s ease}
+  @keyframes zin{from{transform:scale(.96);opacity:0}}
+  .lb figcaption{color:#e9e6df;font-size:.95rem;max-width:80ch}
+  .lb figcaption b{color:#fff}
+  .lb button{position:absolute;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer}
+  .lb button:hover{background:rgba(255,255,255,.2)}
+  .lb .x{top:16px;right:16px}.lb .pv{left:12px;top:50%;margin-top:-22px}.lb .nx{right:12px;top:50%;margin-top:-22px}
+  .lb .cnt{position:absolute;top:26px;left:20px;color:#bbb;font:500 .75rem "JetBrains Mono",monospace;letter-spacing:.1em}
+
+  /* Journey timeline */
+  .tl{position:relative;margin-left:8px;padding-left:34px}
+  .tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .tl-fill{position:absolute;left:7px;top:6px;width:2px;background:var(--accent);height:0;transition:height .1s linear}
+  .tl-item{position:relative;padding:0 0 clamp(22px,3vw,34px)}
+  .tl-item::before{content:"";position:absolute;left:-34px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:2px solid var(--line);transition:all .35s}
+  .tl-item.lit::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 16%,transparent)}
+  .tl-item .when{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:var(--accent);letter-spacing:.06em}
+  .tl-item h3{font-weight:700;font-size:clamp(1.15rem,2.2vw,1.45rem);letter-spacing:-.01em;margin:.2em 0 .15em}
+  .tl-item .org{color:var(--ink-faint);font-size:.9rem}
+  .tl-item p{color:var(--ink-soft);margin:.5em 0 0;max-width:62ch}
+  .tl-item.next h3{color:var(--accent)}
+  .tl-item .tags{margin-top:10px}
+
+  /* Toast */
+  .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:.7em 1.1em;border-radius:12px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:all .3s;z-index:150}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  .socials button{font:inherit;cursor:pointer;background:none;color:var(--ink-soft);border:1px solid var(--line);padding:.7em 1.2em;border-radius:10px;font-weight:500;transition:border-color .2s,color .2s,transform .2s}
+  .socials button:hover{border-color:var(--accent);color:var(--ink);transform:translateY(-2px)}
+
+  @media (prefers-reduced-motion: reduce){.caret{animation:none}.scroll-cue .mouse::after{animation:none}.pipe-fill,.tl-fill{transition:none}}
 </style>
 </head>
 <body>
 
+<div class="progress" id="progress" aria-hidden="true"></div>
 <header class="nav">
   <div class="wrap nav-in">
     <a class="brand" href="#top">Muhammad<span>.</span></a>
     <nav class="nav-links">
       <a href="#work" class="hide-sm">Work</a>
       <a href="#now" class="now-link">Now</a>
+      <a href="#journey" class="hide-sm">Journey</a>
       <a href="#about" class="hide-sm">About</a>
       <a href="#contact">Contact</a>
       <button class="theme-btn" id="themeBtn" aria-label="Toggle light and dark theme" title="Toggle theme">◐</button>
@@ -264,14 +353,16 @@
 
   <!-- ===================== HERO ===================== -->
   <section class="hero">
+    <canvas id="river" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
       <span class="status-chip"><span class="status-dot"></span> Seeking Winter 2027 co-op &middot; St. John's, NL</span>
-      <h1>Hi, I'm <span class="accent">Muhammad</span>.<br>I engineer for the environment.</h1>
+      <h1 aria-label="Hi, I'm Muhammad. I engineer for the environment.">Hi, I'm <span class="accent">Muhammad</span>.<span class="line2" aria-hidden="true">I engineer for <span class="rot" id="rot">the environment.</span><span class="caret"></span></span></h1>
       <p class="hero-lead">Environmental systems engineering student at Memorial University, with a background in building engineering &amp; construction management. This is where I keep my work and what I'm up to right now.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#work">See my work <span aria-hidden="true">→</span></a>
         <a class="btn btn-ghost" href="#now">What I'm doing now</a>
       </div>
+      <a class="scroll-cue" href="#now"><span class="mouse"></span>Scroll to explore</a>
     </div>
 
     <div class="wrap">
@@ -339,7 +430,7 @@
         <p>Graduate research and technical work across environmental systems, water quality and building engineering.</p>
       </div>
 
-      <article class="feature reveal">
+      <article class="feature reveal glow">
         <div class="feature-top">
           <span class="pill hot">Graduate project</span>
           <span class="pill">MUN · ENGI 960A/B</span>
@@ -350,10 +441,18 @@
         <p class="lede">Wildfires are getting larger and more severe across Canada's boreal forests, and the ash and sediment they release can reach the rivers communities drink from. This project builds a data-driven tool that predicts how wildfires degrade source-water quality and explains which factors drive the change, to give water utilities evidence for monitoring and post-fire planning.</p>
 
         <div class="stats">
-          <div class="stat"><b>823</b><span>turbidity samples, 4 stations, 2000–2026</span></div>
-          <div class="stat"><b>22</b><span>chemistry, time &amp; station predictors</span></div>
-          <div class="stat"><b>4</b><span>ensemble ML models compared</span></div>
-          <div class="stat"><b>R² 0.775</b><span>best model (Extra Trees)</span></div>
+          <div class="stat"><b data-count="823">823</b><span>turbidity samples, 4 stations, 2000–2026</span></div>
+          <div class="stat"><b data-count="22">22</b><span>chemistry, time &amp; station predictors</span></div>
+          <div class="stat"><b data-count="4">4</b><span>ensemble ML models compared</span></div>
+          <div class="stat"><b data-count="0.775" data-prefix="R² " data-dec="3">R² 0.775</b><span>best model (Extra Trees)</span></div>
+        </div>
+
+        <div class="pipe" id="pipe">
+          <div class="pipe-head"><h4>How the model works · click each step</h4><button class="pipe-play" id="pipePlay" type="button">▶ Play walkthrough</button></div>
+          <div class="pipe-steps" role="tablist" aria-label="Machine-learning pipeline steps">
+            <div class="pipe-fill" id="pipeFill"></div>
+          </div>
+          <div class="pipe-panel" id="pipePanel" role="tabpanel" aria-live="polite"></div>
         </div>
 
         <div class="cols">
@@ -387,31 +486,31 @@
 
 
         <div class="charts">
-          <figure class="chart wide" style="margin:0">
+          <figure class="chart wide glow" style="margin:0">
             <span class="ck">Figure 1 · Model comparison</span>
             <h4>Extra Trees was the best model on every metric</h4>
             <p class="cap">Four ensemble models scored on held-out test data. R² (left, higher is better) is the share of turbidity variation explained; RMSE and MAE (middle, right, lower is better) are prediction errors in NTU.</p>
             <a class="shot" href="img/ml-model-comparison.png" target="_blank" rel="noopener"><img src="img/ml-model-comparison.png" width="1784" height="484" loading="lazy" alt="Three bar charts comparing Extra Trees, Gradient Boosting, Random Forest and XGBoost on R², RMSE and MAE. Extra Trees has the highest R² (about 0.77) and the lowest RMSE and MAE."></a>
           </figure>
-          <figure class="chart" style="margin:0">
+          <figure class="chart glow" style="margin:0">
             <span class="ck">Figure 2 · Observed vs predicted</span>
             <h4>Predictions track real measurements</h4>
             <p class="cap">Each dot is a held-out water sample; dots on the red 1:1 line are perfect predictions. Extra Trees (top right) reaches R² = 0.775.</p>
             <a class="shot" href="img/ml-observed-vs-predicted.png" target="_blank" rel="noopener"><img src="img/ml-observed-vs-predicted.png" width="1384" height="1184" loading="lazy" alt="Four scatter plots of observed versus predicted turbidity: Random Forest R² 0.719, Extra Trees R² 0.775, Gradient Boosting R² 0.720, XGBoost R² 0.685."></a>
           </figure>
-          <figure class="chart" style="margin:0">
+          <figure class="chart glow" style="margin:0">
             <span class="ck">Figure 3 · What drives turbidity</span>
             <h4>Nitrogen, colour &amp; metals dominate</h4>
             <p class="cap">Top 15 inputs by importance in the Extra Trees model. Total nitrogen leads by about 5×, followed by colour, manganese, aluminium and iron, which is exactly what wildfire runoff carries into rivers.</p>
             <a class="shot" href="img/ml-feature-importance.png" target="_blank" rel="noopener"><img src="img/ml-feature-importance.png" width="784" height="584" loading="lazy" alt="Horizontal bar chart of the top 15 feature importances in the Extra Trees model. Total nitrogen is about 0.52, followed by true colour, total manganese, total aluminium and total iron."></a>
           </figure>
-          <figure class="chart" style="margin:0">
+          <figure class="chart glow" style="margin:0">
             <span class="ck">Figure 4 · Prediction errors</span>
             <h4>Errors are small and unbiased</h4>
             <p class="cap">Residuals (observed − predicted) for Extra Trees are sharply peaked at zero; only a few extreme turbidity events sit in the tail.</p>
             <a class="shot" href="img/ml-residuals.png" target="_blank" rel="noopener"><img src="img/ml-residuals.png" width="682" height="384" loading="lazy" alt="Histogram of Extra Trees residuals, sharply peaked and centred on zero with a long thin tail toward large positive errors."></a>
           </figure>
-          <figure class="chart" id="c-transfer" style="margin:0">
+          <figure class="chart glow" id="c-transfer" style="margin:0">
             <span class="ck">Figure 5 · Transfer test, Churchill River NL</span>
             <h4>The Alberta model doesn't transfer as-is</h4>
             <p class="cap">Applied directly to Newfoundland, the model over-predicts turbidity about 17×. The method transfers, but it must be retrained on local hydrology.</p>
@@ -439,19 +538,75 @@
 
       <p class="grid-label">More work</p>
       <div class="grid">
-        <div class="card reveal">
+        <div class="card reveal glow">
           <span class="num">01</span>
           <h3>GIS Portfolio Project</h3>
           <p>A spatial analysis project built in ArcGIS, applying mapping and geoprocessing to a real environmental question. In progress.</p>
           <div class="tags"><span class="tag">ArcGIS</span><span class="tag">GIS</span><span class="tag">Spatial Analysis</span></div>
           <span class="go">In progress</span>
         </div>
-        <div class="card reveal">
+        <div class="card reveal glow">
           <span class="num">02</span>
           <h3>Undergraduate Work — KUET</h3>
           <p>Projects from my B.Sc. in Building Engineering &amp; Construction Management at Khulna University of Engineering &amp; Technology.</p>
           <div class="tags"><span class="tag">Building Engineering</span><span class="tag">Construction Mgmt</span></div>
           <span class="go">Details coming soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== JOURNEY ===================== -->
+  <section id="journey">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <span class="eyebrow">/ journey</span>
+          <h2 style="margin-top:.35em">From Khulna to St. John's</h2>
+        </div>
+        <p>Building engineering, site work and environmental compliance, and now data-driven environmental research.</p>
+      </div>
+      <div class="tl" id="tl">
+        <div class="tl-fill" id="tlFill"></div>
+        <div class="tl-item reveal">
+          <span class="when">2019 – 2024</span>
+          <h3>B.Sc., Building Engineering &amp; Construction Management</h3>
+          <span class="org">Khulna University of Engineering &amp; Technology (KUET), Bangladesh</span>
+          <p>Majored in structural &amp; materials engineering. Thesis: high-strength concrete from recycled aggregate and metakaolin, reaching 60.36 MPa while replacing ~45% of natural aggregate with waste. University Merit Scholarship.</p>
+          <div class="tags"><span class="tag">ETABS</span><span class="tag">Revit</span><span class="tag">Materials testing</span></div>
+        </div>
+        <div class="tl-item reveal">
+          <span class="when">May 2024</span>
+          <h3>Engineering Intern</h3>
+          <span class="org">Sheltech Pvt. Ltd, Dhaka</span>
+          <p>Site inspections and quality-control checks, plus AutoCAD drawings and technical documentation for site crews.</p>
+          <div class="tags"><span class="tag">AutoCAD</span><span class="tag">QA/QC</span></div>
+        </div>
+        <div class="tl-item reveal">
+          <span class="when">Jun 2024 – Feb 2025</span>
+          <h3>Assistant Engineer</h3>
+          <span class="org">ZAS Corporation Ltd, Dhaka</span>
+          <p>Wrote environmental compliance reports and technical submissions with a 100% first-pass approval rate, inspected fire-safety systems, and put energy-efficiency measures in place.</p>
+          <div class="tags"><span class="tag">Compliance</span><span class="tag">HSEQ</span><span class="tag">MS Project</span></div>
+        </div>
+        <div class="tl-item reveal">
+          <span class="when">2025</span>
+          <h3>MASc (Co-op), Environmental Systems Engineering &amp; Management</h3>
+          <span class="org">Memorial University of Newfoundland, St. John's</span>
+          <p>Graduate coursework in environmental risk assessment, systems engineering, management systems and statistics. CGPA 3.87.</p>
+        </div>
+        <div class="tl-item reveal">
+          <span class="when">Jan 2026 – present</span>
+          <h3>Wildfire &amp; source-water ML research</h3>
+          <span class="org">MUN · ENGI 960A/B</span>
+          <p>Built a machine-learning framework predicting river turbidity in wildfire-exposed boreal watersheds, then tested whether it transfers to Newfoundland. <a href="#work" style="color:var(--accent)">See the project ↑</a></p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">XGBoost</span></div>
+        </div>
+        <div class="tl-item next reveal">
+          <span class="when">Winter 2027 · next</span>
+          <h3>Your team?</h3>
+          <span class="org">Seeking a co-op in environmental management, construction or infrastructure</span>
+          <p><a href="#contact" style="color:var(--accent)">Let's talk →</a></p>
         </div>
       </div>
     </div>
@@ -492,10 +647,19 @@
       <p>Hiring for a co-op or internship, or want to talk environmental engineering? My inbox is open.</p>
       <div class="socials">
         <a href="mailto:muhammadmr@mun.ca">✉ Email</a>
+        <button type="button" id="copyEmail">⧉ Copy email</button>
       </div>
     </div>
   </section>
 </main>
+<div class="toast" id="toast" role="status"></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Figure viewer">
+  <span class="cnt" id="lbCnt"></span>
+  <button class="x" id="lbX" aria-label="Close">✕</button>
+  <button class="pv" id="lbPv" aria-label="Previous figure">←</button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="nx" id="lbNx" aria-label="Next figure">→</button>
+</div>
 
 <footer class="wrap">
   <span>© <span id="year">2026</span> Md. Mushfiqur Rahman.</span>
@@ -554,6 +718,138 @@
     // Fig 4
     hbars('c-transfer',[['Observed (NL)',14,false],['Alberta model, gaps imputed',234,true],['Alberta model, NL inputs only',243,true]],{lw:215,max:260,aria:'Bar chart of observed versus predicted turbidity in Newfoundland',fmt:function(v){return v+' NTU'},tip:function(r){return r[1]+' NTU'+(r[2]?' · ~'+Math.round(r[1]/14)+'× observed':'')}});
     var tb4=document.querySelector('#c-transfer .bar');if(tb4)tb4.style.fill='var(--ink)';
+  })();
+
+  // ================= Interactive layer =================
+  (function(){
+    var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var root=document.documentElement;
+    function css(v){return getComputedStyle(root).getPropertyValue(v).trim()}
+
+    // --- scroll progress + active nav
+    var bar=document.getElementById('progress');
+    function onScroll(){var h=document.documentElement;var p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);bar.style.transform='scaleX('+p+')'}
+    addEventListener('scroll',onScroll,{passive:true});onScroll();
+    var links={};document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+    if('IntersectionObserver' in window){
+      var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){for(var k in links)links[k].classList.remove('active');if(links[e.target.id])links[e.target.id].classList.add('active')}})},{rootMargin:'-45% 0px -50% 0px'});
+      ['now','work','journey','about','contact'].forEach(function(id){var el=document.getElementById(id);if(el)so.observe(el)});
+    }
+
+    // --- hero "river" particle field (water flowing, reacts to cursor)
+    (function(){
+      var c=document.getElementById('river');if(!c)return;var x=c.getContext('2d');var hero=c.parentElement;
+      var W,H,dpr,parts=[],mouse={x:-9999,y:-9999},t=0,running=true;
+      function size(){dpr=Math.min(devicePixelRatio||1,2);W=hero.clientWidth;H=hero.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+        var n=Math.round(Math.min(900,W*H/1400));parts=[];for(var i=0;i<n;i++)parts.push(spawn(true))}
+      function spawn(any){return{x:any?Math.random()*W:-10,y:Math.random()*H,v:.4+Math.random()*1.1,a:.15+Math.random()*.5,r:Math.random()<.08?1.8:1.1}}
+      function flow(px,py){return Math.sin(py*0.006+t*0.6)*0.9+Math.cos(px*0.004-t*0.4)*0.5+Math.sin((px+py)*0.003+t)*0.35}
+      function frame(){
+        if(!running)return;t+=0.008;
+        var acc=css('--accent')||'#F0451E',ink=css('--ink-faint')||'#888';
+        x.clearRect(0,0,W,H);
+        for(var i=0;i<parts.length;i++){var p=parts[i];
+          var ang=flow(p.x,p.y)*0.6;var vx=Math.cos(ang)*p.v*1.4,vy=Math.sin(ang)*p.v;
+          var dx=p.x-mouse.x,dy=p.y-mouse.y,d2=dx*dx+dy*dy;
+          if(d2<16000){var f=(16000-d2)/16000*2.4;var d=Math.sqrt(d2)||1;vx+=dx/d*f;vy+=dy/d*f}
+          var ox=p.x,oy=p.y;p.x+=vx;p.y+=vy;
+          if(p.x>W+10||p.y<-10||p.y>H+10){parts[i]=spawn(false);continue}
+          x.strokeStyle=(i%7===0)?acc:ink;x.globalAlpha=p.a*((i%7===0)?0.9:0.55);x.lineWidth=p.r;x.lineCap='round';
+          x.beginPath();x.moveTo(ox-vx*3,oy-vy*3);x.lineTo(p.x,p.y);x.stroke();
+        }
+        x.globalAlpha=1;requestAnimationFrame(frame);
+      }
+      size();addEventListener('resize',size);
+      hero.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top});
+      hero.addEventListener('pointerleave',function(){mouse.x=mouse.y=-9999});
+      if('IntersectionObserver' in window){new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!running&&!RM){running=true;requestAnimationFrame(frame)}else if(!v)running=false},{}).observe(hero)}
+      if(RM){running=true;for(var k=0;k<60;k++){t+=.01}frame();running=false}else requestAnimationFrame(frame);
+    })();
+
+    // --- rotating / typing headline word
+    (function(){
+      var el=document.getElementById('rot');if(!el)return;
+      var words=['the environment.','clean water.','climate resilience.','greener materials.','safer communities.'];
+      if(RM)return;var wi=0,ci=words[0].length,del=true,pause=1600;
+      function tick(){var w=words[wi];
+        if(del){ci--;el.textContent=w.slice(0,ci);if(ci<=0){del=false;wi=(wi+1)%words.length;return setTimeout(tick,250)}return setTimeout(tick,35)}
+        var nw=words[wi];ci++;el.textContent=nw.slice(0,ci);if(ci>=nw.length){del=true;return setTimeout(tick,pause)}setTimeout(tick,70)}
+      setTimeout(tick,2200);
+    })();
+
+    // --- count-up stats
+    (function(){
+      var els=document.querySelectorAll('[data-count]');if(!els.length||RM||!('IntersectionObserver' in window))return;
+      els.forEach(function(el){var pre=el.dataset.prefix||'',dec=+(el.dataset.dec||0);el.textContent=pre+(0).toFixed(dec)});
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);
+        var el=e.target,end=+el.dataset.count,pre=el.dataset.prefix||'',dec=+(el.dataset.dec||0),t0=performance.now(),dur=1400;
+        (function step(now){var k=Math.min(1,(now-t0)/dur);k=1-Math.pow(1-k,3);el.textContent=pre+(end*k).toFixed(dec);if(k<1)requestAnimationFrame(step)})(t0);
+      })},{threshold:.6});
+      els.forEach(function(el){io.observe(el)});
+    })();
+
+    // --- cursor spotlight + gentle 3D tilt on cards
+    document.querySelectorAll('.glow').forEach(function(el){
+      var tilt=el.classList.contains('card');
+      el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;el.style.setProperty('--mx',mx+'px');el.style.setProperty('--my',my+'px');
+        if(tilt&&!RM){var rx=((my/r.height)-.5)*-6,ry=((mx/r.width)-.5)*6;el.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-4px)'}});
+      el.addEventListener('pointerleave',function(){if(tilt)el.style.transform=''});
+    });
+    // magnetic buttons
+    if(!RM)document.querySelectorAll('.hero-cta .btn').forEach(function(b){
+      b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.25)+'px)'});
+      b.addEventListener('pointerleave',function(){b.style.transform=''});
+    });
+
+    // --- ML pipeline stepper
+    (function(){
+      var steps=[
+        {t:'Collect',big:'837',u:'samples',h:'Collect long-term monitoring data',p:'Pulled 26 years (2000–2026) of water-quality records from four stations in Alberta\'s Peace–Athabasca Basin, a boreal watershed hit by the 2016 Fort McMurray and 2023 fires.'},
+        {t:'Clean',big:'22',u:'predictors',h:'Clean & engineer features',p:'Dropped samples without turbidity (823 remain), filled missing chemistry with medians, one-hot encoded the station and added month, day-of-year and year: 15 chemistry + 3 time + 4 station inputs.'},
+        {t:'Train',big:'4',u:'models',h:'Train & compare four ensemble models',p:'Random Forest, Extra Trees, Gradient Boosting and XGBoost on the same 80/20 train/test split, scored with R², RMSE and MAE so the comparison is fair.'},
+        {t:'Explain',big:'5×',u:'nitrogen lead',h:'Explain what drives turbidity',p:'Extra Trees won (R² = 0.775). Feature importance shows total nitrogen dominating, about 5× the next input, followed by colour, manganese, aluminium and iron: the chemical signature of wildfire runoff.'},
+        {t:'Transfer',big:'17×',u:'over-prediction',h:'Test it in Newfoundland',p:'Applied to Labrador\'s Churchill River, the Alberta model predicted 234–243 NTU against 14 NTU observed. The method transfers, but the model must be retrained once the local hydrology–water-quality link is established.'}
+      ];
+      var wrap=document.querySelector('.pipe-steps'),panel=document.getElementById('pipePanel'),fill=document.getElementById('pipeFill'),play=document.getElementById('pipePlay');if(!wrap)return;
+      var btns=steps.map(function(s,i){var b=document.createElement('button');b.type='button';b.className='pstep';b.setAttribute('role','tab');b.innerHTML='<span class="dot">'+(i+1)+'</span><span class="t">'+s.t+'</span>';b.addEventListener('click',function(){stop();go(i)});wrap.appendChild(b);return b});
+      var cur=0,timer=null;
+      function go(i){cur=i;btns.forEach(function(b,j){b.classList.toggle('on',j===i);b.classList.toggle('done',j<i);b.setAttribute('aria-selected',j===i)});
+        fill.style.width=(80*i/(steps.length-1))+'%';var s=steps[i];
+        panel.innerHTML='<div class="big in">'+s.big+'<small>'+s.u+'</small></div><div class="in"><h5>'+s.h+'</h5><p>'+s.p+'</p></div>'}
+      function stop(){if(timer){clearInterval(timer);timer=null;play.textContent='▶ Play walkthrough'}}
+      play.addEventListener('click',function(){if(timer)return stop();play.textContent='❚❚ Pause';go(0);timer=setInterval(function(){if(cur>=steps.length-1)return stop();go(cur+1)},3200)});
+      wrap.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){stop();go(Math.min(steps.length-1,cur+1));btns[cur].focus()}if(e.key==='ArrowLeft'){stop();go(Math.max(0,cur-1));btns[cur].focus()}});
+      go(0);
+    })();
+
+    // --- figure lightbox
+    (function(){
+      var shots=[].slice.call(document.querySelectorAll('a.shot'));if(!shots.length)return;
+      var lb=document.getElementById('lb'),img=document.getElementById('lbImg'),cap=document.getElementById('lbCap'),cnt=document.getElementById('lbCnt'),i=0,last;
+      function show(k){i=(k+shots.length)%shots.length;var a=shots[i],fig=a.closest('figure');img.src=a.getAttribute('href');img.alt=a.querySelector('img').alt;
+        cap.innerHTML='<b>'+fig.querySelector('h4').textContent+'</b>. '+fig.querySelector('.cap').textContent;cnt.textContent=(i+1)+' / '+shots.length}
+      function open(k){last=document.activeElement;show(k);lb.classList.add('open');document.body.style.overflow='hidden';document.getElementById('lbX').focus()}
+      function close(){lb.classList.remove('open');document.body.style.overflow='';if(last)last.focus()}
+      shots.forEach(function(a,k){a.addEventListener('click',function(e){e.preventDefault();open(k)})});
+      document.getElementById('lbX').onclick=close;document.getElementById('lbPv').onclick=function(){show(i-1)};document.getElementById('lbNx').onclick=function(){show(i+1)};
+      lb.addEventListener('click',function(e){if(e.target===lb)close()});
+      addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+    })();
+
+    // --- journey timeline fill
+    (function(){
+      var tl=document.getElementById('tl'),fill=document.getElementById('tlFill');if(!tl)return;var items=tl.querySelectorAll('.tl-item');
+      function upd(){var r=tl.getBoundingClientRect(),mid=innerHeight*0.6;var h=Math.max(0,Math.min(r.height-12,mid-r.top));fill.style.height=h+'px';
+        items.forEach(function(it){it.classList.toggle('lit',it.getBoundingClientRect().top+10<mid)})}
+      addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+    })();
+
+    // --- copy email
+    (function(){
+      var b=document.getElementById('copyEmail'),t=document.getElementById('toast');if(!b)return;
+      function toast(m){t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(function(){t.classList.remove('show')},2200)}
+      b.addEventListener('click',function(){var e='muhammadmr@mun.ca';(navigator.clipboard?navigator.clipboard.writeText(e):Promise.reject()).then(function(){toast('Email copied: '+e)},function(){toast(e)})});
+    })();
   })();
 </script>
 </body>
