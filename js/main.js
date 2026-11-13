@@ -88,11 +88,12 @@
       var s = steps[i];
       panel.innerHTML = '<div class="big in">' + s.big + '<small>' + s.u + '</small></div><div class="in"><h4>' + s.h + '</h4><p>' + s.p + '</p></div>';
     }
-    function stop() { if (timer) { clearInterval(timer); timer = null; play.textContent = 'Play the steps'; } }
+    var pipe = document.getElementById('pipe');
+    function stop() { if (timer) { clearInterval(timer); timer = null; play.textContent = 'Play the steps'; pipe.classList.remove('playing'); } }
     if (play) play.addEventListener('click', function () {
       if (timer) return stop();
-      play.textContent = 'Pause'; go(0);
-      timer = setInterval(function () { if (cur >= steps.length - 1) return stop(); go(cur + 1); }, 3200);
+      play.textContent = 'Pause'; pipe.classList.add('playing'); go(0);
+      timer = setInterval(function () { if (cur >= steps.length - 1) return stop(); go(cur + 1); pipe.classList.remove('playing'); void pipe.offsetWidth; pipe.classList.add('playing'); }, 3200);
     });
     wrap.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); stop(); go(Math.min(steps.length - 1, cur + 1)); btns[cur].focus(); }
@@ -153,4 +154,105 @@
       (navigator.clipboard ? navigator.clipboard.writeText(e) : Promise.reject()).then(function () { toast('Email copied: ' + e); }, function () { toast(e); });
     });
   })();
+})();
+
+// ================= Motion layer (by request) =================
+(function () {
+  var root = document.documentElement;
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // R² bars in the hero sheet (drawn even without motion)
+  var first = document.querySelector('.sheet .results tbody');
+  if (first) first.querySelectorAll('tr').forEach(function (tr) {
+    var v = parseFloat(tr.querySelector('td.num').textContent);
+    var span = document.createElement('span'); span.className = 'rbar'; span.setAttribute('aria-hidden', 'true');
+    span.style.setProperty('--v', Math.min(1, v / 0.8).toFixed(3));
+    tr.querySelector('td').appendChild(span);
+  });
+  document.querySelectorAll('.sheet tbody').forEach(function (tb) {
+    tb.querySelectorAll('tr').forEach(function (tr, i) { tr.style.setProperty('--i', i); tr.querySelectorAll('.rbar').forEach(function (b) { b.style.setProperty('--i', i); }); });
+  });
+
+  // Scroll progress bar
+  var bar = document.getElementById('progress');
+  var tl = document.getElementById('tl'), items = tl ? tl.querySelectorAll('li') : [];
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var h = document.documentElement, max = h.scrollHeight - h.clientHeight || 1;
+      if (bar) bar.style.transform = 'scaleX(' + (h.scrollTop / max) + ')';
+      if (tl) {
+        var r = tl.getBoundingClientRect(), mid = innerHeight * 0.6;
+        var p = Math.max(0, Math.min(1, (mid - r.top) / r.height));
+        tl.style.setProperty('--p', RM ? 1 : p.toFixed(3));
+        items.forEach(function (it) { it.classList.toggle('lit', RM || it.getBoundingClientRect().top + 24 < mid); });
+      }
+    });
+  }
+  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); onScroll();
+
+  if (RM || !('IntersectionObserver' in window)) return;
+  root.classList.add('motion');
+
+  // Hero headline, word by word
+  var h1 = document.querySelector('.hero h1');
+  if (h1) {
+    h1.setAttribute('aria-label', h1.textContent);
+    h1.innerHTML = h1.textContent.split(' ').map(function (w, i) { return '<span class="w" aria-hidden="true" style="--i:' + i + '">' + w + '</span>'; }).join(' ');
+  }
+  var sheet = document.querySelector('.sheet');
+  if (sheet) requestAnimationFrame(function () { requestAnimationFrame(function () { sheet.classList.add('go'); }); });
+
+  // Count-up for figures
+  function countUp(el, delay) {
+    var raw = el.textContent.trim(), m = raw.match(/^([^\d]*)([\d.]+)(.*)$/); if (!m) return;
+    var pre = m[1], end = parseFloat(m[2]), post = m[3], dec = (m[2].split('.')[1] || '').length;
+    el.textContent = pre + (0).toFixed(dec) + post;
+    setTimeout(function () {
+      var t0 = performance.now(), dur = 1300;
+      (function step(now) { var k = Math.min(1, (now - t0) / dur); k = 1 - Math.pow(1 - k, 3); el.textContent = pre + (end * k).toFixed(dec) + post; if (k < 1) requestAnimationFrame(step); })(t0);
+    }, delay || 0);
+  }
+  document.querySelectorAll('.sheet td.num').forEach(function (td, i) { countUp(td, 700 + i * 90); });
+
+  // Scroll reveals, staggered within each group
+  var groups = [
+    ['.head', ''], ['.rows > li', ''], ['.project-title', ''], ['.facts > div', ''], ['.pipe', 'scale'], ['.tools', ''],
+    ['.figs > .fig, .fig-stack > .fig', ''], ['.chart-note', ''], ['.band-text', ''], ['.figures > div', ''], ['.filters', ''],
+    ['.pub', ''], ['.foot-note', ''], ['.tl > li', 'left'], ['.earlier-head', ''], ['.earlier article', ''],
+    ['.portrait', 'scale'], ['.about-body > *', ''], ['.skills > div', ''], ['.courses', ''],
+    ['.contact h2', ''], ['.contact .mail', ''], ['.contact .lead', ''], ['.socials .btn', ''], ['.now-grid > div:first-child', '']
+  ];
+  var revealEls = [];
+  groups.forEach(function (g) {
+    var els = document.querySelectorAll(g[0]);
+    var byParent = new Map();
+    els.forEach(function (el) {
+      var n = byParent.get(el.parentNode) || 0; byParent.set(el.parentNode, n + 1);
+      el.setAttribute('data-reveal', g[1]); el.style.setProperty('--i', Math.min(n, 6)); revealEls.push(el);
+    });
+  });
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in'); io.unobserve(e.target);
+      if (e.target.matches('.figures > div')) countUp(e.target.querySelector('dd'), 150);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  revealEls.forEach(function (el) { io.observe(el); });
+
+  // Transfer chart and the big 243 / 14
+  var tr = document.getElementById('c-transfer');
+  var pair = document.querySelectorAll('.big-pair b');
+  var io2 = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return; io2.unobserve(e.target);
+      if (e.target === tr) tr.classList.add('in');
+      else e.target.querySelectorAll('b').forEach(function (b, i) { countUp(b, i * 200); });
+    });
+  }, { threshold: 0.35 });
+  if (tr) { tr.classList.add('transfer'); io2.observe(tr); }
+  var bp = document.querySelector('.big-pair'); if (bp) io2.observe(bp);
 })();
