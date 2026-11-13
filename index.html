@@ -3,681 +3,198 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Md. Mushfiqur Rahman — Environmental Systems Engineering</title>
+<title>Mushfiqur Rahman, environmental systems engineering</title>
+<meta name="description" content="Mushfiqur Rahman builds machine-learning models that predict how wildfires change source-water quality. MASc (Co-op) at Memorial University, open to a Winter 2027 co-op." />
+<meta property="og:title" content="Mushfiqur Rahman, machine learning for safer water" />
+<meta property="og:description" content="Wildfire and water-quality research at Memorial University, five papers on low-carbon building, and a Winter 2027 co-op search." />
 <meta property="og:image" content="https://muhammadmr128.github.io/img/mushfique-photo.jpg" />
-<meta name="theme-color" content="#0B7D55" />
-<meta name="description" content="Md. Mushfiqur Rahman — MASc (Co-op) student in Environmental Systems Engineering &amp; Management at Memorial University. Projects, GIS work and what I'm doing now." />
+<meta name="theme-color" content="#c3cad2" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#151b22" media="(prefers-color-scheme: dark)" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
-<style>
-  /* ---------- Tokens: light (default / system-light) ---------- */
-  :root{
-    --paper:#F3F7F2;
-    --surface:#FFFFFF;
-    --ink:#12201A;
-    --ink-soft:#46594E;
-    --ink-faint:#76887D;
-    --line:#DAE5DC;
-    --accent:#0B7D55;      /* forest green */
-    --accent-ink:#FFFFFF;
-    --accent-soft:#DDF2E6;
-    --accent-2:#0E7490;    /* water teal */
-    --accent-3:#E0A13A;    /* sunlight amber */
-    --ring:#0B7D55;
-    --shadow:0 1px 2px rgba(18,32,26,.05), 0 12px 32px -12px rgba(18,32,26,.18);
-  }
-  /* system-dark (no explicit choice) */
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#0B1411;
-      --surface:#12201A;
-      --ink:#EEF5EF;
-      --ink-soft:#A7BBAF;
-      --ink-faint:#6E8578;
-      --line:#20312A;
-      --accent:#3DD68C;
-      --accent-ink:#06140D;
-      --accent-soft:#123526;
-      --accent-2:#38BDF8;
-      --accent-3:#F5B94A;
-      --ring:#3DD68C;
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 18px 40px -16px rgba(0,0,0,.7);
-    }
-  }
-  /* explicit dark wins in both directions */
-  :root[data-theme="dark"]{
-    --paper:#0B1411;
-      --surface:#12201A;
-      --ink:#EEF5EF;
-      --ink-soft:#A7BBAF;
-      --ink-faint:#6E8578;
-      --line:#20312A;
-      --accent:#3DD68C;
-      --accent-ink:#06140D;
-      --accent-soft:#123526;
-      --accent-2:#38BDF8;
-      --accent-3:#F5B94A;
-      --ring:#3DD68C;
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 18px 40px -16px rgba(0,0,0,.7);
-  }
-
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:"Instrument Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    font-size:clamp(16px,1.05vw,18px);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-  }
-  .wrap{width:min(1120px,92vw);margin-inline:auto}
-  a{color:inherit}
-  section{padding:clamp(64px,9vw,128px) 0}
-
-  .eyebrow{
-    font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-    color:var(--ink-faint);
-    display:inline-flex;align-items:center;gap:.6em;
-  }
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
-
-  h1,h2,h3{font-family:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;text-wrap:balance;margin:0;line-height:1.02}
-
-  /* ---------- Nav ---------- */
-  header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--paper) 82%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{font-family:"Bricolage Grotesque";font-weight:800;font-size:1.15rem;letter-spacing:-.01em;text-decoration:none}
-  .brand span{color:var(--accent)}
-  .nav-links{display:flex;gap:clamp(14px,2.4vw,32px);align-items:center}
-  .nav-links a{font-size:.95rem;text-decoration:none;color:var(--ink-soft);font-weight:500}
-  .nav-links a:hover{color:var(--ink)}
-  .nav-links a.now-link{color:var(--ink)}
-  .nav-links a.now-link::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-left:6px;vertical-align:middle;animation:pulse 2s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
-  @media (prefers-reduced-motion: reduce){.nav-links a.now-link::after{animation:none}}
-  .theme-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);width:38px;height:38px;border-radius:50%;cursor:pointer;display:grid;place-items:center;font-size:1rem;transition:border-color .2s,transform .2s}
-  .theme-btn:hover{border-color:var(--accent);transform:rotate(-12deg)}
-  .theme-btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
-  @media (max-width:640px){.nav-links .hide-sm{display:none}}
-
-  /* ---------- Hero ---------- */
-  .hero{padding-top:clamp(48px,8vw,96px);position:relative;overflow:hidden}
-  .hero-grid{display:grid;gap:32px;grid-template-columns:minmax(0,1fr)}
-  .status-chip{display:inline-flex;align-items:center;gap:.55em;font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--ink-soft);background:var(--surface);border:1px solid var(--line);padding:.4em .8em;border-radius:999px;width:max-content}
-  .status-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px color-mix(in srgb,#22c55e 25%,transparent)}
-  .hero h1{font-weight:800;font-size:clamp(3.1rem,12vw,8.5rem);letter-spacing:-.03em;margin-top:.15em}
-  .hero h1 .accent{color:var(--accent)}
-  .hero-lead{max-width:34ch;font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--ink-soft);line-height:1.45}
-  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
-  .btn{display:inline-flex;align-items:center;gap:.5em;font-weight:600;text-decoration:none;padding:.85em 1.4em;border-radius:12px;font-size:1rem;transition:transform .18s, box-shadow .18s, background .18s}
-  .btn-primary{background:var(--accent);color:var(--accent-ink)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px -10px var(--accent)}
-  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--accent);transform:translateY(-2px)}
-
-  /* marquee tagline */
-  .marquee{margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-  .marquee-track{display:flex;gap:2.5rem;width:max-content;animation:scroll 26s linear infinite;font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(1.2rem,3vw,2rem);color:var(--ink-faint);letter-spacing:-.01em;white-space:nowrap}
-  .marquee-track .star{color:var(--accent)}
-  @keyframes scroll{to{transform:translateX(-50%)}}
-  @media (prefers-reduced-motion: reduce){.marquee-track{animation:none}}
-
-  /* ---------- Section heading ---------- */
-  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)}
-  .sec-head h2{font-weight:700;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.02em}
-  .sec-head p{color:var(--ink-soft);max-width:40ch;margin:0}
-
-  /* ---------- Now panel ---------- */
-  .now{background:linear-gradient(135deg,#0A3B2A 0%,#0C4A47 55%,#0B3B55 100%);color:#F3F7F2;border-radius:28px;padding:clamp(28px,5vw,56px);box-shadow:var(--shadow);position:relative;overflow:hidden}
-  :root[data-theme="dark"] .now, :root:not([data-theme="light"]) .now{background:linear-gradient(135deg,#0D3325 0%,#0B3A3A 55%,#0A2F45 100%);border:1px solid #20473a}
-  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .now{background:linear-gradient(135deg,#0A3B2A 0%,#0C4A47 55%,#0B3B55 100%);border:0}}
-  .now::after{content:"";position:absolute;right:-80px;top:-80px;width:300px;height:300px;background:radial-gradient(circle,#3DD68C,transparent 70%);opacity:.35;pointer-events:none}
-  .now::before{content:"";position:absolute;left:-60px;bottom:-90px;width:260px;height:260px;background:radial-gradient(circle,#F5B94A,transparent 70%);opacity:.18;pointer-events:none}
-  .now .eyebrow{color:#cfcbc2}
-  .now .eyebrow::before{background:var(--accent)}
-  .now h2{color:#fff;font-weight:800;font-size:clamp(1.8rem,4.5vw,3rem);letter-spacing:-.02em;margin:.35em 0 .1em}
-  .now .updated{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:#9d9a92}
-  .now-list{list-style:none;margin:clamp(20px,3vw,32px) 0 0;padding:0;display:grid;gap:18px}
-  .now-list li{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.12)}
-  .now-list li:last-child{border-bottom:0;padding-bottom:0}
-  .now-tag{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:#7CF0B6;background:rgba(61,214,140,.16);padding:.35em .7em;border-radius:6px;white-space:nowrap}
-  .now-list strong{color:#fff;font-weight:600}
-  .now-list span{color:#c7c4bc;display:block;font-size:.95rem}
-
-  /* ---------- Projects ---------- */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(16px,2vw,24px)}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,2.5vw,30px);text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:14px;transition:transform .2s, border-color .2s, box-shadow .2s;position:relative}
-  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--shadow)}
-  .card:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
-  .card .num{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:var(--ink-faint)}
-  .card h3{font-weight:700;font-size:1.35rem;letter-spacing:-.01em}
-  .card p{margin:0;color:var(--ink-soft);font-size:.98rem;flex:1}
-  .tags{display:flex;flex-wrap:wrap;gap:8px}
-  .tag{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--ink-soft);border:1px solid var(--line);padding:.3em .6em;border-radius:6px}
-  .card .go{font-weight:600;color:var(--accent);font-size:.95rem;display:inline-flex;align-items:center;gap:.4em}
-  .card:hover .go .arw{transform:translateX(4px)}
-  .arw{transition:transform .2s}
-
-
-  /* ---------- Featured case study ---------- */
-  .feature{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(24px,4vw,48px);box-shadow:var(--shadow);margin-bottom:clamp(20px,3vw,32px)}
-  .feature-top{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:14px}
-  .pill{font-family:"JetBrains Mono",monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;padding:.35em .75em;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft)}
-  .pill.hot{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
-  .feature h3{font-weight:800;font-size:clamp(1.6rem,3.6vw,2.6rem);letter-spacing:-.02em;max-width:24ch}
-  .feature .sub{color:var(--ink-faint);font-size:.92rem;margin:.6em 0 0}
-  .feature .lede{color:var(--ink-soft);font-size:clamp(1rem,1.6vw,1.15rem);max-width:68ch;margin:1.1em 0 0}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin:clamp(22px,3vw,34px) 0}
-  @media (max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}}
-  .stat{background:var(--surface);padding:18px 20px}
-  .stat b{display:block;font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(1.6rem,3.2vw,2.3rem);letter-spacing:-.02em;color:var(--accent);line-height:1.1}
-  .stat span{font-size:.85rem;color:var(--ink-soft)}
-  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px)}
-  @media (max-width:860px){.cols{grid-template-columns:1fr}}
-  .cols h4{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:0 0 .7em;font-weight:500}
-  .cols ol,.cols ul{margin:0;padding-left:1.1em;color:var(--ink-soft);font-size:.96rem}
-  .cols li{margin-bottom:.45em}
-  .cols li::marker{color:var(--accent)}
-  .feature .tags{margin-top:clamp(20px,3vw,30px)}
-  /* coursework */
-  .courses{margin-top:clamp(20px,3vw,32px);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,3vw,30px);background:var(--surface)}
-  .courses h4{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:0 0 14px;font-weight:500}
-  .course-list{display:flex;flex-wrap:wrap;gap:10px}
-  .course{border:1px solid var(--line);border-radius:10px;padding:.5em .8em;font-size:.9rem;color:var(--ink)}
-  .course code{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--ink-faint);margin-right:.5em}
-  .course.ip{border-style:dashed}
-  .course.ip::after{content:"in progress";font-family:"JetBrains Mono",monospace;font-size:.66rem;color:var(--accent);margin-left:.6em;text-transform:uppercase;letter-spacing:.06em}
-  .grid-label{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:clamp(36px,5vw,56px) 0 16px}
-
-
-  /* ---------- Research charts ---------- */
-  .charts{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px);margin-top:clamp(20px,3vw,32px)}
-  @media (max-width:860px){.charts{grid-template-columns:1fr}}
-  .chart{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,2.4vw,26px);position:relative;min-width:0}
-  .chart .ck{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint)}
-  .chart h4{font-family:"Bricolage Grotesque";font-weight:700;font-size:1.15rem;letter-spacing:-.01em;margin:.35em 0 .2em;line-height:1.2}
-  .chart .cap{color:var(--ink-soft);font-size:.9rem;margin:0 0 12px}
-  .chart.wide{grid-column:1/-1}
-  .shot{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:8px;cursor:zoom-in}
-  .shot img{display:block;width:100%;height:auto}
-  .chart svg{display:block;width:100%;height:auto;overflow:visible}
-  .chart svg text{font-family:"Instrument Sans",system-ui,sans-serif;fill:var(--ink-soft)}
-  .chart svg .axis{stroke:var(--line)}
-  .chart svg .lbl{fill:var(--ink);font-weight:600}
-  .chart svg .bar{fill:color-mix(in srgb,var(--ink-faint) 55%,var(--surface))}
-  .chart svg .bar.hi{fill:var(--accent)}
-  .chart svg .hit{fill:transparent;cursor:default}
-  .chart svg .dot{fill:var(--accent);fill-opacity:.55;stroke:var(--surface);stroke-width:1.5}
-  .chart svg .ref{stroke:var(--ink-faint);stroke-dasharray:5 5;stroke-width:1.5}
-  .chart svg .grid{stroke:var(--line);stroke-width:1}
-  .mtable{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:12px}
-  .mtable th,.mtable td{padding:6px 8px;text-align:right;border-bottom:1px solid var(--line);color:var(--ink-soft);font-variant-numeric:tabular-nums}
-  .mtable th:first-child,.mtable td:first-child{text-align:left}
-  .mtable th{font-family:"JetBrains Mono",monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:500}
-  .mtable tr.hi td{color:var(--ink);font-weight:600}
-  .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--paper);font-size:.8rem;padding:6px 9px;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity .12s;z-index:5;font-variant-numeric:tabular-nums}
-  .chart-note{color:var(--ink-faint);font-size:.8rem;margin:14px 0 0;max-width:80ch}
-
-  /* ---------- About ---------- */
-  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
-  @media (max-width:760px){.about-grid{grid-template-columns:1fr}}
-  .about-body p{color:var(--ink-soft);margin:0 0 1.1em;max-width:60ch}
-  .about-body p strong{color:var(--ink)}
-  .facts{display:grid;gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
-  .fact{display:flex;justify-content:space-between;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line);font-size:.95rem}
-  .fact:last-child{border-bottom:0}
-  .fact .k{color:var(--ink-faint);font-family:"JetBrains Mono",monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
-  .fact .v{color:var(--ink);font-weight:500;text-align:right}
-
-  /* ---------- Contact ---------- */
-  .contact{text-align:center}
-  .contact h2{font-weight:800;font-size:clamp(2.4rem,8vw,5rem);letter-spacing:-.03em;margin:.2em 0 .3em}
-  .contact h2 a{color:var(--accent);text-decoration:none;border-bottom:3px solid transparent;transition:border-color .2s}
-  .contact h2 a:hover{border-color:var(--accent)}
-  .contact p{color:var(--ink-soft);max-width:44ch;margin:0 auto 28px}
-  .socials{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .socials a{text-decoration:none;color:var(--ink-soft);border:1px solid var(--line);padding:.7em 1.2em;border-radius:10px;font-weight:500;transition:border-color .2s,color .2s,transform .2s}
-  .socials a:hover{border-color:var(--accent);color:var(--ink);transform:translateY(-2px)}
-
-  footer{border-top:1px solid var(--line);padding:32px 0;color:var(--ink-faint);font-size:.85rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-  footer .mono{font-family:"JetBrains Mono",monospace}
-
-  /* reveal on scroll */
-  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
-
-
-  /* ---------- Research & publications ---------- */
-  .rstats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:clamp(20px,3vw,28px)}
-  @media (max-width:720px){.rstats{grid-template-columns:repeat(2,1fr)}}
-  .rstats div{background:var(--surface);padding:18px 20px}
-  .rstats b{display:block;font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.02em;color:var(--accent);line-height:1.05}
-  .rstats span{font-size:.86rem;color:var(--ink-soft)}
-  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-  .chip{font:600 .82rem "Instrument Sans",sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:.5em 1em;border-radius:999px;cursor:pointer;transition:all .2s}
-  .chip:hover{border-color:var(--accent);color:var(--ink)}
-  .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .pubs{display:grid;gap:14px}
-  .pub{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,2.4vw,26px);display:grid;grid-template-columns:1fr auto;gap:10px 24px;transition:border-color .2s,transform .2s,opacity .3s}
-  .pub:hover{border-color:var(--accent)}
-  .pub.hide{display:none}
-  .pub .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
-  .pub .yr{font:600 .78rem "JetBrains Mono",monospace;color:var(--accent)}
-  .badge{font:500 .68rem "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;padding:.3em .6em;border-radius:6px;border:1px solid var(--line);color:var(--ink-soft)}
-  .badge.j{background:var(--accent-soft);color:var(--accent);border-color:transparent}
-  .badge.fa{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .pub h3{font-weight:700;font-size:clamp(1.05rem,1.9vw,1.3rem);letter-spacing:-.01em;line-height:1.25;margin:0}
-  .pub .auth{color:var(--ink-faint);font-size:.88rem;margin:.45em 0 0}
-  .pub .auth b{color:var(--ink);font-weight:600}
-  .pub .venue{color:var(--ink-soft);font-size:.9rem;font-style:italic;margin:.2em 0 0}
-  .pub .hl{text-align:right;min-width:9ch}
-  .pub .hl b{display:block;font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);color:var(--accent);letter-spacing:-.02em;line-height:1}
-  .pub .hl span{font-size:.75rem;color:var(--ink-faint);display:block;max-width:14ch;margin-left:auto}
-  .pub details{grid-column:1/-1;border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
-  .pub summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--ink);list-style:none;display:flex;align-items:center;gap:.5em;width:max-content}
-  .pub summary::-webkit-details-marker{display:none}
-  .pub summary::before{content:"+";display:grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid var(--line);color:var(--accent);font-weight:700;transition:transform .25s}
-  .pub details[open] summary::before{transform:rotate(45deg)}
-  .pub details p{color:var(--ink-soft);margin:.7em 0 0;max-width:72ch}
-  .pub .links{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
-  .pub .links a{font-weight:600;font-size:.9rem;color:var(--accent);text-decoration:none}
-  .pub .links a:hover{text-decoration:underline}
-  @media (max-width:640px){.pub{grid-template-columns:1fr}.pub .hl{text-align:left;display:flex;align-items:baseline;gap:10px}.pub .hl span{margin:0;max-width:none}}
-  .rg-btn .rg.li{background:#0a66c2;text-transform:lowercase}
-  .rg-btn{display:inline-flex;align-items:center;gap:.55em}
-  .rg-btn .rg{display:inline-grid;place-items:center;width:1.9em;height:1.5em;border-radius:4px;background:#00ccbb;color:#fff;font:700 .7em "Instrument Sans",sans-serif}
-
-
-  /* ---------- Colour layer (greens, water, sun) ---------- */
-  .hero::before{content:"";position:absolute;inset:-20% -10% auto -10%;height:120%;z-index:0;pointer-events:none;
-    background:radial-gradient(40% 45% at 85% 20%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 70%),
-               radial-gradient(35% 40% at 10% 85%,color-mix(in srgb,var(--accent-2) 18%,transparent),transparent 70%),
-               radial-gradient(25% 30% at 60% 90%,color-mix(in srgb,var(--accent-3) 14%,transparent),transparent 70%);
-    animation:drift 18s ease-in-out infinite alternate}
-  @keyframes drift{to{transform:translate3d(-3%,2%,0) scale(1.05)}}
-  .hero h1 .accent{background:linear-gradient(100deg,var(--accent) 10%,var(--accent-2) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .rot{background:linear-gradient(100deg,var(--accent-2),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .caret{background:var(--accent-2)}
-  .btn-primary{background:linear-gradient(120deg,var(--accent),color-mix(in srgb,var(--accent) 60%,var(--accent-2)))}
-  .eyebrow::before{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
-  .tag{background:color-mix(in srgb,var(--accent) 7%,var(--surface));border-color:color-mix(in srgb,var(--accent) 22%,var(--line))}
-  .stat b,.rstats b{background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .rstats div:nth-child(3) b,.stat:nth-child(4) b{background-image:linear-gradient(100deg,var(--accent-2),var(--accent))}
-  #work,#journey{background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--accent) 5%,transparent) 30%,color-mix(in srgb,var(--accent-2) 5%,transparent) 70%,transparent)}
-  .marquee-track .star{color:var(--accent-3)}
-  .tl-fill{background:linear-gradient(180deg,var(--accent),var(--accent-2))}
-  .pipe-fill{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
-  .chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-  .badge.fa{background:var(--accent-2);border-color:var(--accent-2);color:#fff}
-  .feature{background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3)) top/100% 5px no-repeat,var(--surface)}
-  @media (prefers-reduced-motion: reduce){.hero::before{animation:none}}
-
-  /* ---------- Hero photo ---------- */
-  .hero-main{display:grid;gap:32px;min-width:0}
-  .hero-photo{position:relative;justify-self:center;width:clamp(150px,26vw,320px);aspect-ratio:1;margin-top:8px}
-  .hero-photo .ring{position:absolute;inset:-10px;border-radius:50%;background:conic-gradient(from 0deg,var(--accent),var(--accent-2),var(--accent-3),var(--accent));animation:spin 12s linear infinite;filter:saturate(1.1)}
-  .hero-photo .ring::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--paper)}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .hero-photo img{position:relative;width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;box-shadow:var(--shadow)}
-  .hero-photo .badge-f{position:absolute;left:-8%;bottom:6%;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.5em .8em;font:600 .78rem "Instrument Sans",sans-serif;color:var(--ink);box-shadow:var(--shadow);display:flex;align-items:center;gap:.45em;white-space:nowrap;animation:bob 4s ease-in-out infinite}
-  .hero-photo .badge-f.b2{left:auto;right:-10%;bottom:auto;top:8%;animation-delay:-2s}
-  .hero-photo .badge-f i{font-style:normal;font-size:1rem}
-  @keyframes bob{50%{transform:translateY(-6px)}}
-  @media (min-width:1000px){
-    .hero-grid{grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:clamp(24px,4vw,56px)}
-    .hero h1{font-size:clamp(3.1rem,8.4vw,7.2rem)}
-  }
-  @media (max-width:999px){.hero-photo{order:-1;justify-self:start;width:132px;margin:6px 0 4px 10px}.hero-photo .badge-f{display:none}}
-  @media (prefers-reduced-motion: reduce){.hero-photo .ring,.hero-photo .badge-f{animation:none}}
-
-  /* ================= Interactive layer ================= */
-  .progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3));z-index:100;pointer-events:none}
-  .nav-links a.active{color:var(--ink)}
-  .nav-links a{position:relative}
-  .nav-links a:not(.now-link)::before{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transition:transform .25s}
-  .nav-links a.active::before,.nav-links a:not(.now-link):hover::before{transform:scaleX(1)}
-
-  #river{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
-  .hero .wrap{position:relative;z-index:1}
-  .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:140px;background:linear-gradient(to bottom,transparent,var(--paper));z-index:0;pointer-events:none}
-  .hero h1 .line2{display:block;font-size:.52em;margin-top:.25em;white-space:nowrap;min-height:1.05em}
-  @media (max-width:1100px){.hero h1 .line2{white-space:normal;min-height:2.1em}}
-  @media (max-width:640px){.hero h1 .line2{font-size:.66em}}
-  .rot{color:var(--accent)}
-  .caret{display:inline-block;width:.08em;height:.85em;background:var(--accent);margin-left:.06em;vertical-align:-.06em;animation:blink 1s steps(1) infinite}
-  @keyframes blink{50%{opacity:0}}
-  .scroll-cue{display:inline-flex;align-items:center;gap:.6em;margin-top:clamp(24px,4vw,40px);font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);text-decoration:none}
-  .scroll-cue .mouse{width:18px;height:28px;border:1.5px solid var(--ink-faint);border-radius:10px;position:relative}
-  .scroll-cue .mouse::after{content:"";position:absolute;left:50%;top:5px;width:3px;height:6px;margin-left:-1.5px;border-radius:2px;background:var(--accent);animation:wheel 1.6s ease-in-out infinite}
-  @keyframes wheel{0%{transform:translateY(0);opacity:1}80%{transform:translateY(9px);opacity:0}100%{opacity:0}}
-
-  /* spotlight glow that follows the cursor */
-  .glow{position:relative;isolation:isolate}
-  .glow::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 60%)}
-  .glow:hover::before{opacity:1}
-  .card.glow,.chart.glow{transform-style:preserve-3d;transition:transform .25s ease,border-color .2s,box-shadow .2s}
-  .btn{will-change:transform}
-
-  /* ML pipeline stepper */
-  .pipe{margin:clamp(22px,3vw,34px) 0;border:1px solid var(--line);border-radius:20px;overflow:hidden}
-  .pipe-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-  .pipe-head h4{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);margin:0;font-weight:500}
-  .pipe-play{font:600 .8rem "Instrument Sans",sans-serif;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:.4em .9em;cursor:pointer}
-  .pipe-play:hover{border-color:var(--accent)}
-  .pipe-steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative}
-  .pipe-steps::before{content:"";position:absolute;left:10%;right:10%;top:34px;height:2px;background:var(--line)}
-  .pipe-fill{position:absolute;left:10%;top:34px;height:2px;background:var(--accent);transition:width .45s ease;width:0}
-  .pstep{background:none;border:0;cursor:pointer;padding:16px 6px 14px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink-soft);font:500 .85rem "Instrument Sans",sans-serif;position:relative;z-index:1}
-  .pstep .dot{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--line);font:600 .8rem "JetBrains Mono",monospace;transition:all .3s}
-  .pstep.done .dot{border-color:var(--accent);color:var(--accent)}
-  .pstep.on .dot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:scale(1.12);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
-  .pstep.on{color:var(--ink);font-weight:600}
-  .pstep:focus-visible .dot{outline:2px solid var(--ring);outline-offset:3px}
-  .pipe-panel{padding:clamp(18px,2.6vw,28px);background:color-mix(in srgb,var(--accent) 5%,var(--surface));min-height:150px;display:grid;grid-template-columns:auto 1fr;gap:18px 22px;align-items:start}
-  .pipe-panel .big{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1;color:var(--accent);letter-spacing:-.02em;min-width:3.2ch}
-  .pipe-panel .big small{display:block;font:500 .7rem "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
-  .pipe-panel h5{font-family:"Bricolage Grotesque";font-size:1.25rem;margin:0 0 .35em;letter-spacing:-.01em}
-  .pipe-panel p{margin:0;color:var(--ink-soft);max-width:62ch}
-  .pipe-panel .in{animation:pin .45s ease both}
-  @keyframes pin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  @media (max-width:640px){.pstep span.t{font-size:.72rem}.pstep .dot{width:32px;height:32px}.pipe-steps::before,.pipe-fill{top:31px}.pipe-panel{grid-template-columns:1fr}}
-
-  /* Lightbox */
-  .lb{position:fixed;inset:0;z-index:200;background:rgba(10,10,14,.88);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:clamp(12px,4vw,48px)}
-  .lb.open{display:flex;animation:fade .2s ease}
-  @keyframes fade{from{opacity:0}}
-  .lb figure{margin:0;max-width:min(1200px,100%);max-height:100%;display:flex;flex-direction:column;gap:12px}
-  .lb img{max-width:100%;max-height:78vh;object-fit:contain;background:#fff;border-radius:12px;padding:10px;animation:zin .25s ease}
-  @keyframes zin{from{transform:scale(.96);opacity:0}}
-  .lb figcaption{color:#e9e6df;font-size:.95rem;max-width:80ch}
-  .lb figcaption b{color:#fff}
-  .lb button{position:absolute;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer}
-  .lb button:hover{background:rgba(255,255,255,.2)}
-  .lb .x{top:16px;right:16px}.lb .pv{left:12px;top:50%;margin-top:-22px}.lb .nx{right:12px;top:50%;margin-top:-22px}
-  .lb .cnt{position:absolute;top:26px;left:20px;color:#bbb;font:500 .75rem "JetBrains Mono",monospace;letter-spacing:.1em}
-
-  /* Journey timeline */
-  .tl{position:relative;margin-left:8px;padding-left:34px}
-  .tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
-  .tl-fill{position:absolute;left:7px;top:6px;width:2px;background:var(--accent);height:0;transition:height .1s linear}
-  .tl-item{position:relative;padding:0 0 clamp(22px,3vw,34px)}
-  .tl-item::before{content:"";position:absolute;left:-34px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:2px solid var(--line);transition:all .35s}
-  .tl-item.lit::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 16%,transparent)}
-  .tl-item .when{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:var(--accent);letter-spacing:.06em}
-  .tl-item h3{font-weight:700;font-size:clamp(1.15rem,2.2vw,1.45rem);letter-spacing:-.01em;margin:.2em 0 .15em}
-  .tl-item .org{color:var(--ink-faint);font-size:.9rem}
-  .tl-item p{color:var(--ink-soft);margin:.5em 0 0;max-width:62ch}
-  .tl-item.next h3{color:var(--accent)}
-  .tl-item .tags{margin-top:10px}
-
-  /* Toast */
-  .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:.7em 1.1em;border-radius:12px;font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:all .3s;z-index:150}
-  .toast.show{opacity:1;transform:translate(-50%,0)}
-  .socials button{font:inherit;cursor:pointer;background:none;color:var(--ink-soft);border:1px solid var(--line);padding:.7em 1.2em;border-radius:10px;font-weight:500;transition:border-color .2s,color .2s,transform .2s}
-  .socials button:hover{border-color:var(--accent);color:var(--ink);transform:translateY(-2px)}
-
-  @media (prefers-reduced-motion: reduce){.caret{animation:none}.scroll-cue .mouse::after{animation:none}.pipe-fill,.tl-fill{transition:none}}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+<a class="skip" href="#top">Skip to content</a>
 
-<div class="progress" id="progress" aria-hidden="true"></div>
 <header class="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="#top">Mushfique<span>.</span></a>
-    <nav class="nav-links">
-      <a href="#work" class="hide-sm">Work</a>
-      <a href="#now" class="now-link">Now</a>
-      <a href="#research" class="hide-sm">Research</a>
-      <a href="#journey" class="hide-sm">Journey</a>
+  <div class="container nav-in">
+    <a class="brand" href="#top" aria-label="Mushfiqur Rahman, back to top">Mushfiqur Rahman</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#now" class="now-link hide-sm">Now</a>
+      <a href="#work" class="hide-sm">Research</a>
+      <a href="#research" class="hide-sm">Publications</a>
+      <a href="#journey" class="hide-sm">Experience</a>
       <a href="#about" class="hide-sm">About</a>
       <a href="#contact">Contact</a>
-      <button class="theme-btn" id="themeBtn" aria-label="Toggle light and dark theme" title="Toggle theme">◐</button>
+      <a class="btn" href="Mushfiqur_Rahman_CV.pdf" target="_blank" rel="noopener" download>CV</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+      </button>
     </nav>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- ===================== HERO ===================== -->
-  <section class="hero">
-    <canvas id="river" aria-hidden="true"></canvas>
-    <div class="wrap hero-grid">
-      <div class="hero-main">
-      <span class="status-chip"><span class="status-dot"></span> Seeking Winter 2027 co-op &middot; St. John's, NL</span>
-      <h1 aria-label="Hi, I'm Mushfique. I engineer for the environment.">Hi, I'm <span class="accent">Mushfique</span>.<span class="line2" aria-hidden="true">I engineer for <span class="rot" id="rot">the environment.</span><span class="caret"></span></span></h1>
-      <p class="hero-lead">Environmental systems engineering student at Memorial University, with a background in building engineering &amp; construction management. This is where I keep my work and what I'm up to right now.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#work">See my work <span aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#now">What I'm doing now</a>
-        <a class="btn btn-ghost" href="Mushfiqur_Rahman_CV.pdf" target="_blank" rel="noopener" download>⬇ Download CV</a>
-      </div>
-      <a class="scroll-cue" href="#now"><span class="mouse"></span>Scroll to explore</a>
-      </div>
-      <div class="hero-photo reveal in"><span class="ring" aria-hidden="true"></span><img src="img/mushfique-photo.jpg" width="400" height="400" alt="Portrait of Md. Mushfiqur Rahman (Mushfique)"><span class="badge-f" aria-hidden="true"><i>🌿</i>MASc · Memorial University</span><span class="badge-f b2" aria-hidden="true"><i>💧</i>Water &amp; ML research</span></div>
-    </div>
-
-    <div class="wrap">
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-          <span>Environmental Systems</span><span class="star">✦</span>
-          <span>GIS &amp; ArcGIS</span><span class="star">✦</span>
-          <span>Construction Management</span><span class="star">✦</span>
-          <span>Sustainability</span><span class="star">✦</span>
-          <span>Environmental Systems</span><span class="star">✦</span>
-          <span>GIS &amp; ArcGIS</span><span class="star">✦</span>
-          <span>Construction Management</span><span class="star">✦</span>
-          <span>Sustainability</span><span class="star">✦</span>
+  <!-- ============ HERO: the result itself ============ -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1 id="hero-h">Machine learning for safer water.</h1>
+        <p class="lead">I predict what wildfires do to the rivers communities drink from.</p>
+        <div class="hero-actions">
+          <a class="btn btn--primary" href="#work">See the research</a>
+          <a class="btn" href="Mushfiqur_Rahman_CV.pdf" target="_blank" rel="noopener" download>Download CV</a>
         </div>
+        <p class="hero-note">MASc (Co-op), Memorial University, St. John's. Seeking a Winter 2027 co-op.</p>
       </div>
-    </div>
-  </section>
 
-  <!-- ===================== NOW (the centerpiece) ===================== -->
-  <section id="now">
-    <div class="wrap">
-      <div class="now reveal">
-        <span class="eyebrow">/ now</span>
-        <h2>What I'm working on right now</h2>
-        <p class="updated">Last updated: September 2026</p>
-        <ul class="now-list">
-          <li>
-            <span class="now-tag">Studying</span>
-            <div><strong>MASc (Co-op), Environmental Systems Engineering &amp; Management</strong>
-            <span>Memorial University of Newfoundland, expected 2027. This term: offshore oil &amp; gas impacts, and environmental chemistry &amp; toxicology.</span></div>
-          </li>
-          <li>
-            <span class="now-tag">Researching</span>
-            <div><strong>Wildfire impacts on source-water quality</strong>
-            <span>Machine-learning models that predict river turbidity and explain what drives it in wildfire-affected watersheds.</span></div>
-          </li>
-          <li>
-            <span class="now-tag">Learning</span>
-            <div><strong>Power BI, ArcGIS &amp; spatial analysis</strong>
-            <span>Working through Microsoft's Power BI training (data modelling, DAX and dashboards), building my GIS skills and working toward an ArcGIS certification.</span></div>
-          </li>
-          <li>
-            <span class="now-tag">Building</span>
-            <div><strong>A GIS portfolio project</strong>
-            <span>A hands-on mapping and analysis project to put those skills into practice — write-up coming soon.</span></div>
-          </li>
-          <li>
-            <span class="now-tag">Seeking</span>
-            <div><strong>Winter 2027 co-op / internship</strong>
-            <span>Looking for engineering roles in environmental management, construction, or infrastructure.</span></div>
-          </li>
-        </ul>
+      <div class="sheet" role="group" aria-label="Results sheet from the wildfire turbidity model">
+        <div class="sheet-head">
+          <h2>Turbidity model, results</h2>
+          <span class="num">2000 to <b>2026</b></span>
+        </div>
+        <table class="results">
+          <caption>Peace-Athabasca Basin, Alberta. Held-out test, 823 samples.</caption>
+          <thead><tr><th scope="col">Model</th><th scope="col" class="num">R²</th></tr></thead>
+          <tbody>
+            <tr><td>Random Forest</td><td class="num">0.719</td></tr>
+            <tr class="pick"><td>Extra Trees</td><td class="num">0.775</td></tr>
+            <tr><td>Gradient Boosting</td><td class="num">0.720</td></tr>
+            <tr><td>XGBoost</td><td class="num">0.685</td></tr>
+          </tbody>
+        </table>
+        <table class="results">
+          <caption>Transfer to the Churchill River, Labrador.</caption>
+          <thead><tr><th scope="col">Turbidity</th><th scope="col" class="num">NTU</th></tr></thead>
+          <tbody>
+            <tr><td>Observed in the lab</td><td class="num">14</td></tr>
+            <tr><td>Alberta model, gaps imputed</td><td class="num">234</td></tr>
+            <tr class="pick"><td>Alberta model, Labrador inputs only</td><td class="num">243</td></tr>
+          </tbody>
+        </table>
+        <p class="sheet-foot"><span>Magenta marks the best fit and the widest miss.</span><span>Transfer is one pilot comparison.</span></p>
       </div>
     </div>
   </section>
 
-  <!-- ===================== WORK ===================== -->
-  <section id="work">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <span class="eyebrow">/ selected work</span>
-          <h2 style="margin-top:.35em">Projects</h2>
-        </div>
-        <p>Graduate research and technical work across environmental systems, water quality and building engineering.</p>
+  <!-- ============ NOW ============ -->
+  <section id="now" class="well" aria-labelledby="now-h">
+    <div class="container now-grid">
+      <div>
+        <h2 id="now-h">What I'm working on now</h2>
+        <p class="meta">Updated <time datetime="2026-09">September 2026</time></p>
+      </div>
+      <ul class="rows">
+        <li><span class="k">Studying</span><div><strong>MASc (Co-op), Environmental Systems Engineering &amp; Management</strong><p>Memorial University of Newfoundland, expected 2027. This term: offshore oil and gas impacts, and environmental chemistry and toxicology.</p></div></li>
+        <li><span class="k">Researching</span><div><strong>Wildfire impacts on source-water quality</strong><p>Models that predict river turbidity and explain what drives it in burned watersheds.</p></div></li>
+        <li><span class="k">Learning</span><div><strong>Power BI, ArcGIS and spatial analysis</strong><p>Microsoft's Power BI training (data modelling, DAX, dashboards), working toward an ArcGIS certification.</p></div></li>
+        <li><span class="k">Building</span><div><strong>A GIS portfolio project</strong><p>A hands-on mapping and analysis project. Write-up coming soon.</p></div></li>
+        <li><span class="k">Seeking</span><div><strong>Winter 2027 co-op or internship</strong><p>Water resources, environmental management, sustainability or infrastructure engineering in Canada.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
+  <section id="work" aria-labelledby="work-h">
+    <div class="container">
+      <div class="head">
+        <h2 id="work-h">When a watershed burns</h2>
+        <p class="lead">Ash and sediment from boreal fires reach the rivers towns drink from. Utilities need to know when water quality shifts after a fire, and why.</p>
       </div>
 
-      <article class="feature reveal glow">
-        <div class="feature-top">
-          <span class="pill hot">Graduate project</span>
-          <span class="pill">MUN · ENGI 960A/B</span>
-          <span class="pill">Jan 2026 – present</span>
+      <h3 class="project-title">Quantifying Wildfire Impacts on Source-Water Quality: A Machine-Learning Framework</h3>
+      <dl class="facts">
+        <div><dt>Where</dt><dd>Memorial University, ENGI 960A/B</dd></div>
+        <div><dt>Supervisor</dt><dd>Dr. Arpana Rani Datta</dd></div>
+        <div><dt>When</dt><dd>January 2026 to present, team of four</dd></div>
+        <div><dt>Trained on</dt><dd>Peace-Athabasca Basin, Alberta</dd></div>
+        <div><dt>Tested on</dt><dd>Churchill River, Labrador</dd></div>
+        <div><dt>Why there</dt><dd>2016 Fort McMurray, 2023 and 2024 Churchill Falls fires</dd></div>
+      </dl>
+
+      <div class="pipe" id="pipe">
+        <div class="pipe-side">
+          <h3>How the model was built</h3>
+          <div class="pipe-steps" role="tablist" aria-label="Machine-learning pipeline steps"></div>
+          <button class="btn pipe-play" id="pipePlay" type="button">Play the steps</button>
         </div>
-        <h3>Quantifying Wildfire Impacts on Source-Water Quality: A Machine-Learning Framework</h3>
-        <p class="sub">Memorial University of Newfoundland · Supervisor: Dr. Arpana Rani Datta · Team of four · Trained in Alberta's Peace–Athabasca Basin, tested in Labrador's Churchill River</p>
-        <p class="lede">Wildfires are getting larger and more severe across Canada's boreal forests, and the ash and sediment they release can reach the rivers communities drink from. This project builds a data-driven tool that predicts how wildfires degrade source-water quality and explains which factors drive the change, to give water utilities evidence for monitoring and post-fire planning.</p>
-
-        <div class="stats">
-          <div class="stat"><b data-count="823">823</b><span>turbidity samples, 4 stations, 2000–2026</span></div>
-          <div class="stat"><b data-count="22">22</b><span>chemistry, time &amp; station predictors</span></div>
-          <div class="stat"><b data-count="4">4</b><span>ensemble ML models compared</span></div>
-          <div class="stat"><b data-count="0.775" data-prefix="R² " data-dec="3">R² 0.775</b><span>best model (Extra Trees)</span></div>
+        <div class="pipe-panel" id="pipePanel" role="tabpanel" aria-live="polite">
+          <div class="big in">837<small>samples</small></div>
+          <div class="in"><h4>Collect long-term monitoring data</h4><p>Pulled 26 years (2000 to 2026) of water-quality records from four stations in Alberta's Peace-Athabasca Basin, a boreal watershed hit by the 2016 Fort McMurray and 2023 fires.</p></div>
         </div>
+      </div>
+      <p class="tools">Python, scikit-learn, XGBoost, pandas, seaborn, feature importance, ensemble ML, hydrology, water quality, environmental risk.</p>
+    </div>
+  </section>
 
-        <div class="pipe" id="pipe">
-          <div class="pipe-head"><h4>How the model works · click each step</h4><button class="pipe-play" id="pipePlay" type="button">▶ Play walkthrough</button></div>
-          <div class="pipe-steps" role="tablist" aria-label="Machine-learning pipeline steps">
-            <div class="pipe-fill" id="pipeFill"></div>
-          </div>
-          <div class="pipe-panel" id="pipePanel" role="tabpanel" aria-live="polite"></div>
-        </div>
-
-        <div class="cols">
-          <div>
-            <h4>The problem</h4>
-            <ul>
-              <li>2024 wildfires near Churchill Falls, Labrador, forced evacuations and raised concerns about water-supply reliability.</li>
-              <li>Post-fire runoff can raise turbidity, nutrients and metals, increasing treatment costs and risk.</li>
-              <li>Utilities need to know <em>when</em> and <em>why</em> water quality shifts after a fire.</li>
-            </ul>
-          </div>
-          <div>
-            <h4>What I did</h4>
-            <ol>
-              <li>Built a 26-year, 4-station water-quality dataset for the Peace–Athabasca Basin (Alberta), a boreal watershed hit by the 2016 Fort McMurray and 2023 fires.</li>
-              <li>Chose turbidity as the target: it integrates sediment, colour and metals, and it is what treatment plants struggle with.</li>
-              <li>Trained and compared Random Forest, Extra Trees, Gradient Boosting and XGBoost regressors.</li>
-              <li>Ranked the drivers with feature importance, then tested whether the model transfers to Newfoundland's Churchill River.</li>
-            </ol>
-          </div>
-          <div>
-            <h4>Results</h4>
-            <ul>
-              <li>Extra Trees performed best on every metric (R² = 0.775).</li>
-              <li>Total nitrogen, colour, manganese, iron and aluminium drive turbidity, a wildfire disturbance signature.</li>
-              <li>Transfer test: the framework carries over, but the fitted model over-predicts ~17× in Newfoundland until the local hydrology link is established.</li>
-              <li>Findings shaped into recommendations for monitoring and water-supply protection.</li>
-            </ul>
-          </div>
-        </div>
-
-
-        <div class="charts">
-          <figure class="chart wide glow" style="margin:0">
-            <span class="ck">Figure 1 · Model comparison</span>
-            <h4>Extra Trees was the best model on every metric</h4>
-            <p class="cap">Four ensemble models scored on held-out test data. R² (left, higher is better) is the share of turbidity variation explained; RMSE and MAE (middle, right, lower is better) are prediction errors in NTU.</p>
-            <a class="shot" href="img/ml-model-comparison.png" target="_blank" rel="noopener"><img src="img/ml-model-comparison.png" width="1784" height="484" loading="lazy" alt="Three bar charts comparing Extra Trees, Gradient Boosting, Random Forest and XGBoost on R², RMSE and MAE. Extra Trees has the highest R² (about 0.77) and the lowest RMSE and MAE."></a>
-          </figure>
-          <figure class="chart glow" style="margin:0">
-            <span class="ck">Figure 2 · Observed vs predicted</span>
-            <h4>Predictions track real measurements</h4>
-            <p class="cap">Each dot is a held-out water sample; dots on the red 1:1 line are perfect predictions. Extra Trees (top right) reaches R² = 0.775.</p>
-            <a class="shot" href="img/ml-observed-vs-predicted.png" target="_blank" rel="noopener"><img src="img/ml-observed-vs-predicted.png" width="1384" height="1184" loading="lazy" alt="Four scatter plots of observed versus predicted turbidity: Random Forest R² 0.719, Extra Trees R² 0.775, Gradient Boosting R² 0.720, XGBoost R² 0.685."></a>
-          </figure>
-          <figure class="chart glow" style="margin:0">
-            <span class="ck">Figure 3 · What drives turbidity</span>
-            <h4>Nitrogen, colour &amp; metals dominate</h4>
-            <p class="cap">Top 15 inputs by importance in the Extra Trees model. Total nitrogen leads by about 5×, followed by colour, manganese, aluminium and iron, which is exactly what wildfire runoff carries into rivers.</p>
+  <!-- ============ FIGURES ============ -->
+  <section aria-labelledby="figs-h">
+    <div class="container">
+      <div class="head">
+        <h2 id="figs-h">What the model found</h2>
+        <p class="lead">Nitrogen, colour and metals drive turbidity: the chemical signature of wildfire runoff.</p>
+      </div>
+      <div class="figs">
+        <figure class="fig fig--wide">
+          <a class="shot" href="img/ml-model-comparison.png" target="_blank" rel="noopener"><img src="img/ml-model-comparison.png" width="1784" height="484" loading="lazy" alt="Three bar charts comparing Extra Trees, Gradient Boosting, Random Forest and XGBoost on R², RMSE and MAE. Extra Trees has the highest R² (about 0.77) and the lowest RMSE and MAE."></a>
+          <figcaption><span class="fig-title"><span class="num">1</span>Extra Trees was the best model on every metric</span><span class="cap">Four ensemble models scored on held-out test data. R² (left, higher is better) is the share of turbidity variation explained; RMSE and MAE (lower is better) are prediction errors in NTU.</span></figcaption>
+        </figure>
+        <figure class="fig">
+          <a class="shot" href="img/ml-observed-vs-predicted.png" target="_blank" rel="noopener"><img src="img/ml-observed-vs-predicted.png" width="1384" height="1184" loading="lazy" alt="Four scatter plots of observed versus predicted turbidity: Random Forest R² 0.719, Extra Trees R² 0.775, Gradient Boosting R² 0.720, XGBoost R² 0.685."></a>
+          <figcaption><span class="fig-title"><span class="num">2</span>Predictions track real measurements</span><span class="cap">Each dot is a held-out water sample; dots on the red 1:1 line are perfect predictions. Extra Trees (top right) reaches R² = 0.775.</span></figcaption>
+        </figure>
+        <div class="fig-stack">
+          <figure class="fig">
             <a class="shot" href="img/ml-feature-importance.png" target="_blank" rel="noopener"><img src="img/ml-feature-importance.png" width="784" height="584" loading="lazy" alt="Horizontal bar chart of the top 15 feature importances in the Extra Trees model. Total nitrogen is about 0.52, followed by true colour, total manganese, total aluminium and total iron."></a>
+            <figcaption><span class="fig-title"><span class="num">3</span>Nitrogen, colour and metals dominate</span><span class="cap">Top 15 inputs by importance. Total nitrogen leads by about 5×, followed by colour, manganese, aluminium and iron.</span></figcaption>
           </figure>
-          <figure class="chart glow" style="margin:0">
-            <span class="ck">Figure 4 · Prediction errors</span>
-            <h4>Errors are small and unbiased</h4>
-            <p class="cap">Residuals (observed − predicted) for Extra Trees are sharply peaked at zero; only a few extreme turbidity events sit in the tail.</p>
+          <figure class="fig">
             <a class="shot" href="img/ml-residuals.png" target="_blank" rel="noopener"><img src="img/ml-residuals.png" width="682" height="384" loading="lazy" alt="Histogram of Extra Trees residuals, sharply peaked and centred on zero with a long thin tail toward large positive errors."></a>
-          </figure>
-          <figure class="chart glow" id="c-transfer" style="margin:0">
-            <span class="ck">Figure 5 · Transfer test, Churchill River NL</span>
-            <h4>The Alberta model doesn't transfer as-is</h4>
-            <p class="cap">Applied directly to Newfoundland, the model over-predicts turbidity about 17×. The method transfers, but it must be retrained on local hydrology.</p>
-            <div class="plot"></div>
+            <figcaption><span class="fig-title"><span class="num">4</span>Errors are small and unbiased</span><span class="cap">Residuals for Extra Trees peak sharply at zero; only a few extreme turbidity events sit in the tail.</span></figcaption>
           </figure>
         </div>
-        <p class="chart-note">Figures 1–4: project results on the Peace–Athabasca dataset (823 samples, 80/20 train/test split). Figure 5: pilot transfer test on one Churchill River comparison, illustrative rather than statistical. Click any figure to open it full size.</p>
-
-        <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">XGBoost</span><span class="tag">Feature Importance</span><span class="tag">pandas</span><span class="tag">seaborn</span><span class="tag">Ensemble ML</span><span class="tag">Hydrology</span><span class="tag">Water Quality</span><span class="tag">Environmental Risk</span></div>
-      </article>
-
-      <div class="courses reveal">
-        <h4>Graduate coursework · MASc, Memorial University · CGPA 3.87</h4>
-        <div class="course-list">
-          <span class="course"><code>ENGI 9609</code>Environmental Risk Assessment</span>
-          <span class="course"><code>ENGI 9627</code>Environmental Systems Engineering</span>
-          <span class="course"><code>ENGI 9626</code>Environmental Management Systems</span>
-          <span class="course"><code>ENGI 9622</code>Environmental Statistics</span>
-          <span class="course"><code>ENGI 9628</code>Environmental Laboratory</span>
-          <span class="course"><code>ENGI 9601</code>Environmental Pollution &amp; Mitigation</span>
-          <span class="course ip"><code>ENGI 9625</code>Environmental Impacts of Offshore Oil &amp; Gas</span>
-          <span class="course ip"><code>ENVS 6002</code>Environmental Chemistry &amp; Toxicology</span>
-        </div>
       </div>
-
-      <p class="grid-label">More work</p>
-      <div class="grid">
-        <div class="card reveal glow">
-          <span class="num">01</span>
-          <h3>GIS Portfolio Project</h3>
-          <p>A spatial analysis project built in ArcGIS, applying mapping and geoprocessing to a real environmental question. In progress.</p>
-          <div class="tags"><span class="tag">ArcGIS</span><span class="tag">GIS</span><span class="tag">Spatial Analysis</span></div>
-          <span class="go">In progress</span>
-        </div>
-        <div class="card reveal glow">
-          <span class="num">02</span>
-          <h3>BIM Design &amp; Energy Modelling, 4-Storey Building</h3>
-          <p>Designed a 4-storey building in BIM and ran energy simulations to test envelope and efficiency choices, with the schedule planned in MS Project. KUET design project.</p>
-          <div class="tags"><span class="tag">Revit</span><span class="tag">Green Building Studio</span><span class="tag">Robot Structural</span><span class="tag">MS Project</span></div>
-          <span class="go">Undergraduate · KUET</span>
-        </div>
-        <div class="card reveal glow">
-          <span class="num">03</span>
-          <h3>Structural Analysis, 12-Storey Tower</h3>
-          <p>Modelled and analysed a 12-storey tower under wind and seismic loading to check structural performance against code requirements. KUET design project.</p>
-          <div class="tags"><span class="tag">ETABS</span><span class="tag">Wind &amp; Seismic</span><span class="tag">Structural Design</span></div>
-          <span class="go">Undergraduate · KUET</span>
-        </div>
-      </div>
+      <p class="chart-note">Figures 1 to 4: project results on the Peace-Athabasca dataset (823 samples, 80/20 train/test split). Select any figure to open it full size.</p>
     </div>
   </section>
 
-  <!-- ===================== RESEARCH ===================== -->
-  <section id="research">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <span class="eyebrow">/ research portfolio</span>
-          <h2 style="margin-top:.35em">Publications</h2>
+  <!-- ============ TRANSFER: the ink band ============ -->
+  <section class="band" aria-labelledby="tr-h">
+    <div class="container band-grid">
+      <div class="band-text">
+        <h2 id="tr-h">Same model, a different river</h2>
+        <p class="lead">I ran the Alberta model on Labrador's Churchill River, near the 2024 Churchill Falls fires. It over-predicted by about 17×.</p>
+      </div>
+      <div class="band-text">
+        <div class="big-pair">
+          <div><b class="hot">243</b><span>NTU predicted</span></div>
+          <div><b>14</b><span>NTU measured</span></div>
         </div>
-        <p>Turning industrial and demolition waste into low-carbon construction materials, and designing buildings that use less energy. <a class="rg-btn" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none;white-space:nowrap"><span class="rg">RG</span>ResearchGate profile ↗</a></p>
+        <p>The Churchill is hydro-regulated, tidal at the mouth and carries far less metal, and Labrador has only a handful of grab samples to retrain on. The method transfers; the fitted model has to be retrained on local hydrology. The next version predicts turbidity from what the province measures well: daily discharge, water level and fire timing.</p>
       </div>
-      <div class="rstats reveal">
-        <div><b data-count="5">5</b><span>publications</span></div>
-        <div><b data-count="2">2</b><span>peer-reviewed journal articles</span></div>
-        <div><b data-count="77">77</b><span>citations</span></div>
-        <div><b data-count="337">337</b><span>reads on ResearchGate</span></div>
+      <figure class="transfer" id="c-transfer">
+        <div class="plot"></div>
+        <figcaption>Figure 5. Observed against predicted turbidity on the Churchill River. A pilot test on one comparison, illustrative rather than statistical.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ PUBLICATIONS ============ -->
+  <section id="research" aria-labelledby="pubs-h">
+    <div class="container">
+      <div class="head">
+        <h2 id="pubs-h">Five papers on low-carbon building</h2>
+        <p class="lead">Turning industrial and demolition waste into construction materials, and designing buildings that use less energy.</p>
       </div>
+      <dl class="figures">
+        <div><dt>publications</dt><dd>5</dd></div>
+        <div><dt>peer-reviewed journal articles</dt><dd>2</dd></div>
+        <div><dt>citations</dt><dd>77</dd></div>
+        <div><dt>reads on ResearchGate</dt><dd>337</dd></div>
+      </dl>
       <div class="filters" role="group" aria-label="Filter publications">
         <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
         <button class="chip" type="button" data-f="journal" aria-pressed="false">Journal articles</button>
@@ -686,387 +203,220 @@
         <button class="chip" type="button" data-f="energy" aria-pressed="false">Building energy</button>
       </div>
       <div class="pubs" id="pubs">
-          <article class="pub reveal" data-type="journal" data-topic="materials" data-first="false">
-            <div>
-              <div class="meta"><span class="yr">2025</span><span class="badge j">Journal article</span></div>
-              <h3>Combined influence of modified recycled concrete aggregate and metakaolin on high-strength concrete production: Experimental assessment and machine learning quantifications with advanced SHAP and PDP analyses</h3>
-              <p class="auth">Sobuz, M. H. R., <b>Rahman, M. M.</b>, Aayaz, R., Al-Rashed, W. S., Datta, S. D., Safayet, M. A., Kabbo, M. K. I., &amp; Abdullah, M.</p>
-              <p class="venue">Construction and Building Materials, 461, 139897</p>
-            </div>
-            <div class="hl"><b>60.36</b><span>MPa strength from recycled aggregate</span></div>
-            <details>
-              <summary>Key findings</summary>
-              <p>Treated recycled concrete aggregate combined with metakaolin produced high-strength concrete reaching 60.36 MPa, matching conventional high-strength mixes while replacing a large share of natural aggregate with demolition waste. Machine-learning models (XGBoost, R² = 0.924) predicted strength, and SHAP and PDP analyses showed which mix factors drive it.</p>
-              <div class="links"><a href="https://doi.org/10.1016/j.conbuildmat.2025.139897" target="_blank" rel="noopener">Read the paper (DOI) ↗</a></div>
-            </details>
-          </article>
-          <article class="pub reveal" data-type="journal" data-topic="energy" data-first="false">
-            <div>
-              <div class="meta"><span class="yr">2025</span><span class="badge j">Journal article</span></div>
-              <h3>Investigating the energy-efficiency of Glauber's salt as PCM-enhanced mortar in building envelope</h3>
-              <p class="auth">Rahman, S., Rana, M. J., <b>Rahman, M. M.</b>, Dang, H., Talukder, S., &amp; Anzum, A.</p>
-              <p class="venue">Advances in Building Energy Research, 19(6), 798–825</p>
-            </div>
-            <div class="hl"><b>−22%</b><span>simulated building energy use</span></div>
-            <details>
-              <summary>Key findings</summary>
-              <p>Adding Glauber's salt as a phase-change material to mortar cut thermal conductivity by about 65% (1.173 → 0.416 W/m·K). At the optimal 10% PCM content, simulated annual building energy use fell by about 22%.</p>
-              <div class="links"><a href="https://doi.org/10.1080/17512549.2025.2547399" target="_blank" rel="noopener">Read the paper (DOI) ↗</a></div>
-            </details>
-          </article>
-          <article class="pub reveal" data-type="conference" data-topic="materials" data-first="true">
-            <div>
-              <div class="meta"><span class="yr">2024</span><span class="badge">Conference paper</span><span class="badge fa">First author</span></div>
-              <h3>Fresh and hardened properties of high-strength concrete using coal bottom ash and silica fume</h3>
-              <p class="auth"><b>Rahman, M. M.</b>, &amp; Hossain, M. S.</p>
-              <p class="venue">Conference paper</p>
-            </div>
-            <div class="hl"><b>10%</b><span>coal bottom ash replacement</span></div>
-            <details>
-              <summary>Key findings</summary>
-              <p>Replacing up to 10% of the mix with coal bottom ash, a combustion by-product, alongside silica fume kept concrete at high strength. This turns industrial waste into structural material and cuts cement-related CO₂.</p>
-              <div class="links"><a href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate ↗</a></div>
-            </details>
-          </article>
-          <article class="pub reveal" data-type="conference" data-topic="materials" data-first="true">
-            <div>
-              <div class="meta"><span class="yr">2024</span><span class="badge">Conference paper</span><span class="badge fa">First author</span></div>
-              <h3>Enhancing concrete mechanical performance through metakaolin and improved recycled concrete aggregates</h3>
-              <p class="auth"><b>Rahman, M. M.</b>, &amp; Hossain, M. S.</p>
-              <p class="venue">Conference paper</p>
-            </div>
-            <div class="hl"><b>10%</b><span>metakaolin offsets strength loss</span></div>
-            <details>
-              <summary>Key findings</summary>
-              <p>Treating recycled concrete aggregate and adding 10% metakaolin offset the usual strength loss from recycled aggregate, making high-strength concrete from demolition waste feasible.</p>
-              <div class="links"><a href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate ↗</a></div>
-            </details>
-          </article>
-          <article class="pub reveal" data-type="conference" data-topic="energy" data-first="false">
-            <div>
-              <div class="meta"><span class="yr">2023</span><span class="badge">Conference paper</span></div>
-              <h3>Impact of exterior facade materials on energy performance of residential structures in Bangladesh</h3>
-              <p class="auth">Ashraf, J., <b>Rahman, M. M.</b>, &amp; Rana, M. J.</p>
-              <p class="venue">Proceedings of ICPACER 2023</p>
-            </div>
-            <div class="hl"><b>3</b><span>design levers for lower cooling demand</span></div>
-            <details>
-              <summary>Key findings</summary>
-              <p>Identified the window-to-wall ratio, shading height and building orientation that minimise residential cooling-energy demand in Bangladesh’s climate.</p>
-              <div class="links"><a href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate ↗</a></div>
-            </details>
-          </article>
+        <article class="pub" data-type="journal" data-topic="materials" data-first="false">
+          <span class="yr">2025</span>
+          <div>
+            <h3>Combined influence of modified recycled concrete aggregate and metakaolin on high-strength concrete production: Experimental assessment and machine learning quantifications with advanced SHAP and PDP analyses</h3>
+            <p class="kind">Journal article</p>
+            <p class="auth">Sobuz, M. H. R., <b>Rahman, M. M.</b>, Aayaz, R., Al-Rashed, W. S., Datta, S. D., Safayet, M. A., Kabbo, M. K. I., &amp; Abdullah, M.</p>
+            <p class="venue">Construction and Building Materials, 461, 139897</p>
+          </div>
+          <div class="hl"><b>60.36</b><span>MPa from recycled aggregate</span></div>
+          <details>
+            <summary>Key findings</summary>
+            <p>Treated recycled concrete aggregate with metakaolin produced high-strength concrete reaching 60.36 MPa, matching conventional mixes while replacing a large share of natural aggregate with demolition waste. XGBoost (R² = 0.924) predicted strength, and SHAP and PDP analyses showed which mix factors drive it.</p>
+            <p class="links"><a class="textlink" href="https://doi.org/10.1016/j.conbuildmat.2025.139897" target="_blank" rel="noopener">Read the paper (DOI)</a></p>
+          </details>
+        </article>
+        <article class="pub" data-type="journal" data-topic="energy" data-first="false">
+          <span class="yr">2025</span>
+          <div>
+            <h3>Investigating the energy-efficiency of Glauber's salt as PCM-enhanced mortar in building envelope</h3>
+            <p class="kind">Journal article</p>
+            <p class="auth">Rahman, S., Rana, M. J., <b>Rahman, M. M.</b>, Dang, H., Talukder, S., &amp; Anzum, A.</p>
+            <p class="venue">Advances in Building Energy Research, 19(6), 798 to 825</p>
+          </div>
+          <div class="hl"><b>−22%</b><span>simulated building energy use</span></div>
+          <details>
+            <summary>Key findings</summary>
+            <p>Adding Glauber's salt as a phase-change material to mortar cut thermal conductivity by about 65% (1.173 to 0.416 W/m·K). At the optimal 10% PCM content, simulated annual building energy use fell by about 22%.</p>
+            <p class="links"><a class="textlink" href="https://doi.org/10.1080/17512549.2025.2547399" target="_blank" rel="noopener">Read the paper (DOI)</a></p>
+          </details>
+        </article>
+        <article class="pub" data-type="conference" data-topic="materials" data-first="true">
+          <span class="yr">2024</span>
+          <div>
+            <h3>Fresh and hardened properties of high-strength concrete using coal bottom ash and silica fume</h3>
+            <p class="kind">Conference paper, <b>first author</b></p>
+            <p class="auth"><b>Rahman, M. M.</b>, &amp; Hossain, M. S.</p>
+          </div>
+          <div class="hl"><b>10%</b><span>coal bottom ash replacement</span></div>
+          <details>
+            <summary>Key findings</summary>
+            <p>Replacing up to 10% of the mix with coal bottom ash, a combustion by-product, alongside silica fume kept concrete at high strength. It turns industrial waste into structural material and cuts cement-related CO₂.</p>
+            <p class="links"><a class="textlink" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate</a></p>
+          </details>
+        </article>
+        <article class="pub" data-type="conference" data-topic="materials" data-first="true">
+          <span class="yr">2024</span>
+          <div>
+            <h3>Enhancing concrete mechanical performance through metakaolin and improved recycled concrete aggregates</h3>
+            <p class="kind">Conference paper, <b>first author</b></p>
+            <p class="auth"><b>Rahman, M. M.</b>, &amp; Hossain, M. S.</p>
+          </div>
+          <div class="hl"><b>10%</b><span>metakaolin offsets strength loss</span></div>
+          <details>
+            <summary>Key findings</summary>
+            <p>Treating recycled concrete aggregate and adding 10% metakaolin offset the usual strength loss from recycled aggregate, making high-strength concrete from demolition waste feasible.</p>
+            <p class="links"><a class="textlink" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate</a></p>
+          </details>
+        </article>
+        <article class="pub" data-type="conference" data-topic="energy" data-first="false">
+          <span class="yr">2023</span>
+          <div>
+            <h3>Impact of exterior facade materials on energy performance of residential structures in Bangladesh</h3>
+            <p class="kind">Conference paper</p>
+            <p class="auth">Ashraf, J., <b>Rahman, M. M.</b>, &amp; Rana, M. J.</p>
+            <p class="venue">Proceedings of ICPACER 2023</p>
+          </div>
+          <div class="hl"><b>3</b><span>design levers for lower cooling demand</span></div>
+          <details>
+            <summary>Key findings</summary>
+            <p>Identified the window-to-wall ratio, shading height and building orientation that minimise residential cooling-energy demand in Bangladesh's climate.</p>
+            <p class="links"><a class="textlink" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate</a></p>
+          </details>
+        </article>
       </div>
-      <p class="chart-note">Citation and read counts from ResearchGate, September 2026.</p>
+      <p class="foot-note">Citation and read counts from ResearchGate, September 2026. <a class="textlink" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">ResearchGate profile</a></p>
     </div>
   </section>
 
-  <!-- ===================== JOURNEY ===================== -->
-  <section id="journey">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <span class="eyebrow">/ journey</span>
-          <h2 style="margin-top:.35em">From Khulna to St. John's</h2>
-        </div>
-        <p>Building engineering, site work and environmental compliance, and now data-driven environmental research. <a class="rg-btn" href="https://www.linkedin.com/in/muhammad-mushfiqur-rahman-eng/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none;white-space:nowrap"><span class="rg li">in</span>LinkedIn profile ↗</a></p>
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="journey" aria-labelledby="journey-h">
+    <div class="container">
+      <div class="head">
+        <h2 id="journey-h">From Khulna to St. John's</h2>
+        <p class="lead">Building engineering, site work and compliance, now data-driven environmental research. <a class="textlink" href="https://www.linkedin.com/in/muhammad-mushfiqur-rahman-eng/" target="_blank" rel="noopener">LinkedIn profile</a></p>
       </div>
-      <div class="tl" id="tl">
-        <div class="tl-fill" id="tlFill"></div>
-        <div class="tl-item reveal">
-          <span class="when">2019 – 2024</span>
-          <h3>B.Sc., Building Engineering &amp; Construction Management</h3>
-          <span class="org">Khulna University of Engineering &amp; Technology (KUET), Bangladesh</span>
-          <p>Majored in structural &amp; materials engineering. Thesis: high-strength concrete from recycled aggregate and metakaolin, reaching 60.36 MPa while replacing ~45% of natural aggregate with waste. University Merit Scholarship.</p>
-          <div class="tags"><span class="tag">ETABS</span><span class="tag">Revit</span><span class="tag">Materials testing</span></div>
-        </div>
-        <div class="tl-item reveal">
-          <span class="when">May 2024</span>
-          <h3>Engineering Intern</h3>
-          <span class="org">Sheltech Pvt. Ltd, Dhaka</span>
-          <p>Site inspections and quality-control checks, plus AutoCAD drawings and technical documentation for site crews.</p>
-          <div class="tags"><span class="tag">AutoCAD</span><span class="tag">QA/QC</span></div>
-        </div>
-        <div class="tl-item reveal">
-          <span class="when">Jun 2024 – Feb 2025</span>
-          <h3>Assistant Engineer</h3>
-          <span class="org">ZAS Corporation Ltd, Dhaka</span>
-          <p>Wrote environmental compliance reports and technical submissions with a 100% first-pass approval rate, inspected fire-safety systems, and put energy-efficiency measures in place.</p>
-          <div class="tags"><span class="tag">Compliance</span><span class="tag">HSEQ</span><span class="tag">MS Project</span></div>
-        </div>
-        <div class="tl-item reveal">
-          <span class="when">2025</span>
-          <h3>MASc (Co-op), Environmental Systems Engineering &amp; Management</h3>
-          <span class="org">Memorial University of Newfoundland, St. John's</span>
+      <ol class="tl" id="tl" reversed>
+        <li class="next">
+          <span class="when">Winter 2027, next</span>
+          <div><h3>Your team?</h3><span class="org">A co-op in water resources, environmental or infrastructure engineering</span></div>
+          <p><a class="textlink" href="#contact">Get in touch</a></p>
+        </li>
+        <li>
+          <span class="when">Jan 2026 to now</span>
+          <div><h3>Wildfire and source-water ML research</h3><span class="org">Memorial University, ENGI 960A/B</span></div>
+          <div><p>Built a machine-learning framework predicting river turbidity in wildfire-exposed boreal watersheds, then tested whether it transfers to Labrador. <a class="textlink" href="#work">See the project</a></p><p class="tools">Python, scikit-learn, XGBoost</p></div>
+        </li>
+        <li>
+          <span class="when">Sep 2025 to 2027</span>
+          <div><h3>MASc (Co-op), Environmental Systems Engineering &amp; Management</h3><span class="org">Memorial University of Newfoundland, St. John's</span></div>
           <p>Graduate coursework in environmental risk assessment, systems engineering, management systems and statistics. CGPA 3.87.</p>
-        </div>
-        <div class="tl-item reveal">
-          <span class="when">Jan 2026 – present</span>
-          <h3>Wildfire &amp; source-water ML research</h3>
-          <span class="org">MUN · ENGI 960A/B</span>
-          <p>Built a machine-learning framework predicting river turbidity in wildfire-exposed boreal watersheds, then tested whether it transfers to Newfoundland. <a href="#work" style="color:var(--accent)">See the project ↑</a></p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">XGBoost</span></div>
-        </div>
-        <div class="tl-item next reveal">
-          <span class="when">Winter 2027 · next</span>
-          <h3>Your team?</h3>
-          <span class="org">Seeking a co-op in environmental management, construction or infrastructure</span>
-          <p><a href="#contact" style="color:var(--accent)">Let's talk →</a></p>
-        </div>
+        </li>
+        <li>
+          <span class="when">Jun 2024 to Feb 2025</span>
+          <div><h3>Assistant Engineer</h3><span class="org">ZAS Corporation Ltd, Dhaka</span></div>
+          <div><p>Wrote environmental compliance reports and technical submissions with a 100% first-pass approval rate, inspected fire-safety systems, and put energy-efficiency measures in place.</p><p class="tools">Compliance, HSEQ, MS Project</p></div>
+        </li>
+        <li>
+          <span class="when">May 2024</span>
+          <div><h3>Engineering Intern</h3><span class="org">Sheltech Pvt. Ltd, Dhaka</span></div>
+          <div><p>Site inspections and quality-control checks, plus AutoCAD drawings and technical documentation for site crews.</p><p class="tools">AutoCAD, QA/QC</p></div>
+        </li>
+        <li>
+          <span class="when">2019 to 2024</span>
+          <div><h3>BSc, Building Engineering &amp; Construction Management</h3><span class="org">Khulna University of Engineering &amp; Technology (KUET), Bangladesh</span></div>
+          <div><p>Structural and materials engineering. Thesis: high-strength concrete from recycled aggregate and metakaolin, reaching 60.36 MPa while replacing about 45% of natural aggregate with waste. University Merit Scholarship.</p><p class="tools">ETABS, Revit, materials testing</p></div>
+        </li>
+      </ol>
+
+      <h3 class="earlier-head">Design and GIS projects</h3>
+      <div class="earlier">
+        <article>
+          <h3>GIS Portfolio Project</h3>
+          <p>A spatial analysis project in ArcGIS, applying mapping and geoprocessing to a real environmental question.</p>
+          <p class="where">In progress. ArcGIS, spatial analysis.</p>
+        </article>
+        <article>
+          <h3>BIM Design &amp; Energy Modelling, 4-Storey Building</h3>
+          <p>Designed a 4-storey building in BIM and ran energy simulations to test envelope and efficiency choices, with the schedule planned in MS Project.</p>
+          <p class="where">KUET design project. Revit, Green Building Studio, Robot Structural, MS Project.</p>
+        </article>
+        <article>
+          <h3>Structural Analysis, 12-Storey Tower</h3>
+          <p>Modelled and analysed a 12-storey tower under wind and seismic loading to check structural performance against code requirements.</p>
+          <p class="where">KUET design project. ETABS, wind and seismic, structural design.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ===================== ABOUT ===================== -->
-  <section id="about">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div>
-          <span class="eyebrow">/ about</span>
-          <h2 style="margin-top:.35em">A little about me</h2>
-        </div>
-      </div>
+  <!-- ============ ABOUT ============ -->
+  <section id="about" aria-labelledby="about-h">
+    <div class="container">
       <div class="about-grid">
-        <div class="about-body reveal">
-          <p>I'm <strong>Md. Mushfiqur Rahman</strong> (Mushfique), a Master of Applied Science (Co-op) student in <strong>Environmental Systems Engineering &amp; Management</strong> at Memorial University of Newfoundland in St. John's.</p>
-          <p>Before coming to Canada, I earned my B.Sc. in <strong>Building Engineering &amp; Construction Management</strong> from Khulna University of Engineering &amp; Technology (KUET), Bangladesh. That background in how buildings and infrastructure get designed and delivered now meets my graduate focus on how we manage their environmental impact.</p>
-          <p>Right now I'm learning Power BI, building my GIS and ArcGIS skills, and looking for a <strong>Winter 2027 co-op or internship</strong> in environmental management, construction, or infrastructure. If that sounds like your team, I'd love to hear from you.</p>
+        <figure class="portrait">
+          <div class="frame"><img src="img/mushfique-photo.jpg" width="400" height="400" loading="lazy" alt="Portrait of Mushfiqur Rahman in a navy blazer"></div>
+        </figure>
+        <div class="about-body">
+          <h2 id="about-h">Building engineer, now modelling water</h2>
+          <p>I'm Md. Mushfiqur Rahman (Mushfique), an MASc (Co-op) student in Environmental Systems Engineering &amp; Management at Memorial University in St. John's.</p>
+          <p>Before Canada I earned a BSc in Building Engineering &amp; Construction Management at KUET, Bangladesh. That grounding in how infrastructure gets designed and delivered now meets a graduate focus on managing its environmental impact.</p>
+          <dl class="skills">
+            <div><dt>Data and modelling</dt><dd>Python, scikit-learn, XGBoost, pandas, seaborn, Minitab, Excel</dd></div>
+            <div><dt>Design and analysis</dt><dd>Revit, AutoCAD, ETABS, Robot Structural Analysis, MS Project</dd></div>
+            <div><dt>Environmental</dt><dd>Water quality, environmental risk assessment, life cycle assessment, compliance</dd></div>
+            <div><dt>Learning now</dt><dd>Power BI, ArcGIS and spatial analysis</dd></div>
+          </dl>
         </div>
-        <div class="facts reveal">
-          <div class="fact"><span class="k">Based in</span><span class="v">St. John's, NL 🇨🇦</span></div>
-          <div class="fact"><span class="k">Studying</span><span class="v">MASc, Memorial University</span></div>
-          <div class="fact"><span class="k">Focus</span><span class="v">Environmental Systems</span></div>
-          <div class="fact"><span class="k">Background</span><span class="v">B.Sc., Building Eng. (KUET)</span></div>
-          <div class="fact"><span class="k">Currently</span><span class="v">Seeking Winter 2027 co-op</span></div>
-          <div class="fact"><span class="k">Learning</span><span class="v">Power BI · ArcGIS</span></div>
+      </div>
+
+      <div class="courses">
+        <h3>Graduate coursework, CGPA 3.87</h3>
+        <div class="cols">
+          <table>
+            <thead><tr><th scope="col" class="code-col">Code</th><th scope="col">Course</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td class="num code-col">ENGI 9609</td><td>Environmental Risk Assessment</td><td class="st">Done</td></tr>
+              <tr><td class="num code-col">ENGI 9627</td><td>Environmental Systems Engineering</td><td class="st">Done</td></tr>
+              <tr><td class="num code-col">ENGI 9626</td><td>Environmental Management Systems</td><td class="st">Done</td></tr>
+              <tr><td class="num code-col">ENGI 9622</td><td>Environmental Statistics</td><td class="st">Done</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr><th scope="col" class="code-col">Code</th><th scope="col">Course</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              <tr><td class="num code-col">ENGI 9628</td><td>Environmental Laboratory</td><td class="st">Done</td></tr>
+              <tr><td class="num code-col">ENGI 9601</td><td>Environmental Pollution &amp; Mitigation</td><td class="st">Done</td></tr>
+              <tr class="ip"><td class="num code-col">ENGI 9625</td><td>Environmental Impacts of Offshore Oil &amp; Gas</td><td class="st">This term</td></tr>
+              <tr class="ip"><td class="num code-col">ENVS 6002</td><td>Environmental Chemistry &amp; Toxicology</td><td class="st">This term</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== CONTACT ===================== -->
-  <section id="contact" class="contact">
-    <div class="wrap reveal">
-      <span class="eyebrow" style="justify-content:center">/ get in touch</span>
-      <h2>Let's <a href="mailto:muhammadmr@mun.ca">talk</a>.</h2>
-      <p>Hiring for a co-op or internship, or want to talk environmental engineering? My inbox is open.</p>
+  <!-- ============ CONTACT + FOOTER ============ -->
+  <footer id="contact" class="contact" aria-labelledby="contact-h">
+    <div class="container">
+      <h2 id="contact-h">Hiring for a Winter 2027 co-op? Let's talk.</h2>
+      <a class="mail" href="mailto:muhammadmr@mun.ca">muhammadmr@mun.ca</a>
+      <p class="lead">Or to talk wildfire, water quality or low-carbon materials. My inbox is open.</p>
       <div class="socials">
-        <a href="mailto:muhammadmr@mun.ca">✉ Email</a>
-        <a href="Mushfiqur_Rahman_CV.pdf" target="_blank" rel="noopener" download>⬇ CV (PDF)</a>
-        <button type="button" id="copyEmail">⧉ Copy email</button>
-        <a href="https://www.linkedin.com/in/muhammad-mushfiqur-rahman-eng/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">ResearchGate ↗</a>
+        <a class="btn btn--primary" href="mailto:muhammadmr@mun.ca">Email me</a>
+        <button class="btn" type="button" id="copyEmail">Copy email</button>
+        <a class="btn" href="Mushfiqur_Rahman_CV.pdf" target="_blank" rel="noopener" download>CV (PDF)</a>
+        <a class="btn" href="https://www.linkedin.com/in/muhammad-mushfiqur-rahman-eng/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">ResearchGate</a>
+      </div>
+      <div class="colophon">
+        <span>© <span id="year">2026</span> Md. Mushfiqur Rahman. St. John's, Newfoundland and Labrador.</span>
+        <a href="#top">Back to top</a>
       </div>
     </div>
-  </section>
+  </footer>
 </main>
+
 <div class="toast" id="toast" role="status"></div>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Figure viewer">
-  <span class="cnt" id="lbCnt"></span>
-  <button class="x" id="lbX" aria-label="Close">✕</button>
-  <button class="pv" id="lbPv" aria-label="Previous figure">←</button>
+  <div class="bar"><span class="cnt" id="lbCnt"></span><button class="lb-btn x" id="lbX" type="button">Close</button></div>
+  <button class="lb-btn pv" id="lbPv" type="button" aria-label="Previous figure">Previous</button>
   <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
-  <button class="nx" id="lbNx" aria-label="Next figure">→</button>
+  <button class="lb-btn nx" id="lbNx" type="button" aria-label="Next figure">Next</button>
 </div>
 
-<footer class="wrap">
-  <span>© <span id="year">2026</span> Md. Mushfiqur Rahman.</span>
-  <span class="mono">Made with care ✦ Hosted free</span>
-</footer>
-
-<script>
-  // Theme toggle (in-memory; also respects system preference on load)
-  (function(){
-    var root = document.documentElement;
-    var btn = document.getElementById('themeBtn');
-    btn.addEventListener('click', function(){
-      // Determine current effective theme, then flip explicitly
-      var current = root.getAttribute('data-theme');
-      if(!current){
-        current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
-      root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
-    });
-
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Scroll reveal
-    var els = document.querySelectorAll('.reveal');
-    if('IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-      }, {threshold:.12});
-      els.forEach(function(el){ io.observe(el); });
-    } else {
-      els.forEach(function(el){ el.classList.add('in'); });
-    }
-  })();
-
-  // ---------- Research charts ----------
-  (function(){
-    
-    var NS='http://www.w3.org/2000/svg';
-    function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
-    function txt(p,x,y,s,a){var t=el('text',Object.assign({x:x,y:y},a||{}),p);t.textContent=s;return t}
-    function tipFor(fig){var t=document.createElement('div');t.className='tip';fig.appendChild(t);return function(evt,html){if(!html){t.style.opacity=0;return}t.innerHTML=html;var r=fig.getBoundingClientRect();var x=evt.clientX-r.left+12,y=evt.clientY-r.top-34;x=Math.min(x,r.width-t.offsetWidth-8);t.style.left=Math.max(8,x)+'px';t.style.top=y+'px';t.style.opacity=1}}
-    function hbars(id,rows,opt){
-      var fig=document.getElementById(id),box=fig.querySelector('.plot'),tip=tipFor(fig);
-      var W=520,lw=opt.lw,rh=34,H=rows.length*rh+8,max=opt.max;
-      var svg=el('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':opt.aria},box);
-      rows.forEach(function(r,i){
-        var y=i*rh+4,bw=Math.max(2,(W-lw-70)*r[1]/max);
-        txt(svg,lw-10,y+rh/2+1,r[0],{'text-anchor':'end','dominant-baseline':'middle','font-size':13,class:r[2]?'lbl':''});
-        el('rect',{x:lw,y:y+7,width:bw,height:rh-14,rx:4,class:'bar'+(r[2]?' hi':'')},svg);
-        txt(svg,lw+bw+8,y+rh/2+1,opt.fmt(r[1]),{'dominant-baseline':'middle','font-size':13,class:'lbl'});
-        var h=el('rect',{x:0,y:y,width:W,height:rh,class:'hit'},svg);
-        h.addEventListener('mousemove',function(e){tip(e,'<b>'+r[0]+'</b> · '+opt.tip(r))});h.addEventListener('mouseleave',function(e){tip(e,null)});
-      });
-    }
-    // Fig 4
-    hbars('c-transfer',[['Observed (NL)',14,false],['Alberta model, gaps imputed',234,true],['Alberta model, NL inputs only',243,true]],{lw:215,max:260,aria:'Bar chart of observed versus predicted turbidity in Newfoundland',fmt:function(v){return v+' NTU'},tip:function(r){return r[1]+' NTU'+(r[2]?' · ~'+Math.round(r[1]/14)+'× observed':'')}});
-    var tb4=document.querySelector('#c-transfer .bar');if(tb4)tb4.style.fill='var(--ink)';
-  })();
-
-  // ================= Interactive layer =================
-  (function(){
-    var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var root=document.documentElement;
-    function css(v){return getComputedStyle(root).getPropertyValue(v).trim()}
-
-    // --- scroll progress + active nav
-    var bar=document.getElementById('progress');
-    function onScroll(){var h=document.documentElement;var p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);bar.style.transform='scaleX('+p+')'}
-    addEventListener('scroll',onScroll,{passive:true});onScroll();
-    var links={};document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
-    if('IntersectionObserver' in window){
-      var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){for(var k in links)links[k].classList.remove('active');if(links[e.target.id])links[e.target.id].classList.add('active')}})},{rootMargin:'-45% 0px -50% 0px'});
-      ['now','work','research','journey','about','contact'].forEach(function(id){var el=document.getElementById(id);if(el)so.observe(el)});
-    }
-
-    // --- hero "river" particle field (water flowing, reacts to cursor)
-    (function(){
-      var c=document.getElementById('river');if(!c)return;var x=c.getContext('2d');var hero=c.parentElement;
-      var W,H,dpr,parts=[],mouse={x:-9999,y:-9999},t=0,running=true;
-      function size(){dpr=Math.min(devicePixelRatio||1,2);W=hero.clientWidth;H=hero.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
-        var n=Math.round(Math.min(900,W*H/1400));parts=[];for(var i=0;i<n;i++)parts.push(spawn(true))}
-      function spawn(any){return{x:any?Math.random()*W:-10,y:Math.random()*H,v:.4+Math.random()*1.1,a:.15+Math.random()*.5,r:Math.random()<.08?1.8:1.1}}
-      function flow(px,py){return Math.sin(py*0.006+t*0.6)*0.9+Math.cos(px*0.004-t*0.4)*0.5+Math.sin((px+py)*0.003+t)*0.35}
-      function frame(){
-        if(!running)return;t+=0.008;
-        var acc=css('--accent')||'#0B7D55',acc2=css('--accent-2')||'#0E7490',ink=css('--ink-faint')||'#888';
-        x.clearRect(0,0,W,H);
-        for(var i=0;i<parts.length;i++){var p=parts[i];
-          var ang=flow(p.x,p.y)*0.6;var vx=Math.cos(ang)*p.v*1.4,vy=Math.sin(ang)*p.v;
-          var dx=p.x-mouse.x,dy=p.y-mouse.y,d2=dx*dx+dy*dy;
-          if(d2<16000){var f=(16000-d2)/16000*2.4;var d=Math.sqrt(d2)||1;vx+=dx/d*f;vy+=dy/d*f}
-          var ox=p.x,oy=p.y;p.x+=vx;p.y+=vy;
-          if(p.x>W+10||p.y<-10||p.y>H+10){parts[i]=spawn(false);continue}
-          var hi=(i%7===0),wa=(i%5===0);x.strokeStyle=hi?acc:(wa?acc2:ink);x.globalAlpha=p.a*(hi?0.9:(wa?0.7:0.5));x.lineWidth=p.r;x.lineCap='round';
-          x.beginPath();x.moveTo(ox-vx*3,oy-vy*3);x.lineTo(p.x,p.y);x.stroke();
-        }
-        x.globalAlpha=1;requestAnimationFrame(frame);
-      }
-      size();addEventListener('resize',size);
-      hero.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top});
-      hero.addEventListener('pointerleave',function(){mouse.x=mouse.y=-9999});
-      if('IntersectionObserver' in window){new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!running&&!RM){running=true;requestAnimationFrame(frame)}else if(!v)running=false},{}).observe(hero)}
-      if(RM){running=true;for(var k=0;k<60;k++){t+=.01}frame();running=false}else requestAnimationFrame(frame);
-    })();
-
-    // --- rotating / typing headline word
-    (function(){
-      var el=document.getElementById('rot');if(!el)return;
-      var words=['the environment.','clean water.','climate resilience.','greener materials.','safer communities.'];
-      if(RM)return;var wi=0,ci=words[0].length,del=true,pause=1600;
-      function tick(){var w=words[wi];
-        if(del){ci--;el.textContent=w.slice(0,ci);if(ci<=0){del=false;wi=(wi+1)%words.length;return setTimeout(tick,250)}return setTimeout(tick,35)}
-        var nw=words[wi];ci++;el.textContent=nw.slice(0,ci);if(ci>=nw.length){del=true;return setTimeout(tick,pause)}setTimeout(tick,70)}
-      setTimeout(tick,2200);
-    })();
-
-    // --- count-up stats
-    (function(){
-      var els=document.querySelectorAll('[data-count]');if(!els.length||RM||!('IntersectionObserver' in window))return;
-      els.forEach(function(el){var pre=el.dataset.prefix||'',dec=+(el.dataset.dec||0);el.textContent=pre+(0).toFixed(dec)});
-      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);
-        var el=e.target,end=+el.dataset.count,pre=el.dataset.prefix||'',dec=+(el.dataset.dec||0),t0=performance.now(),dur=1400;
-        (function step(now){var k=Math.min(1,(now-t0)/dur);k=1-Math.pow(1-k,3);el.textContent=pre+(end*k).toFixed(dec);if(k<1)requestAnimationFrame(step)})(t0);
-      })},{threshold:.6});
-      els.forEach(function(el){io.observe(el)});
-    })();
-
-    // --- cursor spotlight + gentle 3D tilt on cards
-    document.querySelectorAll('.glow').forEach(function(el){
-      var tilt=el.classList.contains('card');
-      el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top;el.style.setProperty('--mx',mx+'px');el.style.setProperty('--my',my+'px');
-        if(tilt&&!RM){var rx=((my/r.height)-.5)*-6,ry=((mx/r.width)-.5)*6;el.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-4px)'}});
-      el.addEventListener('pointerleave',function(){if(tilt)el.style.transform=''});
-    });
-    // magnetic buttons
-    if(!RM)document.querySelectorAll('.hero-cta .btn').forEach(function(b){
-      b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.25)+'px)'});
-      b.addEventListener('pointerleave',function(){b.style.transform=''});
-    });
-
-    // --- ML pipeline stepper
-    (function(){
-      var steps=[
-        {t:'Collect',big:'837',u:'samples',h:'Collect long-term monitoring data',p:'Pulled 26 years (2000–2026) of water-quality records from four stations in Alberta\'s Peace–Athabasca Basin, a boreal watershed hit by the 2016 Fort McMurray and 2023 fires.'},
-        {t:'Clean',big:'22',u:'predictors',h:'Clean & engineer features',p:'Dropped samples without turbidity (823 remain), filled missing chemistry with medians, one-hot encoded the station and added month, day-of-year and year: 15 chemistry + 3 time + 4 station inputs.'},
-        {t:'Train',big:'4',u:'models',h:'Train & compare four ensemble models',p:'Random Forest, Extra Trees, Gradient Boosting and XGBoost on the same 80/20 train/test split, scored with R², RMSE and MAE so the comparison is fair.'},
-        {t:'Explain',big:'5×',u:'nitrogen lead',h:'Explain what drives turbidity',p:'Extra Trees won (R² = 0.775). Feature importance shows total nitrogen dominating, about 5× the next input, followed by colour, manganese, aluminium and iron: the chemical signature of wildfire runoff.'},
-        {t:'Transfer',big:'17×',u:'over-prediction',h:'Test it in Newfoundland',p:'Applied to Labrador\'s Churchill River, the Alberta model predicted 234–243 NTU against 14 NTU observed. The method transfers, but the model must be retrained once the local hydrology–water-quality link is established.'}
-      ];
-      var wrap=document.querySelector('.pipe-steps'),panel=document.getElementById('pipePanel'),fill=document.getElementById('pipeFill'),play=document.getElementById('pipePlay');if(!wrap)return;
-      var btns=steps.map(function(s,i){var b=document.createElement('button');b.type='button';b.className='pstep';b.setAttribute('role','tab');b.innerHTML='<span class="dot">'+(i+1)+'</span><span class="t">'+s.t+'</span>';b.addEventListener('click',function(){stop();go(i)});wrap.appendChild(b);return b});
-      var cur=0,timer=null;
-      function go(i){cur=i;btns.forEach(function(b,j){b.classList.toggle('on',j===i);b.classList.toggle('done',j<i);b.setAttribute('aria-selected',j===i)});
-        fill.style.width=(80*i/(steps.length-1))+'%';var s=steps[i];
-        panel.innerHTML='<div class="big in">'+s.big+'<small>'+s.u+'</small></div><div class="in"><h5>'+s.h+'</h5><p>'+s.p+'</p></div>'}
-      function stop(){if(timer){clearInterval(timer);timer=null;play.textContent='▶ Play walkthrough'}}
-      play.addEventListener('click',function(){if(timer)return stop();play.textContent='❚❚ Pause';go(0);timer=setInterval(function(){if(cur>=steps.length-1)return stop();go(cur+1)},3200)});
-      wrap.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){stop();go(Math.min(steps.length-1,cur+1));btns[cur].focus()}if(e.key==='ArrowLeft'){stop();go(Math.max(0,cur-1));btns[cur].focus()}});
-      go(0);
-    })();
-
-    // --- figure lightbox
-    (function(){
-      var shots=[].slice.call(document.querySelectorAll('a.shot'));if(!shots.length)return;
-      var lb=document.getElementById('lb'),img=document.getElementById('lbImg'),cap=document.getElementById('lbCap'),cnt=document.getElementById('lbCnt'),i=0,last;
-      function show(k){i=(k+shots.length)%shots.length;var a=shots[i],fig=a.closest('figure');img.src=a.getAttribute('href');img.alt=a.querySelector('img').alt;
-        cap.innerHTML='<b>'+fig.querySelector('h4').textContent+'</b>. '+fig.querySelector('.cap').textContent;cnt.textContent=(i+1)+' / '+shots.length}
-      function open(k){last=document.activeElement;show(k);lb.classList.add('open');document.body.style.overflow='hidden';document.getElementById('lbX').focus()}
-      function close(){lb.classList.remove('open');document.body.style.overflow='';if(last)last.focus()}
-      shots.forEach(function(a,k){a.addEventListener('click',function(e){e.preventDefault();open(k)})});
-      document.getElementById('lbX').onclick=close;document.getElementById('lbPv').onclick=function(){show(i-1)};document.getElementById('lbNx').onclick=function(){show(i+1)};
-      lb.addEventListener('click',function(e){if(e.target===lb)close()});
-      addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
-    })();
-
-    // --- journey timeline fill
-    (function(){
-      var tl=document.getElementById('tl'),fill=document.getElementById('tlFill');if(!tl)return;var items=tl.querySelectorAll('.tl-item');
-      function upd(){var r=tl.getBoundingClientRect(),mid=innerHeight*0.6;var h=Math.max(0,Math.min(r.height-12,mid-r.top));fill.style.height=h+'px';
-        items.forEach(function(it){it.classList.toggle('lit',it.getBoundingClientRect().top+10<mid)})}
-      addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
-    })();
-
-
-    // --- publication filters
-    (function(){
-      var chips=document.querySelectorAll('.filters .chip'),pubs=document.querySelectorAll('.pub');
-      chips.forEach(function(c){c.addEventListener('click',function(){var f=c.dataset.f;
-        chips.forEach(function(x){x.setAttribute('aria-pressed',x===c)});
-        pubs.forEach(function(p){var ok=f==='all'||p.dataset.type===f||p.dataset.topic===f||(f==='first'&&p.dataset.first==='true');p.classList.toggle('hide',!ok);if(ok)p.classList.add('in')})})});
-    })();
-    // --- copy email
-    (function(){
-      var b=document.getElementById('copyEmail'),t=document.getElementById('toast');if(!b)return;
-      function toast(m){t.textContent=m;t.classList.add('show');clearTimeout(toast.h);toast.h=setTimeout(function(){t.classList.remove('show')},2200)}
-      b.addEventListener('click',function(){var e='muhammadmr@mun.ca';(navigator.clipboard?navigator.clipboard.writeText(e):Promise.reject()).then(function(){toast('Email copied: '+e)},function(){toast(e)})});
-    })();
-  })();
-</script>
+<script src="js/main.js" defer></script>
 </body>
 </html>
