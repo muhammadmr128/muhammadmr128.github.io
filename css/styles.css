@@ -3,6 +3,7 @@
 /* Hallmark · dropped the river particle canvas, the typing headline, the marquee, count-ups, card tilt, magnetic buttons, the scroll progress bar and the timeline fill · Almanac keeps still apart from state, and the type now carries the page */
 /* Hallmark · dropped emoji badges on the portrait and the flag in the facts · gate 11 refuses emoji as icons */
 /* Hallmark · reworded "Hi, I'm Mushfique. I engineer for the environment." to "Machine learning for safer water." · the LinkedIn banner line, specific to this research */
+/* Hallmark · motion: by request · the owner asked for a more animated site; Almanac's stillness is overridden with one hero entrance, scroll reveals, count-ups and chart growth, transform and opacity only, all off under reduced motion and visible without script */
 @import url("./tokens.css");
 @import url("./base.css");
 
@@ -276,3 +277,90 @@ section { padding-block: var(--section-gap) 0; }
   .courses .cols { columns: 1; }
   .courses .code-col { display: none; }
 }
+
+/* =================================================================
+   Motion layer (by request). Only active when JS adds .motion to <html>,
+   so the page is fully visible without script and under reduced motion.
+   ================================================================= */
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* Scroll progress, drawn on the nav's bottom edge */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: calc(var(--z-sticky-nav) + 1); background: var(--color-accent); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+
+/* Hero entrance */
+.motion .hero h1 .w { display: inline-block; opacity: 0; transform: translateY(0.45em); animation: rise 700ms var(--ease-out) forwards; animation-delay: calc(var(--i) * 70ms + 80ms); }
+.motion .hero .lead, .motion .hero-actions, .motion .hero-note { opacity: 0; transform: translateY(14px); animation: rise 700ms var(--ease-out) forwards; }
+.motion .hero .lead { animation-delay: 420ms; }
+.motion .hero-actions { animation-delay: 520ms; }
+.motion .hero-note { animation-delay: 620ms; }
+.motion .sheet { opacity: 0; transform: translateY(28px); animation: rise 900ms var(--ease-out) 200ms forwards; }
+.motion .sheet tbody tr { opacity: 0; transform: translateX(-10px); animation: rise 500ms var(--ease-out) forwards; animation-delay: calc(var(--i) * 90ms + 600ms); }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+/* R² bars inside the hero sheet */
+.rbar { display: block; height: 3px; margin-top: var(--space-2xs); background: var(--color-rule); transform-origin: 0 50%; transform: scaleX(var(--v)); }
+tr.pick .rbar { background: var(--color-accent); }
+.motion .rbar { transform: scaleX(0); transition: transform 1100ms var(--ease-out); transition-delay: calc(var(--i) * 90ms + 900ms); }
+.motion .sheet.go .rbar { transform: scaleX(var(--v)); }
+
+/* The highlighted rows pulse once after landing */
+.motion .sheet.go tr.pick td { animation: flash 1400ms var(--ease-out) 1700ms 1 both; }
+@keyframes flash { 0% { background: var(--color-accent-soft); } 35% { background: color-mix(in oklab, var(--color-accent) 22%, transparent); } 100% { background: var(--color-accent-soft); } }
+
+/* Scroll reveals */
+.motion [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); transition-delay: calc(var(--i, 0) * 80ms); }
+.motion [data-reveal="left"] { transform: translateX(-26px); }
+.motion [data-reveal="scale"] { transform: scale(0.96); }
+.motion [data-reveal].in { opacity: 1; transform: none; }
+
+/* Head rules draw across */
+.motion .head { border-bottom-color: transparent; position: relative; }
+.motion .head::after { content: ""; position: absolute; left: 0; right: 0; bottom: calc(-1 * var(--rule-bar)); height: var(--rule-bar); background: var(--color-rule-2); transform: scaleX(0); transform-origin: 0 50%; transition: transform 1000ms var(--ease-out) 150ms; }
+.motion .head.in::after { transform: scaleX(1); }
+
+/* Figures: images settle in from a slight zoom, lift on hover */
+.shot { overflow: hidden; }
+.shot img { transition: transform 600ms var(--ease-out); }
+.shot:hover img { transform: scale(1.025); }
+.motion .fig[data-reveal] .shot img { transform: scale(1.08); transition: transform 1200ms var(--ease-out); }
+.motion .fig[data-reveal].in .shot img { transform: none; }
+.motion .fig[data-reveal].in .shot:hover img { transform: scale(1.025); }
+
+/* Transfer chart: bars grow from the axis */
+.transfer .bar { transform-box: fill-box; transform-origin: 0 50%; }
+.motion .transfer .bar { transform: scaleX(0); transition: transform 1400ms var(--ease-out); }
+.motion .transfer .bar:nth-of-type(2) { transition-delay: 200ms; }
+.motion .transfer .bar:nth-of-type(3) { transition-delay: 400ms; }
+.motion .transfer .val { opacity: 0; transition: opacity 500ms var(--ease-out) 1200ms; }
+.motion .transfer.in .bar { transform: none; }
+.motion .transfer.in .val { opacity: 1; }
+
+/* Stepper: a timer line fills the active step while playing */
+.pstep { position: relative; }
+.pstep::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--color-accent); transform: scaleX(0); transform-origin: 0 50%; }
+.pipe.playing .pstep[aria-selected="true"]::after { animation: fill 3200ms linear forwards; }
+@keyframes fill { to { transform: scaleX(1); } }
+
+/* Experience: a line that fills as you scroll */
+.tl { position: relative; padding-left: var(--space-xl); }
+.tl::before, .tl::after { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--color-rule); }
+.tl::after { background: var(--color-accent); transform-origin: 50% 0; transform: scaleY(var(--p, 1)); }
+.motion .tl::after { transform: scaleY(var(--p, 0)); }
+.tl > li { position: relative; }
+.tl > li::before { content: ""; position: absolute; left: calc(-1 * var(--space-xl) + 1px); top: calc(var(--space-xl) + 4px); width: 12px; height: 12px; border-radius: 50%; background: var(--color-paper); box-shadow: inset 0 0 0 2px var(--color-rule-2); transition: background-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.tl > li:first-child::before { top: 4px; }
+.tl > li.lit::before { background: var(--color-accent); box-shadow: inset 0 0 0 2px var(--color-accent); }
+
+/* Publications rows tint on hover */
+.pub { transition: background-color var(--dur-short) var(--ease-out); }
+.pub:hover { background: color-mix(in oklab, var(--color-paper-2) 60%, transparent); }
+
+/* Portrait: slow drift on hover */
+.portrait img { transition: transform 900ms var(--ease-out); }
+.portrait:hover img { transform: scale(1.1); }
+
+/* Contact email underline sweeps in */
+.motion .contact .mail[data-reveal] { text-decoration-color: transparent; transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out), text-decoration-color 600ms var(--ease-out) 500ms; }
+.motion .contact .mail[data-reveal].in { text-decoration-color: var(--color-band-accent); }
+
+@media (max-width: 40rem) { .tl { padding-left: var(--space-lg); } .tl::before, .tl::after { left: 4px; } .tl > li::before { left: calc(-1 * var(--space-lg) - 1px); } }
