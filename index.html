@@ -8,11 +8,11 @@
 <meta property="og:title" content="Mushfiqur Rahman, machine learning for safer water" />
 <meta property="og:description" content="Wildfire and water-quality research at Memorial University, five papers on low-carbon building, and a Winter 2027 co-op search." />
 <meta property="og:image" content="https://muhammadmr128.github.io/img/mushfique-photo.jpg" />
-<meta name="theme-color" content="#c3cad2" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#151b22" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0d1620" media="(prefers-color-scheme: dark)" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500&family=Funnel+Sans:wght@400;500&display=swap" />
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -20,7 +20,8 @@
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="nav">
-  <div class="container nav-in">
+  <div class="container">
+  <div class="nav-in">
     <a class="brand" href="#top" aria-label="Mushfiqur Rahman, back to top">Mushfiqur Rahman</a>
     <nav class="nav-links" aria-label="Sections">
       <a href="#now" class="now-link hide-sm">Now</a>
@@ -35,12 +36,14 @@
       </button>
     </nav>
   </div>
+  </div>
 </header>
 
 <main id="top">
 
   <!-- ============ HERO: the result itself ============ -->
   <section class="hero" aria-labelledby="hero-h">
+    <div class="pool pool--hero" aria-hidden="true"><canvas data-light="hero"></canvas></div>
     <div class="container hero-grid">
       <div class="hero-text">
         <h1 id="hero-h">Machine learning for safer water.</h1>
@@ -52,7 +55,7 @@
         <p class="hero-note">MASc (Co-op), Memorial University, St. John's. Seeking a Winter 2027 co-op.</p>
       </div>
 
-      <div class="sheet" role="group" aria-label="Results sheet from the wildfire turbidity model">
+      <div class="sheet clear cast" role="group" aria-label="Results sheet from the wildfire turbidity model">
         <div class="sheet-head">
           <h2>Turbidity model, results</h2>
           <span class="num">2000 to <b>2026</b></span>
@@ -76,19 +79,19 @@
             <tr class="pick"><td>Alberta model, Labrador inputs only</td><td class="num">243</td></tr>
           </tbody>
         </table>
-        <p class="sheet-foot"><span>Magenta marks the best fit and the widest miss.</span><span>Transfer is one pilot comparison.</span></p>
+        <p class="sheet-foot"><span>Highlighted: the best fit and the widest miss.</span><span>Transfer is one pilot comparison.</span></p>
       </div>
     </div>
   </section>
 
   <!-- ============ NOW ============ -->
-  <section id="now" class="well" aria-labelledby="now-h">
+  <section id="now" aria-labelledby="now-h">
     <div class="container now-grid">
       <div>
         <h2 id="now-h">What I'm working on now</h2>
         <p class="meta">Updated <time datetime="2026-09">September 2026</time></p>
       </div>
-      <ul class="rows">
+      <ul class="rows clear">
         <li><span class="k">Studying</span><div><strong>MASc (Co-op), Environmental Systems Engineering &amp; Management</strong><p>Memorial University of Newfoundland, expected 2027. This term: offshore oil and gas impacts, and environmental chemistry and toxicology.</p></div></li>
         <li><span class="k">Researching</span><div><strong>Wildfire impacts on source-water quality</strong><p>Models that predict river turbidity and explain what drives it in burned watersheds.</p></div></li>
         <li><span class="k">Learning</span><div><strong>Power BI, ArcGIS and spatial analysis</strong><p>Microsoft's Power BI training (data modelling, DAX, dashboards), working toward an ArcGIS certification.</p></div></li>
@@ -116,7 +119,7 @@
         <div><dt>Why there</dt><dd>2016 Fort McMurray, 2023 and 2024 Churchill Falls fires</dd></div>
       </dl>
 
-      <div class="pipe" id="pipe">
+      <div class="pipe clear" id="pipe">
         <div class="pipe-side">
           <h3>How the model was built</h3>
           <div class="pipe-steps" role="tablist" aria-label="Machine-learning pipeline steps"></div>
@@ -131,52 +134,57 @@
     </div>
   </section>
 
-  <!-- ============ FIGURES ============ -->
+  <!-- ============ FIGURES: sticky diptych ============ -->
   <section aria-labelledby="figs-h">
-    <div class="container">
-      <div class="head">
+    <div class="container sticky-stack">
+      <div class="pane-sticky">
         <h2 id="figs-h">What the model found</h2>
         <p class="lead">Nitrogen, colour and metals drive turbidity: the chemical signature of wildfire runoff.</p>
+        <ol class="fig-index">
+            <li><a href="#fig-1"><span class="num">1</span><span>Extra Trees was the best model on every metric</span></a></li>
+            <li><a href="#fig-2"><span class="num">2</span><span>Predictions track real measurements</span></a></li>
+            <li><a href="#fig-3"><span class="num">3</span><span>Nitrogen, colour and metals dominate</span></a></li>
+            <li><a href="#fig-4"><span class="num">4</span><span>Errors are small and unbiased</span></a></li>
+        </ol>
+        <p class="chart-note">Figures 1 to 4: project results on the Peace-Athabasca dataset (823 samples, 80/20 train/test split). Select any figure to open it full size.</p>
       </div>
-      <div class="figs">
-        <figure class="fig fig--wide">
+      <div class="pane-scroll">
+        <figure class="fig clear" id="fig-1">
           <a class="shot" href="img/ml-model-comparison.png" target="_blank" rel="noopener"><img src="img/ml-model-comparison.png" width="1784" height="484" loading="lazy" alt="Three bar charts comparing Extra Trees, Gradient Boosting, Random Forest and XGBoost on R², RMSE and MAE. Extra Trees has the highest R² (about 0.77) and the lowest RMSE and MAE."></a>
           <figcaption><span class="fig-title"><span class="num">1</span>Extra Trees was the best model on every metric</span><span class="cap">Four ensemble models scored on held-out test data. R² (left, higher is better) is the share of turbidity variation explained; RMSE and MAE (lower is better) are prediction errors in NTU.</span></figcaption>
         </figure>
-        <figure class="fig">
+        <figure class="fig clear" id="fig-2">
           <a class="shot" href="img/ml-observed-vs-predicted.png" target="_blank" rel="noopener"><img src="img/ml-observed-vs-predicted.png" width="1384" height="1184" loading="lazy" alt="Four scatter plots of observed versus predicted turbidity: Random Forest R² 0.719, Extra Trees R² 0.775, Gradient Boosting R² 0.720, XGBoost R² 0.685."></a>
           <figcaption><span class="fig-title"><span class="num">2</span>Predictions track real measurements</span><span class="cap">Each dot is a held-out water sample; dots on the red 1:1 line are perfect predictions. Extra Trees (top right) reaches R² = 0.775.</span></figcaption>
         </figure>
-        <div class="fig-stack">
-          <figure class="fig">
+        <figure class="fig clear" id="fig-3">
             <a class="shot" href="img/ml-feature-importance.png" target="_blank" rel="noopener"><img src="img/ml-feature-importance.png" width="784" height="584" loading="lazy" alt="Horizontal bar chart of the top 15 feature importances in the Extra Trees model. Total nitrogen is about 0.52, followed by true colour, total manganese, total aluminium and total iron."></a>
             <figcaption><span class="fig-title"><span class="num">3</span>Nitrogen, colour and metals dominate</span><span class="cap">Top 15 inputs by importance. Total nitrogen leads by about 5×, followed by colour, manganese, aluminium and iron.</span></figcaption>
           </figure>
-          <figure class="fig">
+        <figure class="fig clear" id="fig-4">
             <a class="shot" href="img/ml-residuals.png" target="_blank" rel="noopener"><img src="img/ml-residuals.png" width="682" height="384" loading="lazy" alt="Histogram of Extra Trees residuals, sharply peaked and centred on zero with a long thin tail toward large positive errors."></a>
             <figcaption><span class="fig-title"><span class="num">4</span>Errors are small and unbiased</span><span class="cap">Residuals for Extra Trees peak sharply at zero; only a few extreme turbidity events sit in the tail.</span></figcaption>
           </figure>
-        </div>
       </div>
-      <p class="chart-note">Figures 1 to 4: project results on the Peace-Athabasca dataset (823 samples, 80/20 train/test split). Select any figure to open it full size.</p>
     </div>
   </section>
 
-  <!-- ============ TRANSFER: the ink band ============ -->
-  <section class="band" aria-labelledby="tr-h">
+  <!-- ============ TRANSFER: a figure in sun ============ -->
+  <section class="transfer-sec" aria-labelledby="tr-h">
     <div class="container band-grid">
       <div class="band-text">
         <h2 id="tr-h">Same model, a different river</h2>
         <p class="lead">I ran the Alberta model on Labrador's Churchill River, near the 2024 Churchill Falls fires. It over-predicted by about 17×.</p>
+        <p>The Churchill is hydro-regulated, tidal at the mouth and carries far less metal, and Labrador has only a handful of grab samples to retrain on. The method transfers; the fitted model has to be retrained on local hydrology. The next version predicts turbidity from what the province measures well: daily discharge, water level and fire timing.</p>
       </div>
-      <div class="band-text">
-        <div class="big-pair">
+      <div class="pool-frame">
+        <div class="pool pool--inset" aria-hidden="true"><canvas data-light="transfer"></canvas></div>
+        <div class="big-pair clear cast">
           <div><b class="hot">243</b><span>NTU predicted</span></div>
           <div><b>14</b><span>NTU measured</span></div>
         </div>
-        <p>The Churchill is hydro-regulated, tidal at the mouth and carries far less metal, and Labrador has only a handful of grab samples to retrain on. The method transfers; the fitted model has to be retrained on local hydrology. The next version predicts turbidity from what the province measures well: daily discharge, water level and fire timing.</p>
       </div>
-      <figure class="transfer" id="c-transfer">
+      <figure class="transfer clear" id="c-transfer">
         <div class="plot"></div>
         <figcaption>Figure 5. Observed against predicted turbidity on the Churchill River. A pilot test on one comparison, illustrative rather than statistical.</figcaption>
       </figure>
@@ -204,7 +212,7 @@
         <button class="chip" type="button" data-f="energy" aria-pressed="false">Building energy</button>
       </div>
       <div class="pubs" id="pubs">
-        <article class="pub" data-type="journal" data-topic="materials" data-first="false">
+        <article class="pub clear lift" data-type="journal" data-topic="materials" data-first="false">
           <span class="yr">2025</span>
           <div>
             <h3>Combined influence of modified recycled concrete aggregate and metakaolin on high-strength concrete production: Experimental assessment and machine learning quantifications with advanced SHAP and PDP analyses</h3>
@@ -219,7 +227,7 @@
             <p class="links"><a class="textlink" href="https://doi.org/10.1016/j.conbuildmat.2025.139897" target="_blank" rel="noopener">Read the paper (DOI)</a></p>
           </details>
         </article>
-        <article class="pub" data-type="journal" data-topic="energy" data-first="false">
+        <article class="pub clear lift" data-type="journal" data-topic="energy" data-first="false">
           <span class="yr">2025</span>
           <div>
             <h3>Investigating the energy-efficiency of Glauber's salt as PCM-enhanced mortar in building envelope</h3>
@@ -234,7 +242,7 @@
             <p class="links"><a class="textlink" href="https://doi.org/10.1080/17512549.2025.2547399" target="_blank" rel="noopener">Read the paper (DOI)</a></p>
           </details>
         </article>
-        <article class="pub" data-type="conference" data-topic="materials" data-first="true">
+        <article class="pub clear lift" data-type="conference" data-topic="materials" data-first="true">
           <span class="yr">2024</span>
           <div>
             <h3>Fresh and hardened properties of high-strength concrete using coal bottom ash and silica fume</h3>
@@ -248,7 +256,7 @@
             <p class="links"><a class="textlink" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate</a></p>
           </details>
         </article>
-        <article class="pub" data-type="conference" data-topic="materials" data-first="true">
+        <article class="pub clear lift" data-type="conference" data-topic="materials" data-first="true">
           <span class="yr">2024</span>
           <div>
             <h3>Enhancing concrete mechanical performance through metakaolin and improved recycled concrete aggregates</h3>
@@ -262,7 +270,7 @@
             <p class="links"><a class="textlink" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">View on ResearchGate</a></p>
           </details>
         </article>
-        <article class="pub" data-type="conference" data-topic="energy" data-first="false">
+        <article class="pub clear lift" data-type="conference" data-topic="energy" data-first="false">
           <span class="yr">2023</span>
           <div>
             <h3>Impact of exterior facade materials on energy performance of residential structures in Bangladesh</h3>
@@ -324,17 +332,17 @@
 
       <h3 class="earlier-head">Design and GIS projects</h3>
       <div class="earlier">
-        <article>
+        <article class="clear lift">
           <h3>GIS Portfolio Project</h3>
           <p>A spatial analysis project in ArcGIS, applying mapping and geoprocessing to a real environmental question.</p>
           <p class="where">In progress. ArcGIS, spatial analysis.</p>
         </article>
-        <article>
+        <article class="clear lift">
           <h3>BIM Design &amp; Energy Modelling, 4-Storey Building</h3>
           <p>Designed a 4-storey building in BIM and ran energy simulations to test envelope and efficiency choices, with the schedule planned in MS Project.</p>
           <p class="where">KUET design project. Revit, Green Building Studio, Robot Structural, MS Project.</p>
         </article>
-        <article>
+        <article class="clear lift">
           <h3>Structural Analysis, 12-Storey Tower</h3>
           <p>Modelled and analysed a 12-storey tower under wind and seismic loading to check structural performance against code requirements.</p>
           <p class="where">KUET design project. ETABS, wind and seismic, structural design.</p>
@@ -363,7 +371,7 @@
         </div>
       </div>
 
-      <div class="courses">
+      <div class="courses clear">
         <h3>Graduate coursework, CGPA 3.87</h3>
         <div class="cols">
           <table>
@@ -392,15 +400,19 @@
   <!-- ============ CONTACT + FOOTER ============ -->
   <footer id="contact" class="contact" aria-labelledby="contact-h">
     <div class="container">
-      <h2 id="contact-h">Hiring for a Winter 2027 co-op? Let's talk.</h2>
+      <div class="contact-card clear">
+        <div>
+          <h2 id="contact-h">Hiring for a Winter 2027 co-op? Let's talk.</h2>
       <a class="mail" href="mailto:muhammadmr@mun.ca">muhammadmr@mun.ca</a>
       <p class="lead">Or to talk wildfire, water quality or low-carbon materials. My inbox is open.</p>
-      <div class="socials">
+        </div>
+        <div class="socials">
         <a class="btn btn--primary" href="mailto:muhammadmr@mun.ca">Email me</a>
         <button class="btn" type="button" id="copyEmail">Copy email</button>
         <a class="btn" href="Mushfiqur_Rahman_CV.pdf" target="_blank" rel="noopener" download>CV (PDF)</a>
         <a class="btn" href="https://www.linkedin.com/in/muhammad-mushfiqur-rahman-eng/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="https://www.researchgate.net/profile/Md-Mushfiqur-Rahman-6" target="_blank" rel="noopener">ResearchGate</a>
+      </div>
       </div>
       <div class="colophon">
         <span>© <span id="year">2026</span> Md. Mushfiqur Rahman. St. John's, Newfoundland and Labrador.</span>
