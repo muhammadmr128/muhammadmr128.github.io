@@ -25,7 +25,7 @@
         if (links[e.target.id]) links[e.target.id].classList.add('active');
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['now', 'work', 'research', 'journey', 'about', 'contact'].forEach(function (id) { var el = document.getElementById(id); if (el) so.observe(el); });
+    ['now', 'civil', 'work', 'research', 'journey', 'about', 'contact'].forEach(function (id) { var el = document.getElementById(id); if (el) so.observe(el); });
   }
 
   // Transfer chart (Figure 5): one series, set large
@@ -341,7 +341,7 @@
     ['.head', ''], ['.now-grid > div:first-child', ''], ['.rows', 'scale'], ['.project-title', ''], ['.facts > div', ''], ['.pipe', 'scale'], ['.tools', ''],
     ['.pane-sticky > *', ''], ['.band-text > *', ''], ['.pool-frame', 'scale'], ['.transfer', ''],
     ['.figures > div', ''], ['.filters', ''], ['.pub', ''], ['.foot-note', ''], ['.tl > li', 'left'], ['.earlier-head', ''], ['.earlier article', ''],
-    ['.portrait', 'scale'], ['.about-body > *', ''], ['.skills > div', ''], ['.courses', ''], ['.contact-card', 'scale']
+    ['.proj', ''], ['.site-grid article', ''], ['[data-r]', ''], ['.portrait', 'scale'], ['.about-body > *', ''], ['.skills > div', ''], ['.courses', ''], ['.contact-card', 'scale']
   ];
   if (!scrollTimeline) groups.push(['.pane-scroll .fig', '']);
   var revealEls = [];
