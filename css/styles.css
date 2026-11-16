@@ -96,6 +96,25 @@ tr.pick .rbar { background: var(--color-accent); }
 .rows strong { display: block; font: 400 var(--text-xl)/1.2 var(--font-display); color: var(--color-ink); letter-spacing: -0.02em; }
 .rows p { margin-top: var(--space-2xs); }
 
+/* ---------- Civil and construction ---------- */
+.proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap-columns); }
+.proj { display: grid; align-content: start; gap: var(--space-md); padding: var(--space-xl); }
+.proj-num { display: grid; gap: var(--space-2xs); padding-bottom: var(--space-md); border-bottom: var(--rule-hair) solid var(--color-rule); }
+.proj-num b { font: 300 var(--text-display-s)/1 var(--font-display); letter-spacing: -0.04em; color: var(--color-accent); font-variant-numeric: tabular-nums; }
+.proj-num span { font-size: var(--text-sm); color: var(--color-muted); }
+.proj h3 { font-size: var(--text-2xl); }
+.proj h3 a { color: var(--color-ink); text-decoration: none; }
+.proj h3 a:hover { color: var(--color-accent); }
+.proj > p { font-size: var(--text-lg); color: var(--color-ink-2); }
+.proj .btn { justify-self: start; margin-top: var(--space-xs); }
+.proj-tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin: 0; padding: 0; list-style: none; }
+.proj-tags li { padding: var(--space-2xs) var(--space-sm); border-radius: var(--radius-pill); background: var(--color-paper-2); font-size: var(--text-sm); color: var(--color-ink-2); }
+.site-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-columns); margin-top: var(--space-lg); }
+.site-grid article { display: grid; align-content: start; gap: var(--space-sm); padding: var(--space-xl); }
+.site-grid h3 { font-size: var(--text-lg); line-height: 1.25; }
+.site-k { justify-self: start; padding: var(--space-2xs) var(--space-sm); border-radius: var(--radius-pill); background: var(--color-accent-soft); color: var(--color-accent); font: 500 var(--text-sm)/1.4 var(--font-body); }
+@media (max-width: 60rem) { .proj-grid, .site-grid { grid-template-columns: minmax(0, 1fr); } .proj { padding: var(--space-lg); } }
+
 /* ---------- Research ---------- */
 .project-title { font-size: var(--text-title); max-width: 46ch; margin-bottom: var(--space-xl); }
 .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-lg) var(--gap-columns); margin: 0 0 var(--space-2xl); }
